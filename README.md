@@ -1,2 +1,5 @@
 # DAC
-Trabalho de DAC(Desenvolvimento de Aplicações corporativas) Equipe Sociedade do Anel( Arthur Vianna Landeo, Marcelo Toniolo Hey, Jorge Madson Santos Viana, Tatiane Portela Medeiros) Forever Alone
+
+Trabalhos desenvolvidos para a matéria de Desenvolvimento de Aplicações Corporativas, do curso de Análise e Desenvovimento de Sistemas - UFPR.
+
+**Devs:** Arthur Vianna Landeo (ArthurVianna), Marcelo Toniolo Hey (MarceloHey), Jorge Madson Santos Viana (JorgeMadson), Tatiane Portela Medeiros (corvinau).
