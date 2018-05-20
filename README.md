@@ -1,6 +1,6 @@
 # Forever Alone
 
-Trabalhos desenvolvidos para a matéria de Desenvolvimento de Aplicações Corporativas, do curso de Análise e Desenvovimento de Sistemas - UFPR.
+Trabalho desenvolvido para a matéria de Desenvolvimento de Aplicações Corporativas, do curso de Análise e Desenvovimento de Sistemas - UFPR.
 
 **Obs.:** Este projeto trabalha em conjunto com o [Always Together](https://github.com/corvinau/AlwaysTogether)
 
