@@ -10,5 +10,24 @@ package com.ufpr.tads.beans;
  * @author DELL
  */
 public class CorCabelo {
+    private int idCorCabelo;
     private String nome;
+
+    public int getIdCorCabelo() {
+        return idCorCabelo;
+    }
+
+    public void setIdCorCabelo(int idCorCabelo) {
+        this.idCorCabelo = idCorCabelo;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+    
+    
 }

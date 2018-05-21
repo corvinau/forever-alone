@@ -10,5 +10,34 @@ package com.ufpr.tads.beans;
  * @author DELL
  */
 public class Cidade {
+    private int idCidade;
     private String nome;
+    private UF uf;
+
+    public int getIdCidade() {
+        return idCidade;
+    }
+
+    public void setIdCidade(int idCidade) {
+        this.idCidade = idCidade;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public UF getUf() {
+        return uf;
+    }
+
+    public void setUf(UF uf) {
+        this.uf = uf;
+    }
+    
+    
+    
 }

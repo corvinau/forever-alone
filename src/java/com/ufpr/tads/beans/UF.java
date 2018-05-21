@@ -7,18 +7,19 @@ package com.ufpr.tads.beans;
 
 /**
  *
- * @author DELL
+ * @author ArtVin
  */
-public class Status {
-    private int idStatus;
+public class UF {
+    private int idUF;
     private String nome;
+    private String sigla;
 
-    public int getIdStatus() {
-        return idStatus;
+    public int getIdUF() {
+        return idUF;
     }
 
-    public void setIdStatus(int idStatus) {
-        this.idStatus = idStatus;
+    public void setIdUF(int idUF) {
+        this.idUF = idUF;
     }
 
     public String getNome() {
@@ -28,6 +29,15 @@ public class Status {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
+    public String getSigla() {
+        return sigla;
+    }
+
+    public void setSigla(String sigla) {
+        this.sigla = sigla;
+    }
+    
     
     
 }

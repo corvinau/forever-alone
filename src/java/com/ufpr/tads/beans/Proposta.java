@@ -9,10 +9,19 @@ package com.ufpr.tads.beans;
  *
  * @author DELL
  */
-public class Propostas {
+public class Proposta {
+    private int idProposta;
     private String descricao;
     private float preco;
     private String tipo;
+
+    public int getIdProposta() {
+        return idProposta;
+    }
+
+    public void setIdProposta(int idProposta) {
+        this.idProposta = idProposta;
+    }
 
     public String getDescricao() {
         return descricao;

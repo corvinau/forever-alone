@@ -13,7 +13,60 @@ import java.util.Date;
  * @author DELL
  */
 public class Encontro implements Convidavel {
+    private int idEncontro;
     private Date data;
     private Date hora;
+    private Local local;
     private Status status;
+    private Convite convite;
+
+    public int getIdEncontro() {
+        return idEncontro;
+    }
+
+    public void setIdEncontro(int idEncontro) {
+        this.idEncontro = idEncontro;
+    }
+
+    public Date getData() {
+        return data;
+    }
+
+    public void setData(Date data) {
+        this.data = data;
+    }
+
+    public Date getHora() {
+        return hora;
+    }
+
+    public void setHora(Date hora) {
+        this.hora = hora;
+    }
+
+    public Local getLocal() {
+        return local;
+    }
+
+    public void setLocal(Local local) {
+        this.local = local;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public Convite getConvite() {
+        return convite;
+    }
+
+    public void setConvite(Convite convite) {
+        this.convite = convite;
+    }
+    
+    
 }

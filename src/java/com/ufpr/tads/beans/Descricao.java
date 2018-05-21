@@ -10,7 +10,44 @@ package com.ufpr.tads.beans;
  * @author DELL
  */
 public class Descricao {
+    private int idDescricao;
     private String resumo;
     private CorCabelo corCabelo;
-    private CorPele corPele;    
+    private CorPele corPele;
+
+    public int getIdDescricao() {
+        return idDescricao;
+    }
+
+    public void setIdDescricao(int idDescricao) {
+        this.idDescricao = idDescricao;
+    }
+
+    public String getResumo() {
+        return resumo;
+    }
+
+    public void setResumo(String resumo) {
+        this.resumo = resumo;
+    }
+
+    public CorCabelo getCorCabelo() {
+        return corCabelo;
+    }
+
+    public void setCorCabelo(CorCabelo corCabelo) {
+        this.corCabelo = corCabelo;
+    }
+
+    public CorPele getCorPele() {
+        return corPele;
+    }
+
+    public void setCorPele(CorPele corPele) {
+        this.corPele = corPele;
+    }
+    
+    
+    
+    
 }

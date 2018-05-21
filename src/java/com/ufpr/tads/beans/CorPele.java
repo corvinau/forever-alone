@@ -10,5 +10,24 @@ package com.ufpr.tads.beans;
  * @author DELL
  */
 public class CorPele {
+    private int idCorPele;
     private String nome;
+
+    public int getIdCorPele() {
+        return idCorPele;
+    }
+
+    public void setIdCorPele(int idCorPele) {
+        this.idCorPele = idCorPele;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+    
+    
 }
