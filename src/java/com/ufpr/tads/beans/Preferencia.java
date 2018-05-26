@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @author DELL
  */
-public class Preferencias {
+public class Preferencia {
     private int idPreferencias;
     private char sexos;
     private int idadeMin;

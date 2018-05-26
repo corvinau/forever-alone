@@ -42,18 +42,34 @@ public class ClienteDAO {
         
         try {
             st = con.prepareStatement(
-                    "SELECT  FROM USUARIO WHERE EMAIL = ? AND SENHA = ?"
+                    "SELECT idCliente, nome, cpf, dataNascimento,"
+                    + " dataCadastro, sexo, disponibilidade, qtdTokens, "
+                    + "Endereco_idEndereco, Descricao_idDescricao, "
+                    + "Preferencias_idPreferencias "
+                    + "FROM Cliente WHERE Usuario_idUsuario = ?"
             );
-            st.setString(1, email);
-            st.setString(2, senhaMD5(senha));
+            st.setInt(1, u.getIdUsuario());
             
             rs = st.executeQuery();
+            EnderecoDAO enderecoDAO = new EnderecoDAO(con);
+            DescricaoDAO descricaoDAO = new DescricaoDAO(con);
+            PreferenciaDAO preferenciaDAO = new PreferenciaDAO(con);
             while(rs.next()){
-                u = new Usuario();
-                u.setIdUsuario(rs.getInt("IDUSUARIO"));
-                u.setEmail(rs.getString("EMAIL"));
-                u.setSenha(rs.getString("SENHA"));
-                u.setTipo(rs.getString("TIPO").charAt(0));
+                c = new Cliente();
+                c.setIdUsuario(u.getIdUsuario());
+                c.setEmail(u.getEmail());
+                c.setTipo(u.getTipo());
+                c.setIdCliente(rs.getInt("idCliente"));
+                c.setNome(rs.getString("nome"));
+                c.setCpf(rs.getString("cpf"));
+                c.setDataNasc(rs.getDate("dataNascimento"));
+                c.setDataCadast(rs.getDate("dataCadastro"));
+                c.setSexo(rs.getString("sexo").charAt(0));
+                c.setDisp(rs.getBoolean("disponibilidade"));
+                c.setQtdTokens(rs.getInt("qtdTokens"));
+                c.setEndereco(enderecoDAO.getEndereco(rs.getInt("Endereco_idEndereco")));
+                c.setDescricao(descricaoDAO.getDescricao(rs.getInt("Descricao_idDescricao")));
+                c.setPreferencia(preferenciaDAO.getPreferencia(rs.getInt("Preferencias_idPreferencias")));
             }
             
             

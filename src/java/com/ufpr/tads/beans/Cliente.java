@@ -21,7 +21,7 @@ public class Cliente extends Usuario {
     private char sexo;
     private boolean disp;
     private int qtdTokens;
-    private Preferencias preferencia;
+    private Preferencia preferencia;
     private Descricao descricao;
 
     public int getIdCliente() {
@@ -96,11 +96,11 @@ public class Cliente extends Usuario {
         this.qtdTokens = qtdTokens;
     }
 
-    public Preferencias getPreferencia() {
+    public Preferencia getPreferencia() {
         return preferencia;
     }
 
-    public void setPreferencia(Preferencias preferencia) {
+    public void setPreferencia(Preferencia preferencia) {
         this.preferencia = preferencia;
     }
 
