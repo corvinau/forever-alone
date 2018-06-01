@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -81,6 +82,78 @@ public class ClienteDAO {
         
         
         return c;
+    }
+    public int insertCliente(Cliente c){
+        PreparedStatement st;
+        int aux;
+        try {
+            st = con.prepareStatement(
+                    "INSERT INTO cliente(Usuario_idUsuario,nome, cpf, dataNascimento,"
+                    + "dataCadastro, sexo, disponibilidade, qtdTokens, "
+                    + "Endereco_idEndereco, Descricao_idDescricao, "
+                    + "Preferencias_idPreferencias) "
+                    + "VALUES(?,?,?,?,?,?,?,?,?,?,?)"
+            );
+            st.setInt(1, c.getIdUsuario());
+            st.setString(2, c.getNome());
+            st.setString(3, c.getCpf());
+            st.setDate(4,new java.sql.Date(c.getDataNasc().getTime()));
+            Date dateNow = new Date();
+            st.setDate(5,new java.sql.Date(dateNow.getTime()));
+            st.setString(6, c.getSexo() + "");
+            st.setBoolean(7, c.isDisp());
+            st.setInt(8,c.getQtdTokens());
+            if(c.getEndereco() != null){
+                if(c.getEndereco().getIdEndereco() == 0){
+                    EnderecoDAO enderecoDAO = new EnderecoDAO(con);
+                    aux = enderecoDAO.insertEndereco(c.getEndereco());
+                    c.getEndereco().setIdEndereco(aux);
+                    st.setInt(9, c.getEndereco().getIdEndereco());
+                }
+                else st.setNull(9, java.sql.Types.INTEGER);
+            }
+            else{
+                st.setNull(9, java.sql.Types.INTEGER);
+            }
+            if(c.getDescricao() != null){
+                if(c.getDescricao().getIdDescricao() == 0){
+                    DescricaoDAO descricaoDAO = new DescricaoDAO(con);
+                    aux = descricaoDAO.insertDescricao(c.getDescricao());
+                    c.getDescricao().setIdDescricao(aux);
+                    st.setInt(10, c.getDescricao().getIdDescricao());
+                }
+                else st.setNull(10, java.sql.Types.INTEGER);
+            }
+            else{
+                st.setNull(10, java.sql.Types.INTEGER);
+            }
+            if(c.getPreferencia() != null){
+                if(c.getPreferencia().getIdPreferencias() == 0){
+                    PreferenciaDAO preferenciaDAO = new PreferenciaDAO(con);
+                    aux = preferenciaDAO.insertPreferencia(c.getPreferencia());
+                    c.getPreferencia().setIdPreferencias(aux);
+                    st.setInt(11, c.getPreferencia().getIdPreferencias());
+                }
+                else st.setNull(11, java.sql.Types.INTEGER);
+            }
+            else{
+                st.setNull(11, java.sql.Types.INTEGER);
+            }
+            
+            st.executeUpdate();
+            
+            rs = st.getGeneratedKeys();
+            if(rs.next()) return rs.getInt(1);
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+        
+        return 0;
     }
     
 }

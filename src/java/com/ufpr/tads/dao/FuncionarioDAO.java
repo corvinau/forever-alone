@@ -5,7 +5,7 @@
  */
 package com.ufpr.tads.dao;
 
-import com.ufpr.tads.beans.Cliente;
+import com.ufpr.tads.beans.Funcionario;
 import com.ufpr.tads.beans.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -35,24 +35,30 @@ public class FuncionarioDAO {
         this.con = con;
     }
     
-    public Cliente getFuncionario(Usuario u){
-        Cliente c = null;
+    public Funcionario getFuncionario(Usuario u){
+        Funcionario f = null;
         PreparedStatement st;
         
         try {
             st = con.prepareStatement(
-                    "SELECT  FROM USUARIO WHERE EMAIL = ? AND SENHA = ?"
+                      "SELECT idFuncionario, nome, cargo, cpf, "
+                    + "dataNascimento, Endereco_idEndereco FROM funcionario "
+                    + "WHERE Usuario_idUsuario = ? "
             );
-            st.setString(1, email);
-            st.setString(2, senhaMD5(senha));
-            
+            st.setInt(1, u.getIdUsuario());
+            EnderecoDAO enderecoDAO = new EnderecoDAO(con);
             rs = st.executeQuery();
             while(rs.next()){
-                u = new Usuario();
-                u.setIdUsuario(rs.getInt("IDUSUARIO"));
-                u.setEmail(rs.getString("EMAIL"));
-                u.setSenha(rs.getString("SENHA"));
-                u.setTipo(rs.getString("TIPO").charAt(0));
+                f = new Funcionario();
+                f.setIdUsuario(u.getIdUsuario());
+                f.setEmail(u.getEmail());
+                f.setTipo(u.getTipo());
+                f.setIdFuncionario(rs.getInt("idFuncionario"));
+                f.setNome(rs.getString("nome"));
+                f.setCargo(rs.getString("cargo"));
+                f.setCpf(rs.getString("cpf"));
+                f.setDataNasc(rs.getDate("dataNascimento"));
+                f.setEndereco(enderecoDAO.getEndereco(rs.getInt("Endereco_idEndereco")));
             }
             
             
@@ -63,6 +69,48 @@ public class FuncionarioDAO {
         
         
         
-        return c;
+        return f;
+    }
+
+    public int insertFuncionario(Funcionario f) {
+        PreparedStatement st;
+        int aux;
+        try {
+            st = con.prepareStatement(
+                      "INSERT INTO Funcionario(nome, cargo, cpf, "
+                    + "dataNascimento, Endereco_idEndereco) "
+                    + "VALUES(?,?,?,?,?)"
+            );
+            st.setString(1, f.getNome());
+            st.setString(2, f.getCargo());
+            st.setString(3, f.getCpf());
+            st.setDate(4, new java.sql.Date(f.getDataNasc().getTime()));
+            if(f.getEndereco() != null){
+                if(f.getEndereco().getIdEndereco() == 0){
+                    EnderecoDAO enderecoDAO = new EnderecoDAO(con);
+                    aux = enderecoDAO.insertEndereco(f.getEndereco());
+                    f.getEndereco().setIdEndereco(aux);
+                    st.setInt(5, f.getEndereco().getIdEndereco());
+                }
+                else st.setNull(5, java.sql.Types.INTEGER);
+            }
+            else{
+                st.setNull(5, java.sql.Types.INTEGER);
+            }
+            
+            st.executeUpdate();
+            
+            rs = st.getGeneratedKeys();
+            if(rs.next()) return rs.getInt(1);
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+        
+        return 0;
     }
 }

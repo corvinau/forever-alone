@@ -56,6 +56,9 @@ public class PreferenciaDAO {
                 p.setIdadeMin(rs.getInt("idadeMin"));
                 p.setIdadeMax(rs.getInt("idadeMax"));
                 p.setSexos(rs.getString("sexo").charAt(0));
+                p.setCorCabelo(corCabeloDAO.getListaCorCabelo(idPreferencia));
+                p.setCorPele(corPeleDAO.getListaCorPele(idPreferencia));
+                p.setHorario(horarioDAO.getListaHorario(idPreferencia));
             }
             
             
@@ -67,5 +70,60 @@ public class PreferenciaDAO {
         
         
         return p;
+    }
+
+    public int insertPreferencia(Preferencia preferencia){
+        PreparedStatement st;
+        int aux = 0;
+        try {
+            st = con.prepareStatement(
+                    "INSERT INTO preferencias(sexo, idadeMin, idadeMax) "
+                    + "VALUES (?,?,?)"
+            );
+            st.setString(1, preferencia.getSexos() + "");
+            st.setInt(2, preferencia.getIdadeMin());
+            st.setInt(3, preferencia.getIdadeMax());
+            
+            st.executeUpdate();
+            
+            rs = st.getGeneratedKeys();
+            
+            if(rs.next()){
+                aux = rs.getInt(1);
+                if(aux != 0){
+                    CorCabeloDAO corCabeloDAO = new CorCabeloDAO(con);
+                    CorPeleDAO corPeleDAO = new CorPeleDAO(con);
+                    HorarioDAO horarioDAO = new HorarioDAO(con);
+                    if( corCabeloDAO.insertCorCabeloPreferencia(aux,preferencia.getCorCabelo()) &&
+                        corPeleDAO.insertCorPelePreferencia(aux,preferencia.getCorPele())       &&
+                        horarioDAO.insertHorarioPreferencia(aux,preferencia.getHorario())       ){
+                        return aux;
+                    }
+                    else{
+                        corCabeloDAO.deleteCorCabeloPreferencia(aux);
+                        corPeleDAO.deleteCorPelePreferencia(aux);
+                        horarioDAO.deleteHorarioPreferencia(aux);
+                        deletePrefencia(aux);
+                        return 0;
+                    }
+                }
+                
+            }
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+        
+        return 0;
+        
+    
+    }
+
+    private void deletePrefencia(int aux) {
+        
     }
 }

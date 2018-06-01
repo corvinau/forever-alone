@@ -6,6 +6,7 @@
 package com.ufpr.tads.dao;
 
 import com.ufpr.tads.beans.Cliente;
+import com.ufpr.tads.beans.Funcionario;
 import com.ufpr.tads.beans.Usuario;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
@@ -75,9 +76,62 @@ public class UsuarioDAO {
                 
         
         
-        return null;
+        return u;
+    }
+    public int insertUsuario(Usuario u){
+        PreparedStatement st;
+        
+        try {
+            st = con.prepareStatement(
+                    "INSERT INTO usuario(email,senha,tipo) VALUES(?,?,?)"
+            );
+            st.setString(1, u.getEmail());
+            st.setString(2, senhaMD5(u.getSenha()));
+            st.setString(3, u.getTipo() + "");
+            
+            st.executeUpdate();
+            
+            rs = st.getGeneratedKeys();
+            if(u != null && rs.next()){
+                u.setIdUsuario(rs.getInt(1));
+                if(u.getTipo() == 'C' || u.getTipo() == 'c'){
+                    ClienteDAO clienteDAO = new ClienteDAO(con);
+                    if(clienteDAO.insertCliente((Cliente) u) != 0)return u.getIdUsuario();
+                }
+                else{
+                    FuncionarioDAO funcionarioDAO = new FuncionarioDAO(con);
+                    if(funcionarioDAO.insertFuncionario((Funcionario) u) != 0) return u.getIdUsuario();
+                }
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        deleteUsuario(u);
+        return 0;       
     }
     
+    public boolean deleteUsuario(Usuario u){
+        if(u.getIdUsuario() != 0){
+            return deleteUsuario(u.getIdUsuario());
+        }
+        return false;
+    }
+    public boolean deleteUsuario(int idUsuario){
+        PreparedStatement st;
+        try {
+            st = con.prepareStatement(
+                    "DELETE FROM usuario WHERE idUsuario = ?"
+            );
+            st.setInt(1, idUsuario);
+            
+            if(st.executeUpdate() !=0) return true;
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
     private String senhaMD5(String senha){
         MessageDigest algorithm;
         String senhaHex = null;

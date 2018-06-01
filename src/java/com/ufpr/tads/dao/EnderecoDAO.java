@@ -5,9 +5,7 @@
  */
 package com.ufpr.tads.dao;
 
-import com.ufpr.tads.beans.Cliente;
 import com.ufpr.tads.beans.Endereco;
-import com.ufpr.tads.beans.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -69,5 +67,34 @@ public class EnderecoDAO {
         
         
         return e;
+    }
+
+    public int insertEndereco(Endereco endereco){
+        PreparedStatement st;
+        
+        try {
+            st = con.prepareStatement(
+                    "INSERT INTO Endereco(bairro, rua, numero, complemento,"
+                    + " Cidade_idCidade) VALUES (?,?,?,?,?)"
+            );
+            st.setString(1, endereco.getBairro());
+            st.setString(2, endereco.getRua());
+            st.setInt(3,endereco.getNumero());
+            st.setString(4,endereco.getComplemento());
+            st.setInt(5, endereco.getCidade().getIdCidade());
+            
+            st.executeUpdate();
+            
+            rs = st.getGeneratedKeys();
+            if(rs.next()) return rs.getInt(1);
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        return 0;
+        
     }
 }

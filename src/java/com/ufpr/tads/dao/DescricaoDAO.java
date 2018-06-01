@@ -69,4 +69,34 @@ public class DescricaoDAO {
         
         return d;
     }
+
+    public int insertDescricao(Descricao descricao) {
+        PreparedStatement st;
+        
+        try {
+            st = con.prepareStatement(
+                    "INSERT INTO descricao(resumo, CorCabelo_idCorCabelo, "
+                    + "CorPele_idCorPele) VALUES(?,?,?)"
+            );
+            st.setString(1, descricao.getResumo());
+            st.setInt(2, descricao.getCorCabelo().getIdCorCabelo());
+            st.setInt(3, descricao.getCorPele().getIdCorPele());
+            
+            st.executeUpdate();
+            
+            rs = st.getGeneratedKeys();
+            if(rs.next()) return rs.getInt(1);
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+        
+        return 0;
+    
+    
+    }
 }
