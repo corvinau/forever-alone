@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -141,7 +142,7 @@ public class HorarioDAO {
         try {
             st = con.prepareStatement(
                     "SELECT INTO horario(diaSemana, horaInicial, horaLimite) "
-                    + "VALUES(?,?,?) "
+                    + "VALUES(?,?,?) ",Statement.RETURN_GENERATED_KEYS
             );
             st.setString(1, h.getDiaSemana());
             st.setDate(2,new java.sql.Date(h.getHoraInicial().getTime()));

@@ -15,6 +15,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -47,10 +48,12 @@ public class UsuarioDAO {
             st = con.prepareStatement(
                     "SELECT IDUSUARIO,EMAIL,SENHA,TIPO FROM USUARIO WHERE EMAIL = ? AND SENHA = ?"
             );
-            st.setString(1, email);
-            st.setString(2, senhaMD5(senha));
-            
-            rs = st.executeQuery();
+            if(email != null && senha !=null){
+                st.setString(1, email);
+                st.setString(2, senhaMD5(senha));
+
+                rs = st.executeQuery();
+            }
             while(rs.next()){
                 u = new Usuario();
                 u.setIdUsuario(rs.getInt("IDUSUARIO"));
@@ -80,35 +83,37 @@ public class UsuarioDAO {
     }
     public int insertUsuario(Usuario u){
         PreparedStatement st;
-        
-        try {
-            st = con.prepareStatement(
-                    "INSERT INTO usuario(email,senha,tipo) VALUES(?,?,?)"
-            );
-            st.setString(1, u.getEmail());
-            st.setString(2, senhaMD5(u.getSenha()));
-            st.setString(3, u.getTipo() + "");
-            
-            st.executeUpdate();
-            
-            rs = st.getGeneratedKeys();
-            if(u != null && rs.next()){
-                u.setIdUsuario(rs.getInt(1));
-                if(u.getTipo() == 'C' || u.getTipo() == 'c'){
-                    ClienteDAO clienteDAO = new ClienteDAO(con);
-                    if(clienteDAO.insertCliente((Cliente) u) != 0)return u.getIdUsuario();
+        if(u !=null){
+            try {
+                st = con.prepareStatement(
+                        "INSERT INTO usuario(email,senha,tipo) VALUES(?,?,?)",Statement.RETURN_GENERATED_KEYS
+                );
+                if(!u.getEmail().isEmpty() && !u.getSenha().isEmpty() && u.getTipo() != 0){
+                    st.setString(1, u.getEmail());
+                    st.setString(2, senhaMD5(u.getSenha())); 
+                    st.setString(3, u.getTipo() + "");
+                    st.executeUpdate();
                 }
-                else{
-                    FuncionarioDAO funcionarioDAO = new FuncionarioDAO(con);
-                    if(funcionarioDAO.insertFuncionario((Funcionario) u) != 0) return u.getIdUsuario();
+                rs = st.getGeneratedKeys();
+                if(rs.next()){
+                    u.setIdUsuario(rs.getInt(1));
+                    if(u.getTipo() == 'C' || u.getTipo() == 'c'){
+                        ClienteDAO clienteDAO = new ClienteDAO(con);
+                        if(clienteDAO.insertCliente((Cliente) u) != 0)return 1;
+                    }
+                    else{
+                        FuncionarioDAO funcionarioDAO = new FuncionarioDAO(con);
+                        if(funcionarioDAO.insertFuncionario((Funcionario) u) != 0) return 1;
+                    }
                 }
+
+            } catch (SQLException ex) {
+                Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            deleteUsuario(u);
         }
-        deleteUsuario(u);
-        return 0;       
+        return 0;    
+        
     }
     
     public boolean deleteUsuario(Usuario u){

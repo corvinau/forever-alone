@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -78,7 +79,7 @@ public class PreferenciaDAO {
         try {
             st = con.prepareStatement(
                     "INSERT INTO preferencias(sexo, idadeMin, idadeMax) "
-                    + "VALUES (?,?,?)"
+                    + "VALUES (?,?,?)",Statement.RETURN_GENERATED_KEYS
             );
             st.setString(1, preferencia.getSexos() + "");
             st.setInt(2, preferencia.getIdadeMin());

@@ -11,6 +11,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -64,5 +66,36 @@ public class UFDAO {
         
         
         return u;
+    }
+
+    public List<UF> getListaUF() {
+        List<UF> listaUF = new ArrayList<UF>();
+        UF u = null;
+        PreparedStatement st;
+        
+        try {
+            st = con.prepareStatement(
+                    "SELECT idUF, nome, sigla"
+                    + " FROM uf"
+            );
+            
+            rs = st.executeQuery();
+            while(rs.next()){
+                u = new UF();
+                u.setIdUF(rs.getInt("idUF"));
+                u.setNome(rs.getString("nome"));
+                u.setSigla(rs.getString("sigla"));
+                listaUF.add(u);
+            }
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+        
+        return listaUF;
     }
 }

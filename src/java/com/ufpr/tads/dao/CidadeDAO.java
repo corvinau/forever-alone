@@ -7,10 +7,13 @@ package com.ufpr.tads.dao;
 
 import com.ufpr.tads.beans.Cidade;
 import com.ufpr.tads.beans.Endereco;
+import com.ufpr.tads.beans.UF;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -65,5 +68,40 @@ public class CidadeDAO {
         
         
         return c;
+    }
+
+    public List<Cidade> getListaCidade(int idEstado) {
+        List<Cidade> lista = new ArrayList<Cidade>();
+        Cidade c = null;
+        PreparedStatement st;
+        
+        try {
+            st = con.prepareStatement(
+                    "SELECT idCidade, nome, UF_idUF"
+                    + " FROM Cidade WHERE UF_idUF = ?"
+            );
+            st.setInt(1, idEstado);
+            
+            rs = st.executeQuery();
+            UFDAO ufDAO = new UFDAO(con);
+            while(rs.next()){
+                c = new Cidade();
+                c.setIdCidade(rs.getInt("idCidade"));
+                c.setNome(rs.getString("nome"));
+                UF uf = new UF();
+                uf.setIdUF(idEstado);
+                c.setUf(uf);
+                lista.add(c);
+            }
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+        
+        return lista;
     }
 }

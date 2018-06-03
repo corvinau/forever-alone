@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -76,7 +77,7 @@ public class DescricaoDAO {
         try {
             st = con.prepareStatement(
                     "INSERT INTO descricao(resumo, CorCabelo_idCorCabelo, "
-                    + "CorPele_idCorPele) VALUES(?,?,?)"
+                    + "CorPele_idCorPele) VALUES(?,?,?)",Statement.RETURN_GENERATED_KEYS
             );
             st.setString(1, descricao.getResumo());
             st.setInt(2, descricao.getCorCabelo().getIdCorCabelo());

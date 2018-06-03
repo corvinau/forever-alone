@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -75,7 +76,7 @@ public class EnderecoDAO {
         try {
             st = con.prepareStatement(
                     "INSERT INTO Endereco(bairro, rua, numero, complemento,"
-                    + " Cidade_idCidade) VALUES (?,?,?,?,?)"
+                    + " Cidade_idCidade) VALUES (?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS
             );
             st.setString(1, endereco.getBairro());
             st.setString(2, endereco.getRua());

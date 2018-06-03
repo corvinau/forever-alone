@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -79,7 +80,7 @@ public class FuncionarioDAO {
             st = con.prepareStatement(
                       "INSERT INTO Funcionario(nome, cargo, cpf, "
                     + "dataNascimento, Endereco_idEndereco) "
-                    + "VALUES(?,?,?,?,?)"
+                    + "VALUES(?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS
             );
             st.setString(1, f.getNome());
             st.setString(2, f.getCargo());

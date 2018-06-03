@@ -1,6 +1,6 @@
 <%-- 
-    Document   : index
-    Created on : 20/05/2018, 21:50:41
+    Document   : portal
+    Created on : 01/06/2018, 21:40:08
     Author     : ArtVin
 --%>
 
@@ -13,7 +13,5 @@
     </head>
     <body>
         <h1>Hello World!</h1>
-        <a href="UsuarioServlet?action=formLogin">Logar</a>
-        <a href="UsuarioServlet?action=formCliente">Cadastrar</a>
     </body>
 </html>
