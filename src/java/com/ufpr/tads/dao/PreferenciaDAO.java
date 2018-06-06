@@ -123,8 +123,68 @@ public class PreferenciaDAO {
         
     
     }
+    
+    public boolean updatePreferencia(Preferencia preferencia){
+        PreparedStatement st;
+        int aux = 0;
+        if(preferencia.getIdPreferencias() > 0){
+            
+            try {
+                st = con.prepareStatement(
+                        "UPDATE preferencias WHERE idPreferencias = ? SET sexo = ?,"
+                        + " idadeMin = ?, idadeMax = ? "
+                );
+                st.setString(1, preferencia.getSexos() + "");
+                st.setInt(2, preferencia.getIdadeMin());
+                st.setInt(3, preferencia.getIdadeMax());
 
-    private void deletePrefencia(int aux) {
+                aux = st.executeUpdate();
+                
+                if(aux > 0){
+                    CorCabeloDAO corCabeloDAO = new CorCabeloDAO(con);
+                    CorPeleDAO corPeleDAO = new CorPeleDAO(con);
+                    HorarioDAO horarioDAO = new HorarioDAO(con);
+                    corCabeloDAO.deleteCorCabeloPreferencia(aux);
+                    corPeleDAO.deleteCorPelePreferencia(aux);
+                    horarioDAO.deleteHorarioPreferencia(aux);
+                    aux = preferencia.getIdPreferencias();
+                    if(aux != 0){
+                        if( corCabeloDAO.insertCorCabeloPreferencia(aux,preferencia.getCorCabelo()) &&
+                            corPeleDAO.insertCorPelePreferencia(aux,preferencia.getCorPele())       &&
+                            horarioDAO.insertHorarioPreferencia(aux,preferencia.getHorario())       ){
+                            return true;
+                        }
+                    }
+
+                }
+
+
+            } catch (SQLException ex) {
+                Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         
+        
+        return false;
+    }
+
+    public boolean deletePrefencia(int aux) {
+        Preferencia p = null;
+        PreparedStatement st;
+        
+        try {
+            st = con.prepareStatement(
+                    "DELETE FROM Preferencias WHERE idPreferencias = ?"
+            );
+            st.setInt(1, aux);
+            
+            int rowsAffected = st.executeUpdate();
+            if(rowsAffected > 0) return true;
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return false;
     }
 }

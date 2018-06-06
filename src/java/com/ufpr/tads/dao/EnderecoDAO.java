@@ -98,4 +98,8 @@ public class EnderecoDAO {
         return 0;
         
     }
+
+    void updateEndereco(Endereco endereco) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

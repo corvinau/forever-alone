@@ -1,6 +1,6 @@
 <%-- 
-    Document   : portal
-    Created on : 01/06/2018, 21:40:08
+    Document   : clienteOpcoes
+    Created on : 03/06/2018, 20:59:13
     Author     : ArtVin
 --%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -12,11 +12,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <c:if test="${(empty loginBean)}">
-            <jsp:forward page="index.jsp">
-                <jsp:param name="msg" value="Usuário deve se autenticar para acessar o sistema." />
-            </jsp:forward>
-        </c:if>
-        Bem vindo ${loginBean.nome}
+        <h1>Hello World!</h1>
     </body>
 </html>

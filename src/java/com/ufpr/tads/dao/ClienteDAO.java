@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -92,7 +93,7 @@ public class ClienteDAO {
                     + "dataCadastro, sexo, disponibilidade, qtdTokens, "
                     + "Endereco_idEndereco, Descricao_idDescricao, "
                     + "Preferencias_idPreferencias) "
-                    + "VALUES(?,?,?,?,?,?,?,?,?,?,?)"
+                    + "VALUES(?,?,?,?,?,?,?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS
             );
             st.setInt(1, c.getIdUsuario());
             st.setString(2, c.getNome());
@@ -154,6 +155,76 @@ public class ClienteDAO {
         
         
         return 0;
+    }
+    
+    public boolean updateCliente(Cliente c){
+        PreparedStatement st;
+        int aux;
+        if(c.getIdCliente() == 0){
+            try {
+                st = con.prepareStatement(
+                        "UPDATE cliente WHERE idCliente = ? SET nome = ?,"
+                        + "disponibilidade = ?, qtdTokens = ?, "
+                        + "Endereco_idEndereco = ?, Descricao_idDescricao = ?, "
+                        + "Preferencias_idPreferencias = ? "
+                );
+                st.setInt(1, c.getIdCliente());
+                st.setString(2, c.getNome());
+                st.setBoolean(3, c.isDisp());
+                st.setInt(4,c.getQtdTokens());
+                if(c.getEndereco() != null){
+                    EnderecoDAO enderecoDAO = new EnderecoDAO(con);
+                    if(c.getEndereco().getIdEndereco() == 0){
+                        aux = enderecoDAO.insertEndereco(c.getEndereco());
+                        c.getEndereco().setIdEndereco(aux);
+                    }
+                    else {
+                        enderecoDAO.updateEndereco(c.getEndereco());
+                    }
+                    st.setInt(5, c.getEndereco().getIdEndereco());
+                }
+                else{
+                    st.setNull(5, java.sql.Types.INTEGER);
+                }
+                if(c.getDescricao() != null){
+                    DescricaoDAO descricaoDAO = new DescricaoDAO(con);
+                    if(c.getDescricao().getIdDescricao() == 0){
+                        aux = descricaoDAO.insertDescricao(c.getDescricao());
+                        c.getDescricao().setIdDescricao(aux);
+                    }
+                    else {
+                        descricaoDAO.updateDescricao(c.getDescricao());
+                    }
+                    st.setInt(6, c.getDescricao().getIdDescricao());
+                }
+                else{
+                    st.setNull(6, java.sql.Types.INTEGER);
+                }
+                if(c.getPreferencia() != null){
+                    PreferenciaDAO preferenciaDAO = new PreferenciaDAO(con);
+                    if(c.getPreferencia().getIdPreferencias() == 0){
+                        aux = preferenciaDAO.insertPreferencia(c.getPreferencia());
+                        c.getPreferencia().setIdPreferencias(aux);
+                    }
+                    else {
+                        preferenciaDAO.updatePreferencia(c.getPreferencia());
+                    }
+                    st.setInt(7, c.getPreferencia().getIdPreferencias());
+                }
+                else{
+                    st.setNull(7, java.sql.Types.INTEGER);
+                }
+
+                int rowsAffected = st.executeUpdate();
+
+                if(rowsAffected > 0) return true;
+
+            } catch (SQLException ex) {
+                Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        return false;
     }
     
 }

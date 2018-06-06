@@ -115,7 +115,28 @@ public class UsuarioDAO {
         return 0;    
         
     }
-    
+    public boolean updateUsuario(Usuario u){
+        PreparedStatement st;
+        if(u !=null && u.getIdUsuario() > 0){
+            try {
+                st = con.prepareStatement(
+                        "UPDATE usuario WHERE idUsuario = ? SET senha = ?"
+                );
+                if(!u.getSenha().isEmpty()){
+                    st.setInt(1, u.getIdUsuario());
+                    st.setString(2, senhaMD5(u.getSenha()));
+                    st.executeUpdate();
+                }
+                int rowsAffected = st.executeUpdate();
+                if(rowsAffected > 0)return true;
+                
+            } catch (SQLException ex) {
+                Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return false;    
+        
+    }
     public boolean deleteUsuario(Usuario u){
         if(u.getIdUsuario() != 0){
             return deleteUsuario(u.getIdUsuario());

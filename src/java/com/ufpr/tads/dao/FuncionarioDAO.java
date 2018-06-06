@@ -114,4 +114,42 @@ public class FuncionarioDAO {
         
         return 0;
     }
+    public boolean updateFuncionario(Funcionario f) {
+        PreparedStatement st;
+        int aux;
+        try {
+            st = con.prepareStatement(
+                      "UPDATE Funcionario WHERE idFuncionario = ? SET nome = ?,"
+                    + "cargo = ?, Endereco_idEndereco = ?"
+            );
+            st.setInt(1, f.getIdFuncionario());
+            st.setString(2, f.getNome());
+            st.setString(3, f.getCargo());
+            if(f.getEndereco() != null){
+                EnderecoDAO enderecoDAO = new EnderecoDAO(con);
+                if(f.getEndereco().getIdEndereco() == 0){
+                    aux = enderecoDAO.insertEndereco(f.getEndereco());
+                    f.getEndereco().setIdEndereco(aux);
+                }
+                else {
+                    enderecoDAO.updateEndereco(f.getEndereco());
+                }
+                st.setInt(4, f.getEndereco().getIdEndereco());
+            }
+            else{
+                st.setNull(4, java.sql.Types.INTEGER);
+            }
+            aux = st.executeUpdate();
+            if(aux > 0) return true;
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+        
+        return true;
+    }
 }

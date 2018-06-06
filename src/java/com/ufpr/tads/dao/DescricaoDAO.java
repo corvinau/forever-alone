@@ -91,13 +91,31 @@ public class DescricaoDAO {
             
         } catch (SQLException ex) {
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        
-        
-        
+        }        
         return 0;
+    }
     
-    
+    public boolean updateDescricao(Descricao descricao){
+        PreparedStatement st;
+        if(descricao.getIdDescricao() == 0){
+            try {
+                st = con.prepareStatement(
+                        "UPDATE descricao WHERE idDescricao = ? SET resumo = ?,"
+                        + "CorCabelo_idCorCabelo = ? ,CorPele_idCorPele = ?"
+                );
+                st.setString(1, descricao.getResumo());
+                st.setInt(2, descricao.getCorCabelo().getIdCorCabelo());
+                st.setInt(3, descricao.getCorPele().getIdCorPele());
+
+                int rowsAffected = st.executeUpdate();
+                
+                if(rowsAffected > 0) return true;
+            
+            } catch (SQLException ex) {
+                Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return false;
+        
     }
 }

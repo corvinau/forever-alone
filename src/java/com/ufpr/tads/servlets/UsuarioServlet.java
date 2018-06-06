@@ -81,7 +81,6 @@ public class UsuarioServlet extends HttpServlet {
                     rd = getServletContext().getRequestDispatcher("/login.jsp");   
                     break;
                 case "formCliente":
-                    
                     request.setAttribute("estados", UsuarioFacade.getEstados());
                     rd = getServletContext().getRequestDispatcher("/clienteForm.jsp");
                     break;
