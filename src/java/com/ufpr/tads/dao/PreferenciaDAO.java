@@ -131,12 +131,13 @@ public class PreferenciaDAO {
             
             try {
                 st = con.prepareStatement(
-                        "UPDATE preferencias WHERE idPreferencias = ? SET sexo = ?,"
-                        + " idadeMin = ?, idadeMax = ? "
+                        "UPDATE preferencias SET sexo = ?, idadeMin = ?, "
+                        + "idadeMax = ? WHERE idPreferencias = ?"
                 );
                 st.setString(1, preferencia.getSexos() + "");
                 st.setInt(2, preferencia.getIdadeMin());
                 st.setInt(3, preferencia.getIdadeMax());
+                st.setInt(4, preferencia.getIdPreferencias());
 
                 aux = st.executeUpdate();
                 

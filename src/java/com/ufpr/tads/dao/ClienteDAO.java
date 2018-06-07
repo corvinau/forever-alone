@@ -163,15 +163,14 @@ public class ClienteDAO {
         if(c.getIdCliente() == 0){
             try {
                 st = con.prepareStatement(
-                        "UPDATE cliente WHERE idCliente = ? SET nome = ?,"
-                        + "disponibilidade = ?, qtdTokens = ?, "
-                        + "Endereco_idEndereco = ?, Descricao_idDescricao = ?, "
-                        + "Preferencias_idPreferencias = ? "
+                        "UPDATE cliente SET nome = ?,disponibilidade = ?,"
+                        + " qtdTokens = ?, Endereco_idEndereco = ?, "
+                        + " Descricao_idDescricao = ?,Preferencias_idPreferencias = ? "
+                        + " WHERE idCliente = ? "
                 );
-                st.setInt(1, c.getIdCliente());
-                st.setString(2, c.getNome());
-                st.setBoolean(3, c.isDisp());
-                st.setInt(4,c.getQtdTokens());
+                st.setString(1, c.getNome());
+                st.setBoolean(2, c.isDisp());
+                st.setInt(3,c.getQtdTokens());
                 if(c.getEndereco() != null){
                     EnderecoDAO enderecoDAO = new EnderecoDAO(con);
                     if(c.getEndereco().getIdEndereco() == 0){
@@ -181,10 +180,10 @@ public class ClienteDAO {
                     else {
                         enderecoDAO.updateEndereco(c.getEndereco());
                     }
-                    st.setInt(5, c.getEndereco().getIdEndereco());
+                    st.setInt(4, c.getEndereco().getIdEndereco());
                 }
                 else{
-                    st.setNull(5, java.sql.Types.INTEGER);
+                    st.setNull(4, java.sql.Types.INTEGER);
                 }
                 if(c.getDescricao() != null){
                     DescricaoDAO descricaoDAO = new DescricaoDAO(con);
@@ -195,10 +194,10 @@ public class ClienteDAO {
                     else {
                         descricaoDAO.updateDescricao(c.getDescricao());
                     }
-                    st.setInt(6, c.getDescricao().getIdDescricao());
+                    st.setInt(5, c.getDescricao().getIdDescricao());
                 }
                 else{
-                    st.setNull(6, java.sql.Types.INTEGER);
+                    st.setNull(5, java.sql.Types.INTEGER);
                 }
                 if(c.getPreferencia() != null){
                     PreferenciaDAO preferenciaDAO = new PreferenciaDAO(con);
@@ -209,12 +208,13 @@ public class ClienteDAO {
                     else {
                         preferenciaDAO.updatePreferencia(c.getPreferencia());
                     }
-                    st.setInt(7, c.getPreferencia().getIdPreferencias());
+                    st.setInt(6, c.getPreferencia().getIdPreferencias());
                 }
                 else{
-                    st.setNull(7, java.sql.Types.INTEGER);
+                    st.setNull(6, java.sql.Types.INTEGER);
                 }
-
+                st.setInt(7, c.getIdCliente());
+                
                 int rowsAffected = st.executeUpdate();
 
                 if(rowsAffected > 0) return true;

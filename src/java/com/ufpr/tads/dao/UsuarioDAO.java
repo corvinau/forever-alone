@@ -120,11 +120,11 @@ public class UsuarioDAO {
         if(u !=null && u.getIdUsuario() > 0){
             try {
                 st = con.prepareStatement(
-                        "UPDATE usuario WHERE idUsuario = ? SET senha = ?"
+                        "UPDATE usuario SET senha = ? WHERE idUsuario = ?"
                 );
                 if(!u.getSenha().isEmpty()){
-                    st.setInt(1, u.getIdUsuario());
-                    st.setString(2, senhaMD5(u.getSenha()));
+                    st.setString(1, senhaMD5(u.getSenha()));
+                    st.setInt(2, u.getIdUsuario());
                     st.executeUpdate();
                 }
                 int rowsAffected = st.executeUpdate();

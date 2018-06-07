@@ -100,13 +100,14 @@ public class DescricaoDAO {
         if(descricao.getIdDescricao() == 0){
             try {
                 st = con.prepareStatement(
-                        "UPDATE descricao WHERE idDescricao = ? SET resumo = ?,"
-                        + "CorCabelo_idCorCabelo = ? ,CorPele_idCorPele = ?"
+                        "UPDATE descricao SET resumo = ?, CorCabelo_idCorCabelo = ? , "
+                        + "CorPele_idCorPele = ? WHERE idDescricao = ?"
                 );
                 st.setString(1, descricao.getResumo());
                 st.setInt(2, descricao.getCorCabelo().getIdCorCabelo());
                 st.setInt(3, descricao.getCorPele().getIdCorPele());
-
+                st.setInt(4, descricao.getIdDescricao());
+                
                 int rowsAffected = st.executeUpdate();
                 
                 if(rowsAffected > 0) return true;

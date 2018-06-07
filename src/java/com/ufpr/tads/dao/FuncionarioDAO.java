@@ -119,12 +119,12 @@ public class FuncionarioDAO {
         int aux;
         try {
             st = con.prepareStatement(
-                      "UPDATE Funcionario WHERE idFuncionario = ? SET nome = ?,"
-                    + "cargo = ?, Endereco_idEndereco = ?"
+                      "UPDATE Funcionario SET nome = ?, cargo = ?, "
+                    + "Endereco_idEndereco = ? WHERE idFuncionario = ?"
             );
-            st.setInt(1, f.getIdFuncionario());
-            st.setString(2, f.getNome());
-            st.setString(3, f.getCargo());
+            
+            st.setString(1, f.getNome());
+            st.setString(2, f.getCargo());
             if(f.getEndereco() != null){
                 EnderecoDAO enderecoDAO = new EnderecoDAO(con);
                 if(f.getEndereco().getIdEndereco() == 0){
@@ -134,11 +134,13 @@ public class FuncionarioDAO {
                 else {
                     enderecoDAO.updateEndereco(f.getEndereco());
                 }
-                st.setInt(4, f.getEndereco().getIdEndereco());
+                st.setInt(3, f.getEndereco().getIdEndereco());
             }
             else{
-                st.setNull(4, java.sql.Types.INTEGER);
+                st.setNull(3, java.sql.Types.INTEGER);
             }
+            st.setInt(4, f.getIdFuncionario());
+            
             aux = st.executeUpdate();
             if(aux > 0) return true;
             
