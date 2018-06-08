@@ -175,4 +175,30 @@ public class CorCabeloDAO {
         
         return false;
     }
+
+    public List<CorCabelo> getListaCorCabelo() {
+        List<CorCabelo> lista = new ArrayList<CorCabelo>();
+        CorCabelo c;
+        PreparedStatement st;
+        
+        try {
+            st = con.prepareStatement(
+                              "SELECT idCorCabelo, nome FROM corCabelo"
+            );
+            
+            rs = st.executeQuery();
+            while(rs.next()){
+                c = new CorCabelo();
+                c.setIdCorCabelo(rs.getInt("idCorCabelo"));
+                c.setNome(rs.getString("nome"));
+                lista.add(c);
+            }
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return lista;
+    }
 }

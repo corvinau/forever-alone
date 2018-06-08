@@ -45,6 +45,7 @@ public class UsuarioServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
+        Usuario usuarioLogado = (Usuario) session.getAttribute("loginBean");
         RequestDispatcher rd = null;
         String action = (String) request.getParameter("action");
         if(action == null){

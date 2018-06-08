@@ -175,5 +175,31 @@ public class CorPeleDAO {
         
         return false;
     }
+
+    public List<CorPele> getListaCorPele() {
+       List<CorPele> lista = new ArrayList<CorPele>();
+       CorPele c;
+       PreparedStatement st;
+        
+        try {
+            st = con.prepareStatement(
+                              "SELECT idCorPele, nome FROM corPele"
+            );
+            
+            rs = st.executeQuery();
+            while(rs.next()){
+                c = new CorPele();
+                c.setIdCorPele(rs.getInt("idCorPele"));
+                c.setNome(rs.getString("nome"));
+                lista.add(c);
+            }
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return lista;
+    }
     
 }
