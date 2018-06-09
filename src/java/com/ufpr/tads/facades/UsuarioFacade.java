@@ -16,6 +16,7 @@ import com.ufpr.tads.dao.ClienteDAO;
 import com.ufpr.tads.dao.CorCabeloDAO;
 import com.ufpr.tads.dao.CorPeleDAO;
 import com.ufpr.tads.dao.DescricaoDAO;
+import com.ufpr.tads.dao.PreferenciaDAO;
 import com.ufpr.tads.dao.UFDAO;
 import com.ufpr.tads.dao.UsuarioDAO;
 import java.util.List;
@@ -62,6 +63,23 @@ public class UsuarioFacade {
                 if(cliente.getDescricao().getIdDescricao() != 0){
                     DescricaoDAO descricaoDao = new DescricaoDAO();
                     return descricaoDao.updateDescricao(cliente.getDescricao());
+                }
+                else{
+                    ClienteDAO clienteDao = new ClienteDAO();
+                    return clienteDao.updateCliente(cliente);
+                    
+                }
+            }
+        }
+        return false;
+    }
+
+    public static boolean updatePreferencia(Cliente cliente) {
+        if(cliente.getTipo() != 'C' || cliente.getTipo() != 'c'){
+            if(cliente.getPreferencia() != null){
+                if(cliente.getPreferencia().getIdPreferencias() != 0){
+                    PreferenciaDAO preferenciaDao = new PreferenciaDAO();
+                    return preferenciaDao.updatePreferencia(cliente.getPreferencia());
                 }
                 else{
                     ClienteDAO clienteDao = new ClienteDAO();

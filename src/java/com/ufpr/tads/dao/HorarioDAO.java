@@ -167,7 +167,7 @@ public class HorarioDAO {
     public boolean insertHorarioPreferencia(int aux, List<Horario> horario) { 
         Horario aux2;
         int aux3;
-        if(!horario.isEmpty()){
+        if(horario != null && !horario.isEmpty()){
             for(Horario h : horario){
                 if(h.getIdHorario() == 0){
                     aux2 = getHorario(h.getDiaSemana(),h.getHoraInicial(),h.getHoraLimite());

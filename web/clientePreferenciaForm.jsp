@@ -57,6 +57,65 @@
                     </c:forEach>
                 </div>
             </div>
+            <div>
+                <div>
+                    <input type="checkbox" id="coding" name="diaSemana" value="Segunda">
+                    <label for="coding">Segunda</label>
+                    <input id="horaMin" type="number" name="horaMin"/>
+                    <input id="horaMin" type="number" name="minutoMin"/>
+                    <input id="horaMax" type="number" name="horaMax"/>
+                    <input id="horaMax" type="number" name="minutoMax"/>
+                </div>
+                <div>
+                    <input type="checkbox" id="coding" name="diaSemana" value="Terca" >
+                    <label for="coding">Terca</label>
+                    <input id="horaMin" type="number" name="horaMin"/>
+                    <input id="horaMin" type="number" name="minutoMin"/>
+                    <input id="horaMax" type="number" name="horaMax"/>
+                    <input id="horaMax" type="number" name="minutoMax"/>
+                </div>
+                <div>
+                    <input type="checkbox" id="coding" name="diaSemana" value="Quarta">
+                    <label for="coding">Quarta</label>
+                    <input id="horaMin" type="number" name="horaMin"/>
+                    <input id="horaMin" type="number" name="minutoMin"/>
+                    <input id="horaMax" type="number" name="horaMax"/>
+                    <input id="horaMax" type="number" name="minutoMax"/>
+                </div>
+                <div>
+                    <input type="checkbox" id="coding" name="diaSemana" value="Quinta" >
+                    <label for="coding">Quinta</label>
+                    <input id="horaMin" type="number" name="horaMin"/>
+                    <input id="horaMin" type="number" name="minutoMin"/>
+                    <input id="horaMax" type="number" name="horaMax"/>
+                    <input id="horaMax" type="number" name="minutoMax"/>
+                </div>
+                <div>
+                    <input type="checkbox" id="coding" name="diaSemana" value="Sexta" >
+                    <label for="coding">Sexta</label>
+                    <input id="horaMin" type="number" name="horaMin"/>
+                    <input id="horaMin" type="number" name="minutoMin"/>
+                    <input id="horaMax" type="number" name="horaMax"/>
+                    <input id="horaMax" type="number" name="minutoMax"/>
+                </div>
+                <div>
+                    <input type="checkbox" id="coding" name="diaSemana" value="Sabado">
+                    <label for="coding">Sabado</label>
+                    <input id="horaMin" type="number" name="horaMin"/>
+                    <input id="horaMin" type="number" name="minutoMin"/>
+                    <input id="horaMax" type="number" name="horaMax"/>
+                    <input id="horaMax" type="number" name="minutoMax"/>
+                </div>
+                <div>
+                    <input type="checkbox" id="coding" name="diaSemana" value="Domingo" >
+                    <label for="coding">Domingo</label>
+                    <input id="horaMin" type="number" name="horaMin"/>
+                    <input id="horaMin" type="number" name="minutoMin"/>
+                    <input id="horaMax" type="number" name="horaMax"/>
+                    <input id="horaMax" type="number" name="minutoMax"/>
+                </div>
+            </div>
+            <input type="submit" class="btn btn-primary" value="Salvar"/>
         </form>
     </body>
 </html>

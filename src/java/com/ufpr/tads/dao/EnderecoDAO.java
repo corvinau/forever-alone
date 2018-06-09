@@ -99,7 +99,30 @@ public class EnderecoDAO {
         
     }
 
-    void updateEndereco(Endereco endereco) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean updateEndereco(Endereco endereco) {
+        PreparedStatement st;
+        
+        try {
+            st = con.prepareStatement(
+                    "UPDATE Endereco SET bairro = ? , rua = ?, numero = ?, complemento = ?,"
+                    + " Cidade_idCidade = ? WHERE idEndereco = ?"
+            );
+            st.setString(1, endereco.getBairro());
+            st.setString(2, endereco.getRua());
+            st.setInt(3,endereco.getNumero());
+            st.setString(4,endereco.getComplemento());
+            st.setInt(5, endereco.getCidade().getIdCidade());
+            st.setInt(6, endereco.getIdEndereco());
+            
+            int aux = st.executeUpdate();
+            if(aux > 0) return true;
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        return false;
     }
 }

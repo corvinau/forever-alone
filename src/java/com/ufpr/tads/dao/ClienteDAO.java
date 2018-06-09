@@ -160,7 +160,7 @@ public class ClienteDAO {
     public boolean updateCliente(Cliente c){
         PreparedStatement st;
         int aux;
-        if(c.getIdCliente() == 0){
+        if(c.getIdCliente() > 0){
             try {
                 st = con.prepareStatement(
                         "UPDATE cliente SET nome = ?,disponibilidade = ?,"

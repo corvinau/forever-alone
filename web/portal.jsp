@@ -18,5 +18,7 @@
             </jsp:forward>
         </c:if>
         Bem vindo ${loginBean.nome}
+        
+        <a href="ClienteServlet">Opcoes</a>
     </body>
 </html>
