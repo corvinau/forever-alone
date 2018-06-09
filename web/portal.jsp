@@ -18,7 +18,19 @@
             </jsp:forward>
         </c:if>
         Bem vindo ${loginBean.nome}
+        <c:choose>
+            <c:when test="${loginBean.tipo == 'C' || loginBean.tipo == 'c'}">
+                Cliente
+                <a href="ClienteServlet">Opcoes</a>
+            </c:when>
+            <c:otherwise>
+                Funcionario
+                <a href="FuncionarioServlet?action=listaClientes">Clientes</a>
+                <c:if test="${loginBean.nome == \"admin\" }">
+                    <a href="FuncionarioServlet?action=listaFuncionarios">Funcionario</a>
+                </c:if>
+            </c:otherwise>
+        </c:choose>
         
-        <a href="ClienteServlet">Opcoes</a>
     </body>
 </html>

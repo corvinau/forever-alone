@@ -12,6 +12,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -153,5 +155,40 @@ public class FuncionarioDAO {
         
         
         return true;
+    }
+
+    public List<Funcionario> getListaFuncionario() {
+        List<Funcionario> lista = new ArrayList<Funcionario>();
+        Funcionario f;
+        PreparedStatement st;
+        
+        try {
+            st = con.prepareStatement(
+                      "SELECT F.idFuncionario, F.nome, F.cargo, F.cpf, "
+                    + "F.dataNascimento, U.email FROM funcionario F "
+                    + "INNER JOIN usuario U ON U.idUsuario = F.Usuario_idUsuario "
+            );
+            EnderecoDAO enderecoDAO = new EnderecoDAO(con);
+            rs = st.executeQuery();
+            while(rs.next()){
+                f = new Funcionario();
+                f.setIdFuncionario(rs.getInt("F.idFuncionario"));
+                f.setNome(rs.getString("F.nome"));
+                f.setCargo(rs.getString("F.cargo"));
+                f.setCpf(rs.getString("F.cpf"));
+                f.setDataNasc(rs.getDate("F.dataNascimento"));
+                f.setEmail(rs.getString("U.email"));
+                lista.add(f);
+            }
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+        
+        return lista;
     }
 }

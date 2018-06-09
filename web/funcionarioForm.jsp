@@ -1,6 +1,6 @@
 <%-- 
-    Document   : clienteForm
-    Created on : 01/06/2018, 22:07:19
+    Document   : funcionarioForm
+    Created on : 09/06/2018, 20:03:29
     Author     : ArtVin
 --%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -38,7 +38,7 @@
             function getCidades(preencherPrimeiroForm){
                 preencherPrimeiroForm = false;
                 var estadoId = $("#uf").val();
-                var url = "http://localhost:19935/ForeverAlone/webresources/Ajax/cidade/"+estadoId;
+                var url = "http://localhost:28313/ForeverAlone/webresources/Ajax/cidade/"+estadoId;
                 $.ajax({
                         type : "GET",
                         url : url, // URL da sua Servlet
@@ -64,31 +64,21 @@
         </script>
     </head>
     <body>
-        <c:if test="${!(empty loginBean) && loginBean.tipo != 'F' && loginBean.tipo != 'f'}">
+        <c:if test="${!(empty loginBean) && loginBean.tipo != 'F' && loginBean.tipo != 'f' && loginBean.nome != \"admin\"}">
             <jsp:forward page="index.jsp">
                 <jsp:param name="msg" value="Apenas funcionarios podem cadastrar clientes enquanto estão logados" />
             </jsp:forward>
         </c:if>
-        <form action="UsuarioServlet?action=cadastroCliente" method="POST">
+        <form action="FuncionarioServlet?action=cadastroFuncionario" method="POST">
             <div><input type="text" name="email" value="" placeholder="Email"/></div>
-            <c:if test="${(empty loginBean)}">
-                <div><input type="password" name="senha" value="" placeholder="Senha"/></div>
-                <div><input type="password" name="senhaConfirm" value="" placeholder="Confirmar Senha"/></div>
-            </c:if>
             <div><input type="text" name="nome" value="" placeholder="nome"/></div>
             <div><input type="text" name="cpf" value="" placeholder="cpf"/></div>
             <div><input type="text" name="dataNascimento" value="" placeholder="dataNascimento"/></div>
             <div>
-                <select name="sexo">
-                    <option value="M">M</option>
-                    <option value="F">F</option>
-                </select>
-            </div>
-            <div>
                 <select id="uf" name="uf">
                     <c:forEach items="${estados}" var="estado">
                         <c:choose>
-                            <c:when test="${cliente.endereco.cidade.uf.idUF == estado.idUF}">
+                            <c:when test="${funcionario.endereco.cidade.uf.idUF == estado.idUF}">
                                 <option value="${estado.idUF}" selected>${estado.nome} - ${estado.sigla}</option>
                             </c:when>
                             <c:otherwise>
@@ -111,3 +101,4 @@
         </form>
     </body>
 </html>
+

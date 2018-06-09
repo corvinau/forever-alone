@@ -94,7 +94,9 @@ public class UsuarioDAO {
                     st.setString(3, u.getTipo() + "");
                     st.executeUpdate();
                 }
-                rs = st.getGeneratedKeys();
+                if(st !=null){
+                    rs = st.getGeneratedKeys();
+                }
                 if(rs.next()){
                     u.setIdUsuario(rs.getInt(1));
                     if(u.getTipo() == 'C' || u.getTipo() == 'c'){
