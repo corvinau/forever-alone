@@ -11,24 +11,17 @@
         <title>Forever Alone</title>
     </head>
     <body>
-        <%@include file="header.jsp"%>
-        
-        <!-- sobre -->
-        <div class="about-w3layouts" id="about">
-            <div class="tittle-agileinfo">
-                <h3>Sobre Nós</h3>
+        <!-- footer -->
+        <div>
+            <div class="footer-w3layouts">
+                <div class="container">
+                    <div class="agile-copy">
+                        <p>All rights reserved | Design by <a href="http://w3layouts.com/">W3layouts</a></p>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
             </div>
-            <div class="about-right">
-                <h3 class="subheading-agileits-w3layouts">BLABLABLA</h3>
-                <p class="para-agileits-w3layouts">
-                    Duis sit amet nisi quis leo fermentum vestibulum vitae eget augue. Nulla quam nunc,
-                    vulputate id urna at, tempor tincidunt metus. Sed feugiat quam nec mauris mattis malesuada.
-                </p>
-            </div>
-            <div class="clearfix"> </div>
         </div>
-        
-        <%@include file="footer.jsp"%>
         
         <a href="#home" class="scroll" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
         <script type="text/javascript" src="js/move-top.js"></script>

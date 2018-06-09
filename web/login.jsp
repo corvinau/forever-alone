@@ -9,14 +9,37 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Forever Alone</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
-        <form action="UsuarioServlet?action=login" method="POST">
-            <input type="text" name="login" value="" placeholder="Login"/>
-            <input type="password" name="senha" value="" placeholder="Senha"/>
-            <input type="submit" class="btn btn-primary" value="Entrar"/>
-        </form>
+        <%@include file="header.jsp"%>
+        <div class="login elite-app">
+            <div class="container">
+                <div class="tittle-agileinfo">
+                    <h3>Login</h3>
+                </div>
+                <div class="col-md-12 login-form-w3-agile">
+                    <form action="UsuarioServlet?action=login" method="POST">
+                        <div class="w3_form_body_grid">
+                            <span>Login</span>
+                            <input type="text" name="login" placeholder="Login" value="" required>
+                        </div>
+                        <div class="w3_form_body_grid">
+                            <span>Senha</span>
+                            <input type="password" name="senha" placeholder="Senha" value="" required>
+                        </div>
+                        <div class="agile_remember">
+                            <div class="agile_remember_right">
+                                <a href="#">Esqueci minha senha</a>
+                            </div>
+                            <div class="clearfix"> </div>
+                        </div>
+                        <input type="submit" value="Entrar">
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <%@include file="footer.jsp"%>
     </body>
 </html>

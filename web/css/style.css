@@ -32,7 +32,7 @@ input[type="button"],input[type="submit"]{
 h1,h2,h3,h4,h5,h6{
 	margin:0;
 	font-family: 'Raleway', sans-serif;
-    font-weight: 600;
+        font-weight: 600;
 }	
 p{
 	margin:0;
@@ -57,18 +57,16 @@ h1.logo {
     padding: 5px 5px;
     position: relative;
     font-size: 47px;
-    letter-spacing: 6px;
-    font-family: 'Dancing Script', cursive;
+    font-family: 'Allura', cursive;
 }
 h1 span {
-    color: rgba(68, 199, 244, 0.37);
+    color: rgba(68, 199, 244, 0.7);
     display: block;
     font-size: 36px;
-    letter-spacing: 6px;
     padding-left: 53px;
 }
 h1.logo a {
-    color: rgba(255, 255, 255, 0.73);
+    color: rgba(255, 255, 255, 0.9);
     text-decoration: none;
     display: block;
 }
@@ -336,7 +334,7 @@ ul.nav.navbar-nav.navbar-right li:nth-child(6) a {
 }
 .callbacks_here a:after{
 	background:none;
-	color:#EA3621;
+	color:rgba(68, 199, 244, 0.5);
 }
 /*----*/
 .banner-w3ls .agileits-social {
@@ -412,7 +410,7 @@ ul.nav.navbar-nav.navbar-right li:nth-child(6) a {
     font-size: 1.6em;
     letter-spacing: 2px;
     line-height: 1.5em;
-    font-family: 'Dancing Script', cursive;
+    font-family: 'Allura', cursive;
 }
 .w3ls-info h4 i{
 	display: block;
@@ -670,7 +668,7 @@ img.img-responsive {
 .w3_agileits_services_grid_1 {
     width: 100px;
     height: 100px;
-    border: 2px solid #EA3621;
+    border: 2px solid rgba(68, 199, 244, 0.5);
     margin: 15px auto 0;
     border-radius: 50px;
 	-webkit-border-radius: 50px;
@@ -710,7 +708,7 @@ img.img-responsive {
     transition: all .5s ease;
     width: 20%;
     height: 2px;
-    background: #EA3621;
+    background: rgba(68, 199, 244, 0.5);
     left: 40%;
     bottom: 0;
 }
@@ -726,7 +724,7 @@ img.img-responsive {
 	border:2px solid #fff;
 }
 .w3_agileits_services_grid:hover .w3_agileits_services_grid_agile h3{
-	color:#EA3621;
+	color:rgba(68, 199, 244, 0.5);
 }
 .w3_agileits_services_grid {
     -webkit-transition: all .5s ease;
@@ -854,8 +852,7 @@ h3.subhead-agileits {
     letter-spacing: 1px;
     font-size: 2.5em;
     color: #000;
-    font-family: 'Dancing Script', cursive;
-	text-transform:capitalize;
+    text-transform:capitalize;
 }
 .white-w3ls{
 	color:#fff!important;
@@ -1029,7 +1026,7 @@ h3.subhead-agileits {
 .search-wthree .sim-button{
 	float:right;
 	margin-top:0!important;
-	background: #EA3621!important;
+	background: rgba(68, 199, 244, 0.5) !important;
 	width: 192px!important;
 }
 .search-wthree {
@@ -1042,12 +1039,11 @@ h3.subhead-agileits {
     background-attachment: fixed;
 }
 h3.subheading-agileits-w3layouts,h3.subheading-agileits-w3layouts {
-    color: rgba(68, 199, 244, 0.37);
+    color: rgba(68, 199, 244, 0.5);
     font-size: 30px;
     letter-spacing: 3px;
     margin-bottom: 0.5em;
     text-transform: capitalize;
-    /*font-family: 'Dancing Script', cursive;*/
 }
 .search-wthree h3 {
     margin-top: 8px!important;
@@ -1079,7 +1075,7 @@ h3.subheading-agileits-w3layouts span,h3.subheading-agileits-w3layouts span{
     margin: 2em 0 1em;
 }
 .app-info p a {
-    color: #EA3621;
+    color: rgba(68, 199, 244, 0.5);
     font-weight: bold;
     text-decoration: none;
 }
@@ -1317,11 +1313,11 @@ background: rgba(0, 0, 0, 0.17);
     text-transform: capitalize;
     padding: 2.3em 0 0;
     display: inline-block;
-	    font-family: 'Dancing Script', cursive;
+	    font-family: 'Allura', cursive;
 }
 .second-effect .mask p i {
     display: block;
-    color: #EA3621;
+    color: rgba(68, 199, 244, 0.5);
 	font-weight:bold;
     font-size: 20px;
 }
@@ -1395,7 +1391,7 @@ background: rgba(0, 0, 0, 0.17);
     background: #0e0e0e;
 }
 .w3l_agileits_breadcrumbs ul li a {
-    color: #EA3621;
+    color: rgba(68, 199, 244, 0.5);
     text-decoration: none;
 }
 .w3l_agileits_breadcrumbs ul li span {
@@ -1415,8 +1411,8 @@ background: rgba(0, 0, 0, 0.17);
     border: 2px solid #44c7f4;
 }
 .login-form-w3-agile {
-    margin-right: 19px;
-    width: 65%;
+    width: 70%;
+    margin: 0 15%;
 }
 .w3_form_body_grid span {
     float: left;
@@ -1453,7 +1449,7 @@ background: rgba(0, 0, 0, 0.17);
     width: 10px;
     height: 10px;
     outline: none;
-    background: #ea3621;
+    background: rgba(68, 199, 244, 0.5);
     border-radius: 50%;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
@@ -1546,7 +1542,7 @@ label.radio {
     color: #fff;
     border: none;
     width: 100%;
-    background: #EA3621;
+    background: rgb(65, 131, 154);
     margin: 1.5em 0 0;
     text-transform: uppercase;
 }
@@ -1664,13 +1660,13 @@ label.radio {
     text-transform: capitalize;
 }
 .login-right-info ul li i {
-    color: #ea3621;
+    color: rgba(68, 199, 244, 0.5);
     margin-right: 10px;
     font-size: 14px;
 }
 .login-right-info .sim-button {
     margin-top: 0em!important;
-    background: #EA3621!important;
+    background: rgba(68, 199, 244, 0.5) !important;
     width: 192px!important;
 }
 .login-right-info h5 {
@@ -1734,7 +1730,7 @@ ul.resp-tabs-list {
 	border:3px solid #eee;
 }
 .resp-tabs-container p span {
-    color: #EA3621;
+    color: rgba(68, 199, 244, 0.5);
     font-weight: bold;
 }
 .resp-tabs-container p a {
@@ -1803,12 +1799,12 @@ ul.resp-tabs-list {
 	margin:10px 10px 0 0px;
 }
 .person-info-agileits-w3layouts ul li a:hover {
-	background:#EA3621;
+	background:rgba(68, 199, 244, 0.5);
 	color:#fff;
 	text-decoration:none;
 }
 .about-person .sim-button{
-	background:#EA3621;
+	background:rgba(68, 199, 244, 0.5);
 	margin-top:1em!important;
 }
 .about-person h6,.person-info-agileits-w3layouts h3 {
@@ -1817,12 +1813,12 @@ ul.resp-tabs-list {
     color: #000;
 }
 .person-info-agileits-w3layouts h3 {
-	color:#EA3621;
+	color:rgba(68, 199, 244, 0.5);
 	margin-bottom: 1em!important;
 	margin-top: 0em!important;
 }
 .about-person p span {
-    color: #EA3621;
+    color: rgba(68, 199, 244, 0.5);
     font-size: 19px;
 }
 .matches-main-agileinfo {
@@ -2144,7 +2140,6 @@ h2.typoh2{
     color: #fff;
     letter-spacing: 5px;
     margin-bottom: .6em;
-    font-family: 'Dancing Script', cursive;
 }
 .w3ls_footer_grid_left p {
     color: #9c9c9c;
@@ -2153,7 +2148,7 @@ h2.typoh2{
 }
 .w3ls_footer_grid_left p a {
     text-decoration: none;
-    color: #EA3621;
+    color: rgba(68, 199, 244, 0.5);
 }
 .w3ls_footer_grid_left p a:hover {
     text-decoration: none;
@@ -2203,7 +2198,7 @@ h2.typoh2{
     font-size: 38px;
 }
 .logo-icons-w3ls i.fa.fa-heart-o.heart2 {
-    color: #ea3621;
+    color: rgba(68, 199, 244, 0.5);
     font-size: 48px;
 }
 .logo-icons-w3ls{
@@ -2258,7 +2253,7 @@ h2.typoh2{
 }
 .footer-w3layouts p a {
     text-decoration: none;
-    color: #EA3621;
+    color: rgba(68, 199, 244, 0.5);
 }
 .footer-w3layouts p a:hover {
     text-decoration: none;
@@ -2453,7 +2448,7 @@ h2.typoh2{
 		min-height: 230px;
 	}
 	.banner-btm-w3layouts, .gallery, .w3ls-team, .test, .middle-section-agileits-w3layouts, .contact, .newsletter, .services, .elite-app {
-		padding: 4em 0em;
+		padding: 0em 0em 4em;
 	}
 	.tittle-agileinfo h3 {
 		font-size: 2.1em;
@@ -2946,7 +2941,7 @@ h2.typoh2{
 		margin: 2px 0px 0 0px;
 	}
 	.navbar-default .navbar-toggle .icon-bar {
-		background-color: #ea3621;
+		background-color: rgba(68, 199, 244, 0.5);
 	}
 	.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
 		background-color: rgba(255, 255, 255, 0.13);
