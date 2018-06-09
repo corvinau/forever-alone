@@ -54,7 +54,7 @@
                 <h3 style="font-family: 'Source Sans Pro', sans-serif;">Sobre Nós</h3>
             </div>
             <div class="about-right">
-                <h3 class="subheading-agileits-w3layouts">blablabla</h3>
+                <h3 class="subheading-agileits-w3layouts">BLABLABLA</h3>
                 <p class="para-agileits-w3layouts">Duis sit amet nisi quis leo fermentum vestibulum vitae eget augue. Nulla quam nunc, vulputate id urna at, tempor tincidunt metus. Sed feugiat quam nec mauris mattis malesuada.</p>
             </div>
             <div class="clearfix"> </div>
