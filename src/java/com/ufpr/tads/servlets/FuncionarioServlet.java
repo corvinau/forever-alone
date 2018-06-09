@@ -7,9 +7,11 @@ package com.ufpr.tads.servlets;
 
 import com.ufpr.tads.beans.Cidade;
 import com.ufpr.tads.beans.Cliente;
+import com.ufpr.tads.beans.Descricao;
 import com.ufpr.tads.beans.Endereco;
+import com.ufpr.tads.beans.Funcionario;
+import com.ufpr.tads.beans.Preferencia;
 import com.ufpr.tads.beans.UF;
-import com.ufpr.tads.beans.Usuario;
 import com.ufpr.tads.facades.UsuarioFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -30,8 +32,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author ArtVin
  */
-@WebServlet(name = "UsuarioServlet", urlPatterns = {"/UsuarioServlet"})
-public class UsuarioServlet extends HttpServlet {
+@WebServlet(name = "FuncionarioServlet", urlPatterns = {"/FuncionarioServlet"})
+public class FuncionarioServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,85 +46,74 @@ public class UsuarioServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        RequestDispatcher rd = getServletContext().getRequestDispatcher("/clienteOpcoes.jsp");
         HttpSession session = request.getSession();
-        session.invalidate();
-        session = request.getSession(); 
-        Usuario usuarioLogado = (Usuario) session.getAttribute("loginBean");
-        RequestDispatcher rd = null;
+        Funcionario usuarioLogado = (Funcionario) session.getAttribute("loginBean");
+        if(usuarioLogado == null || usuarioLogado.getIdUsuario() == 0 ||
+                (usuarioLogado.getTipo() != 'F' && usuarioLogado.getTipo() != 'f')){
+            rd = getServletContext().getRequestDispatcher("/login.jsp");
+            session.invalidate();
+            rd.forward(request, response);
+        }
         String action = (String) request.getParameter("action");
         if(action == null){
              action = (String) request.getAttribute("action");
         }
         if(action != null){
-            Cliente c;
-            switch(action){
-                case "login" :
-                    String login = (String) request.getParameter("login");
-                    String senha = (String) request.getParameter("senha");
-                    Usuario u = UsuarioFacade.usuarioLogin(login, senha);
-                    if(u != null){
-                        session.setAttribute("loginBean", u);
-                        rd = getServletContext().getRequestDispatcher("/portal.jsp");
-                    }
-                    else{
-                        request.setAttribute("msg", "Usuário/senha invalidos");
-                        rd = getServletContext().getRequestDispatcher("/login.jsp");
-                    }
-                    break;
-                case "cadastroCliente":
-                    c = getPostCliente(request);
-                    if(UsuarioFacade.createCliente(c) != 0){
+            Funcionario f;
+            switch (action){
+                case "cadastroFuncionario":
+                    f = getPostFuncionario(request);
+                    if(UsuarioFacade.createFuncionario(f) != 0){
                         request.setAttribute("msg", "Usuario cadastrado com sucesso");
                         rd = getServletContext().getRequestDispatcher("/login.jsp");
                         if(usuarioLogado != null && usuarioLogado.getTipo() == 'F' && usuarioLogado.getTipo() == 'f'){
                             rd = getServletContext().getRequestDispatcher("/portal.jsp");
                         }
                     }
-                    else{
-                        request.setAttribute("usuario", c);
-                        rd = getServletContext().getRequestDispatcher("/clienteForm.jsp");
-                    }
                     break;
-                case "formLogin":
-                    rd = getServletContext().getRequestDispatcher("/login.jsp");   
-                    break;
-                case "formCliente":
+                case "clienteForm":
                     request.setAttribute("estados", UsuarioFacade.getEstados());
                     rd = getServletContext().getRequestDispatcher("/clienteForm.jsp");
                     break;
+                case "funcionarioForm":
+                    request.setAttribute("estados", UsuarioFacade.getEstados());
+                    rd = getServletContext().getRequestDispatcher("/clienteForm.jsp");
+                    break;
+                case "listaFuncionarios":
+                    request.setAttribute("listaFuncionarios", UsuarioFacade.getListaFuncionario());
+                    rd = getServletContext().getRequestDispatcher("/funcionarioListar.jsp");
+                    break;
+                case "listaClientes":
+                    request.setAttribute("listaClientes",UsuarioFacade.getListaCliente());
+                    rd = getServletContext().getRequestDispatcher("/clienteListar.jsp");
+                    break;
                 default :
-                    rd = getServletContext().getRequestDispatcher("/index.jsp");
+                    rd = getServletContext().getRequestDispatcher("/portal.jsp");
                     break;
             }
+                            
+                            
         }
         rd.forward(request, response);
-       
     }
     
-    private Cliente getPostCliente(HttpServletRequest request){
-        Cliente c = new Cliente();
+    private Funcionario getPostFuncionario(HttpServletRequest request){
+        Funcionario f = new Funcionario();
         String aux;
         Date data;
         
-        c.setEmail((String)request.getParameter("email"));
-        aux = (String) request.getParameter("senha");
-        if(aux != null &&!aux.isEmpty()){
-            if(aux.equals((String)request.getParameter("senhaConfirm"))){
-                c.setSenha(aux);
-            }
-        }
-        c.setNome((String) request.getParameter("nome"));
-        c.setCpf((String) request.getParameter("cpf"));
+        f.setEmail((String)request.getParameter("email"));
+        f.setNome((String) request.getParameter("nome"));
+        f.setCpf((String) request.getParameter("cpf"));
         aux = (String) request.getParameter("dataNascimento");
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
         try {
-            c.setDataNasc(format.parse(aux.replace("/", "-")));
+            f.setDataNasc(format.parse(aux.replace("/", "-")));
         } catch (ParseException ex) {
             Logger.getLogger(UsuarioServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        aux = (String) request.getParameter("sexo");
-        c.setSexo(aux.charAt(0));
-        c.setTipo('C');
+        f.setTipo('F');
         
         Endereco endereco = new Endereco();
         UF uf = new UF();
@@ -137,9 +128,12 @@ public class UsuarioServlet extends HttpServlet {
         endereco.setNumero(Integer.parseInt((String) request.getParameter("numero")));
         endereco.setComplemento((String) request.getParameter("complemento"));
         
-        c.setEndereco(endereco);
-        return c;
+        f.setEndereco(endereco);
+        
+        
+        return f;
     }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

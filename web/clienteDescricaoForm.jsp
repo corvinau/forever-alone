@@ -19,7 +19,7 @@
                 <select id="corCabelo" name="corCabelo">
                     <c:forEach items="${listaCorCabelo}" var="cabelo">
                         <c:choose>
-                            <c:when test="${cliente.descricao.corCabelo.idCorCabelo == cabelo.idCorCabelo}">
+                            <c:when test="${loginBean.descricao.corCabelo.idCorCabelo == cabelo.idCorCabelo}">
                                 <option value="${cabelo.idCorCabelo}" selected> ${cabelo.nome}</option>
                             </c:when>
                             <c:otherwise>
@@ -33,7 +33,7 @@
                 <select id="corPele" name="corPele">
                     <c:forEach items="${listaCorPele}" var="pele">
                         <c:choose>
-                            <c:when test="${cliente.descricao.corPele.idCorPele == pele.idCorPele}">
+                            <c:when test="${loginBean.descricao.corPele.idCorPele == pele.idCorPele}">
                                 <option value="${pele.idCorPele}" selected> ${pele.nome}</option>
                             </c:when>
                             <c:otherwise>

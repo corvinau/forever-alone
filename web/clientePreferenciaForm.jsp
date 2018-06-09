@@ -29,7 +29,7 @@
                 <div>
                     <c:forEach items="${listaCorCabelo}" var="cabelo">
                         <c:choose>
-                            <c:when test="${cliente.preferencia.corCabelo.contains(cabelo)}">
+                            <c:when test="${loginBean.preferencia.corCabelo.contains(cabelo)}">
                                 <input type="checkbox" id="coding" name="cabelo" value="${cabelo.idCorCabelo}" checked>
                                 <label for="coding">${cabelo.nome}</label>
                             </c:when>
@@ -45,7 +45,7 @@
                 <div>
                     <c:forEach items="${listaCorPele}" var="pele">
                         <c:choose>
-                            <c:when test="${cliente.preferencia.corPele.contains(pele)}">
+                            <c:when test="${loginBean.preferencia.corPele.contains(pele)}">
                                 <input type="checkbox" id="coding" name="pele" value="${pele.idCorPele}" checked>
                                 <label for="coding">${pele.nome}</label>
                             </c:when>

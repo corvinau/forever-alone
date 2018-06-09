@@ -6,13 +6,16 @@
 package com.ufpr.tads.dao;
 
 import com.ufpr.tads.beans.Cliente;
+import com.ufpr.tads.beans.Descricao;
 import com.ufpr.tads.beans.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -225,6 +228,50 @@ public class ClienteDAO {
         }
         
         return false;
+    }
+
+    public List<Cliente> getListaCliente() {
+        List<Cliente> lista = new ArrayList<Cliente>();
+        Cliente c ;
+        PreparedStatement st;
+        
+        try {
+            st = con.prepareStatement(
+                    "SELECT C.idCliente, C.nome, C.cpf, "
+                    + "C.sexo, C.disponibilidade, "
+                    + "C.Descricao_idDescricao, D.resumo, "
+                    + "C.Usuario_idUsuario, U.email "
+                    + "FROM Cliente C "
+                    + "INNER JOIN usuario U ON C.Usuario_idUsuario = U.idUsuario "
+                    + "INNER JOIN descricao D ON C.Descricao_idDescricao = D.idDescricao "
+            );
+            
+            rs = st.executeQuery();
+            Descricao descricao;
+            while(rs.next()){
+                c = new Cliente();
+                c.setIdCliente(rs.getInt("C.idCliente"));
+                c.setNome(rs.getString("C.nome"));
+                c.setCpf(rs.getString("C.cpf"));
+                c.setSexo(rs.getString("C.sexo").charAt(0));
+                c.setDisp(rs.getBoolean("C.disponibilidade"));
+                descricao = new Descricao();
+                descricao.setIdDescricao(rs.getInt("C.Descricao_idDescricao"));
+                descricao.setResumo(rs.getString("D.resumo"));
+                c.setDescricao(descricao);
+                c.setEmail(rs.getString("U.email"));
+                lista.add(c);
+            }
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+        
+        return lista;
     }
     
 }
