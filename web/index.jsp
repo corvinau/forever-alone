@@ -8,12 +8,39 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Forever Alone</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
-        <a href="UsuarioServlet?action=formLogin">Logar</a>
-        <a href="UsuarioServlet?action=formCliente">Cadastrar</a>
+        <%@include file="header.jsp"%>
+        
+        <!-- sobre -->
+        <div class="about-w3layouts" id="about">
+            <div class="tittle-agileinfo">
+                <h3>Sobre Nós</h3>
+            </div>
+            <div class="about-right">
+                <h3 class="subheading-agileits-w3layouts">BLABLABLA</h3>
+                <p class="para-agileits-w3layouts">
+                    Duis sit amet nisi quis leo fermentum vestibulum vitae eget augue. Nulla quam nunc,
+                    vulputate id urna at, tempor tincidunt metus. Sed feugiat quam nec mauris mattis malesuada.
+                </p>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+        
+        <%@include file="footer.jsp"%>
+        
+        <a href="#home" class="scroll" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+        <script type="text/javascript" src="js/move-top.js"></script>
+        <script type="text/javascript" src="js/easing.js"></script>
+        <script type="text/javascript">
+            jQuery(document).ready(function($) {
+                $(".scroll").click(function(event){		
+                    event.preventDefault();
+                    $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+                });
+            });
+        </script>
+        <script type="text/javascript" src="js/bootstrap-3.1.1.min.js"></script>
     </body>
 </html>

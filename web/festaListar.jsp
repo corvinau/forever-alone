@@ -21,6 +21,7 @@
                     <th scope="col">Data</th>
                     <th scope="col">Tema</th>
                     <th scope="col">Hora</th>
+                    <th scope="col">Status</th>
                     <th scope="col">Situacao</th>
                     <th scope="col">Ação</th>
                 </tr>
@@ -32,11 +33,15 @@
                         <td>${festa.data}</td>
                         <td>${festa.tema} </td>
                         <td>${festa.hora}</td>
+                        <td>${festa.status.nome}</td>
                         <td>Tem q ver</td>
                         <td>
                             <a href="ClientesServlet?action=show&id=${festa.idFesta}">
                                 Não faz nd
                                 <i class="material-icons">visibility</i> 
+                            </a>
+                            <a href="FestaServlet?action=listaConvidados&id=${festa.idFesta}">
+                                Add convidado
                             </a>
                         </td>
                     </tr>

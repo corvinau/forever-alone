@@ -24,4 +24,9 @@ public class FestaFacade {
         FestaDAO festaDao = new FestaDAO();
         return festaDao.createFesta(f);
     }
+
+    public static Festa getFesta(int idFesta) {
+        FestaDAO festaDao = new FestaDAO();
+        return festaDao.getFesta(idFesta);
+    }
 }

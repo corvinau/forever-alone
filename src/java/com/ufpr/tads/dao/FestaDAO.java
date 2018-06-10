@@ -5,9 +5,16 @@
  */
 package com.ufpr.tads.dao;
 
+import com.ufpr.tads.beans.Cidade;
+import com.ufpr.tads.beans.Cliente;
+import com.ufpr.tads.beans.Convite;
+import com.ufpr.tads.beans.Endereco;
 import com.ufpr.tads.beans.Festa;
 import com.ufpr.tads.beans.Funcionario;
 import com.ufpr.tads.beans.Local;
+import com.ufpr.tads.beans.Pagamento;
+import com.ufpr.tads.beans.Status;
+import com.ufpr.tads.beans.UF;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -47,18 +54,23 @@ public class FestaDAO {
         
         try {
             st = con.prepareStatement(
-                    "SELECT idFesta, data, tema, hora "
-                    + "FROM Festa"
+                    "SELECT F.idFesta, F.data, F.tema, F.hora ,S.idStatus , S.nome "
+                    + "FROM Festa F "
+                    + "INNER JOIN status S ON F.Status_idStatus = S.idStatus "
             );
             
             rs = st.executeQuery();
-            Funcionario func;
+            Status status;
             while(rs.next()){
                 f = new Festa();
-                f.setIdFesta(rs.getInt("idFesta"));
-                f.setData(rs.getDate("data"));
-                f.setTema(rs.getString("tema"));
-                f.setHora(rs.getTimestamp("hora"));
+                f.setIdFesta(rs.getInt("F.idFesta"));
+                f.setData(rs.getDate("F.data"));
+                f.setTema(rs.getString("F.tema"));
+                f.setHora(rs.getTimestamp("F.hora"));
+                status = new Status();
+                status.setIdStatus(rs.getInt("S.idStatus"));
+                status.setNome(rs.getString("S.nome"));
+                f.setStatus(status);
                 listaFesta.add(f);
             }
             
@@ -101,5 +113,137 @@ public class FestaDAO {
         
         
         return 0;
+    }
+    
+    public List<Convite> getConvites(int idFesta){
+        List<Convite> listaConvites = new ArrayList<Convite>();
+        Convite c = null;
+        PreparedStatement st;
+        
+        try {
+            st = con.prepareStatement(
+                    "SELECT C.idConvite, C.status, C.tipo, C.Pagamento_idPagamento, C.Cliente_idCliente "
+                    + "FROM festa_has_convite F "
+                    + "INNER JOIN convite C ON F.Convite_idConvite = C.idConvite "
+                    + "WHERE F.Festa_idFesta = ? "
+            );
+            st.setInt(1, idFesta);
+            
+            rs = st.executeQuery();
+            Status status;
+            int aux;
+            Festa f = new Festa();
+            f.setIdFesta(idFesta);
+            Pagamento pagamento;
+            Cliente cliente;
+            while(rs.next()){
+                c = new Convite();
+                c.setIdConvite(rs.getInt("C.idConvite"));
+                c.setStatus(rs.getString("C.status"));
+                c.setTipo(rs.getString("C.tipo"));
+                aux = rs.getInt("C.Pagamento_idPagamento");
+                c.setPagamento(null);
+                if(aux > 0){
+                    pagamento = new Pagamento();
+                    pagamento.setIdPagamento(rs.getInt("C.Pagamento_idPagamento"));
+                    c.setPagamento(pagamento);
+                }
+                
+                cliente = new Cliente();
+                cliente.setIdCliente(rs.getInt("C.Cliente_idCliente"));
+                c.setConvidado(cliente);
+                
+                listaConvites.add(c);
+            }
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return listaConvites;
+    }
+    
+    public Festa getFesta(int idFesta) {
+        Festa f = null;
+        PreparedStatement st;
+        
+        try {
+            st = con.prepareStatement(
+                    "SELECT F.idFesta, F.data, F.tema, F.hora , S.idStatus , S.nome, "
+                    + "FU.idFuncionario, FU.nome, L.nomeEstabelecimento, L.idLocal , E.bairro, E.rua, "
+                    + "E.numero, E.complemento, E.idEndereco, C.nome, C.idCidade, UF.nome, UF.sigla, UF.idUF "
+                    + "FROM Festa F "
+                    + "INNER JOIN status S ON F.Status_idStatus = S.idStatus "
+                    + "INNER JOIN funcionario FU ON F.Funcionario_idFuncionario = FU.idFuncionario "
+                    + "INNER JOIN local L ON F.Local_idLocal = L.idLocal "
+                    + "INNER JOIN endereco E ON L.Endereco_idEndereco = E.idEndereco "
+                    + "INNER JOIN cidade C ON E.Cidade_idCidade = C.idCidade "
+                    + "INNER JOIN uf UF ON C.UF_idUF = UF.idUF "
+                    + "WHERE F.idFesta = ?"
+            );
+            st.setInt(1, idFesta);
+            
+            rs = st.executeQuery();
+            Status status;
+            Funcionario func;
+            Local local;
+            Endereco endereco;
+            Cidade cidade;
+            UF uf;
+            while(rs.next()){
+                f = new Festa();
+                f.setIdFesta(rs.getInt("F.idFesta"));
+                f.setData(rs.getDate("F.data"));
+                f.setTema(rs.getString("F.tema"));
+                f.setHora(rs.getTimestamp("F.hora"));
+                
+                status = new Status();
+                status.setIdStatus(rs.getInt("S.idStatus"));
+                status.setNome(rs.getString("S.nome"));
+                f.setStatus(status);
+                
+                func = new Funcionario();
+                func.setIdFuncionario(rs.getInt("FU.idFuncionario"));
+                func.setNome(rs.getString("FU.nome"));
+                f.setFunc(func);
+                
+                uf = new UF();
+                uf.setIdUF(rs.getInt("UF.idUF"));
+                uf.setNome(rs.getString("UF.nome"));
+                uf.setSigla(rs.getString("UF.sigla"));
+                
+                cidade = new Cidade();
+                cidade.setIdCidade(rs.getInt("C.idCidade"));
+                cidade.setNome(rs.getString("C.nome"));
+                cidade.setUf(uf);
+                
+                endereco = new Endereco();
+                endereco.setBairro(rs.getString("E.bairro"));
+                endereco.setRua(rs.getString("E.rua"));
+                endereco.setNumero(rs.getInt("E.numero"));
+                endereco.setComplemento(rs.getString("E.complemento"));
+                endereco.setCidade(cidade);
+                
+                local = new Local();
+                local.setIdLocal(rs.getInt("L.idLocal"));
+                local.setNomeEstabelecimento(rs.getString("L.nomeEstabelecimento"));
+                local.setEndereco(endereco);
+                
+                f.setLocal(local);
+                
+                f.setConvites(getConvites(idFesta));
+                
+            }
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+        
+        return f;
     }
 }

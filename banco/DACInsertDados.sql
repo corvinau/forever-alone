@@ -5641,7 +5641,7 @@ INSERT INTO FUNCIONARIO(NOME,CARGO,CPF,DATANASCIMENTO,USUARIO_IDUSUARIO,ENDERECO
 VALUES ('admin','admin','11111111111',str_to_date('1-01-2000','%d-%m-%Y'),1,1);
 
 INSERT INTO STATUS(NOME)
-VALUES  ('Aguardando Confirmacao'),
+VALUES  ('Aguardando'),
 		('Confirmado'),
         ('Realizado'),
         ('Remarcado'),
