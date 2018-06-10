@@ -10,3 +10,13 @@ and open the template in the editor.
 #about {
     margin-bottom: 5%;
 }
+
+.w3l_agileits_breadcrumbs_inner {
+    float: right;
+}
+
+.footer{
+    position: inherit;
+    bottom: 0;
+    width: 100%;
+}

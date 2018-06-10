@@ -9,13 +9,17 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Forever Alone</title>
     </head>
     <body>
+        <%@include file="headerLogged.jsp"%>
+        
         <h1>Opcoes</h1>
         <a href="ClienteServlet?action=formDescricao">Descricao<a>
         <a href="ClienteServlet?action=formPreferencia">Preferencia</a>
         <a href="ClienteServlet?action=formHorario">Horario</a>
         <a href="ClienteServlet?action=switchDisp">On/Off</a>
+        
+        <%@include file="footer.jsp"%>
     </body>
 </html>

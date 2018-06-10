@@ -60,7 +60,7 @@ h1.logo {
     font-family: 'Allura', cursive;
 }
 h1 span {
-    color: rgba(68, 199, 244, 0.7);
+    color: rgba(255, 255, 255, 0.9);
     display: block;
     font-size: 36px;
     padding-left: 53px;
@@ -348,7 +348,7 @@ ul.nav.navbar-nav.navbar-right li:nth-child(6) a {
     -o-background-size: cover;
     -ms-background-size: cover;
     /* padding-bottom: 2.5em; */
-    min-height: 250px;
+    min-height: 160px;
 }
 .logo-w3layouts h1 a {
     position: absolute;
@@ -1400,10 +1400,11 @@ background: rgba(0, 0, 0, 0.17);
 .w3l_agileits_breadcrumbs ul li {
     display: inline-block;
     color: #ffffff;
-    font-weight: 600;
+    /*font-weight: 600;*/
     font-family: 'Open Sans', sans-serif;
     letter-spacing: 1px;
-	font-size:15px;
+    font-size:15px;
+    padding: 0px 15px;
 }
 /*-login-page-*/
 .login-form-w3-agile,.login-right-info {
@@ -2445,7 +2446,7 @@ h2.typoh2{
 		margin: 9.3em 0em 0em 0em;
 	}
 	.banner-w3ls {
-		min-height: 230px;
+		min-height: 160px;
 	}
 	.banner-btm-w3layouts, .gallery, .w3ls-team, .test, .middle-section-agileits-w3layouts, .contact, .newsletter, .services, .elite-app {
 		padding: 0em 0em 4em;
@@ -2530,7 +2531,7 @@ h2.typoh2{
 		margin: 7.5em 0em 0em 0em;
 	}
 	.banner-w3ls {
-		min-height: 530px;
+		min-height: 160px;
 	}
 	.callbacks_tabs {
 		bottom: -87%;
@@ -2727,7 +2728,7 @@ h2.typoh2{
 		width: 26.6%;
 	}
 	.banner-w3ls {
-		min-height: 450px;
+		min-height: 160px;
 	}
 	.callbacks_tabs {
 		bottom: -114%;
@@ -3206,7 +3207,7 @@ h2.typoh2{
 		margin: 0 .2em;
 	}
 	.banner-w3ls {
-		min-height: 360px;
+		min-height: 160px;
 	}
 	.callbacks_tabs {
 		bottom: -110%;
@@ -3544,7 +3545,7 @@ h2.typoh2{
 		bottom: -92%;
 	}
 	.banner-w3ls {
-		min-height: 345px;
+		min-height: 160px;
 	}
 	.app-info h4 {
 		font-size: 1em;
