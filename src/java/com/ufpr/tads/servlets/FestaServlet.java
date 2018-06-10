@@ -64,6 +64,9 @@ public class FestaServlet extends HttpServlet {
         if(action != null){
             Festa f;
             switch (action){
+                case "adicionarConvidado":
+                    
+                    break;
                 case "cadastroFesta":
                     f = getPostFesta(request);
                     f.setFunc(usuarioLogado);
@@ -75,6 +78,10 @@ public class FestaServlet extends HttpServlet {
                 case "festaForm":
                     request.setAttribute("locais", LocalFacade.getListaLocal());
                     rd = getServletContext().getRequestDispatcher("/festaForm.jsp");
+                    break;
+                case "listaConvidados":
+                    f = FestaFacade.getFesta(Integer.parseInt((String) request.getParameter("id")));
+                    
                     break;
                 case "listaFesta":
                     request.setAttribute("listaFesta", FestaFacade.getListaFesta());
