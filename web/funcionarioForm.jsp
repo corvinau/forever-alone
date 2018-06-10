@@ -64,14 +64,16 @@
         </script>
     </head>
     <body>
+        <h1>lista Funcionarios</h1>
         <c:if test="${!(empty loginBean) && loginBean.tipo != 'F' && loginBean.tipo != 'f' && loginBean.nome != \"admin\"}">
             <jsp:forward page="index.jsp">
-                <jsp:param name="msg" value="Apenas funcionarios podem cadastrar clientes enquanto estão logados" />
+                <jsp:param name="msg" value="Voce não pode cadastrar funcionarios" />
             </jsp:forward>
         </c:if>
         <form action="FuncionarioServlet?action=cadastroFuncionario" method="POST">
             <div><input type="text" name="email" value="" placeholder="Email"/></div>
             <div><input type="text" name="nome" value="" placeholder="nome"/></div>
+            <div><input type="text" name="cargo" value="" placeholder="cargo"/></div>
             <div><input type="text" name="cpf" value="" placeholder="cpf"/></div>
             <div><input type="text" name="dataNascimento" value="" placeholder="dataNascimento"/></div>
             <div>
@@ -90,7 +92,7 @@
             </div>
             <div>
                 <select id="cidade" name="cidade">
-                    <option value="${cliente.cidadeCliente.idCidade}" selected>${cliente.cidadeCliente.nomeCidade}</option>
+                    <option value="${funcionario.endereco.cidade.idCidade}" selected>${funcionario.endereco.cidade.nomeCidade}</option>
                 </select>
             </div>
             <div><input type="text" name="bairro" value="" placeholder="bairro"/></div>

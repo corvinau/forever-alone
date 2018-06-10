@@ -81,8 +81,8 @@ public class FuncionarioDAO {
         try {
             st = con.prepareStatement(
                       "INSERT INTO Funcionario(nome, cargo, cpf, "
-                    + "dataNascimento, Endereco_idEndereco) "
-                    + "VALUES(?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS
+                    + "dataNascimento, Endereco_idEndereco, Usuario_idUsuario) "
+                    + "VALUES(?,?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS
             );
             st.setString(1, f.getNome());
             st.setString(2, f.getCargo());
@@ -100,6 +100,7 @@ public class FuncionarioDAO {
             else{
                 st.setNull(5, java.sql.Types.INTEGER);
             }
+            st.setInt(6, f.getIdUsuario());
             
             st.executeUpdate();
             

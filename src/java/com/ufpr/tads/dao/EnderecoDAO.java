@@ -78,16 +78,25 @@ public class EnderecoDAO {
                     "INSERT INTO Endereco(bairro, rua, numero, complemento,"
                     + " Cidade_idCidade) VALUES (?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS
             );
-            st.setString(1, endereco.getBairro());
-            st.setString(2, endereco.getRua());
-            st.setInt(3,endereco.getNumero());
-            st.setString(4,endereco.getComplemento());
-            st.setInt(5, endereco.getCidade().getIdCidade());
-            
-            st.executeUpdate();
-            
-            rs = st.getGeneratedKeys();
-            if(rs.next()) return rs.getInt(1);
+            if(endereco != null){
+                if(endereco.getBairro() != null || !endereco.getBairro().isEmpty())
+                    st.setString(1, endereco.getBairro());
+                if(endereco.getRua() != null || !endereco.getRua().isEmpty())
+                    st.setString(2, endereco.getRua());
+                if(endereco.getNumero() > 0)
+                    st.setInt(3,endereco.getNumero());
+                if(endereco.getComplemento() != null || !endereco.getBairro().isEmpty())
+                    st.setString(4,endereco.getComplemento());
+                else
+                    st.setNull(4, java.sql.Types.VARCHAR);
+                if(endereco.getBairro() != null || !endereco.getBairro().isEmpty())
+                    st.setInt(5, endereco.getCidade().getIdCidade());
+
+                st.executeUpdate();
+
+                rs = st.getGeneratedKeys();
+                if(rs.next()) return rs.getInt(1);
+            }
             
             
         } catch (SQLException ex) {

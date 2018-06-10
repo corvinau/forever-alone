@@ -11,6 +11,7 @@ package com.ufpr.tads.beans;
  */
 public class Descricao {
     private int idDescricao;
+    private String imagem;
     private String resumo;
     private CorCabelo corCabelo;
     private CorPele corPele;
@@ -46,8 +47,14 @@ public class Descricao {
     public void setCorPele(CorPele corPele) {
         this.corPele = corPele;
     }
-    
-    
+
+    public String getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(String imagem) {
+        this.imagem = imagem;
+    }
     
     
 }

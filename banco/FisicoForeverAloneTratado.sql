@@ -89,6 +89,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS Descricao (
   idDescricao INT NOT NULL AUTO_INCREMENT,
+  imagem VARCHAR(250) NULL,
   resumo VARCHAR(250) NULL,
   CorCabelo_idCorCabelo INT NOT NULL,
   CorPele_idCorPele INT NOT NULL,
@@ -106,7 +107,6 @@ CREATE TABLE IF NOT EXISTS Descricao (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
-
 
 -- -----------------------------------------------------
 -- Table Preferencias

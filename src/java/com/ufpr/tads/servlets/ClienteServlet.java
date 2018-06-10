@@ -97,6 +97,7 @@ public class ClienteServlet extends HttpServlet {
     }
     private Descricao getPostDescricao(HttpServletRequest request){
         Descricao descricao = new Descricao();
+        descricao.setImagem((String) request.getParameter("imagem"));
         descricao.setResumo((String)request.getParameter("resumo"));
         CorCabelo corCabelo = new CorCabelo();
         corCabelo.setIdCorCabelo(Integer.parseInt((String) request.getParameter("corCabelo")));
