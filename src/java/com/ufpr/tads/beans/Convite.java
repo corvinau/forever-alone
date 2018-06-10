@@ -14,10 +14,11 @@ import com.ufpr.tads.interfaces.Convidavel;
 public class Convite {
     private int idConvite;
     private String status;
-    private int tipo;
+    private String tipo;
     private Cliente convidado;
     private Convidavel evento;
-
+    private Pagamento pagamento;
+    
     public int getIdConvite() {
         return idConvite;
     }
@@ -34,11 +35,11 @@ public class Convite {
         this.status = status;
     }
 
-    public int getTipo() {
+    public String getTipo() {
         return tipo;
     }
 
-    public void setTipo(int tipo) {
+    public void setTipo(String tipo) {
         this.tipo = tipo;
     }
 
@@ -57,8 +58,14 @@ public class Convite {
     public void setEvento(Convidavel evento) {
         this.evento = evento;
     }
-    
-    
+
+    public Pagamento getPagamento() {
+        return pagamento;
+    }
+
+    public void setPagamento(Pagamento pagamento) {
+        this.pagamento = pagamento;
+    }
     
     
 }

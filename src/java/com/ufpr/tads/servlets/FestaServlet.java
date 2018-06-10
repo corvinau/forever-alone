@@ -81,7 +81,7 @@ public class FestaServlet extends HttpServlet {
                     break;
                 case "listaConvidados":
                     f = FestaFacade.getFesta(Integer.parseInt((String) request.getParameter("id")));
-                    
+                    rd = getServletContext().getRequestDispatcher("/festaForm.jsp");
                     break;
                 case "listaFesta":
                     request.setAttribute("listaFesta", FestaFacade.getListaFesta());
