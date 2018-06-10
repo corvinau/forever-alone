@@ -122,9 +122,12 @@ public class FestaDAO {
         
         try {
             st = con.prepareStatement(
-                    "SELECT C.idConvite, C.status, C.tipo, C.Pagamento_idPagamento, C.Cliente_idCliente "
-                    + "FROM festa_has_convite F "
+                    "SELECT C.idConvite, C.status, C.tipo, C.Pagamento_idPagamento, C.Cliente_idCliente, "
+                    + "CL.nome, CL.dataNascimento, CL.sexo, U.email "
+                    + "FROM (festa_has_convite F) "
                     + "INNER JOIN convite C ON F.Convite_idConvite = C.idConvite "
+                    + "INNER JOIN cliente CL ON C.Cliente_idCliente = CL.idCliente "
+                    + "INNER JOIN usuario U ON CL.Usuario_idUsuario = U.idUsuario "
                     + "WHERE F.Festa_idFesta = ? "
             );
             st.setInt(1, idFesta);
@@ -151,6 +154,10 @@ public class FestaDAO {
                 
                 cliente = new Cliente();
                 cliente.setIdCliente(rs.getInt("C.Cliente_idCliente"));
+                cliente.setNome(rs.getString("CL.nome"));
+                cliente.setDataNasc(rs.getDate("CL.dataNascimento"));
+                cliente.setSexo(rs.getString("CL.sexo").charAt(0));
+                cliente.setEmail(rs.getString("U.email"));
                 c.setConvidado(cliente);
                 
                 listaConvites.add(c);
@@ -245,5 +252,33 @@ public class FestaDAO {
         
         
         return f;
+    }
+
+    public int insertConviteFesta(Convite convite) {
+        PreparedStatement st;
+        int aux = 0;
+        try {
+            st = con.prepareStatement(
+                    "INSERT INTO festa_has_convite(Festa_idFesta, Convite_idConvite) "
+                    + "VALUES(?,?)",Statement.RETURN_GENERATED_KEYS
+            );
+            st.setInt(1,convite.getEvento().getId());
+            if(convite.getIdConvite() <= 0){
+                ConviteDAO conviteDao = new ConviteDAO();
+                aux = conviteDao.insertConvite(convite);
+            }
+            else{
+                aux = convite.getIdConvite();
+            }
+            if(aux > 0){
+                st.setInt(2,aux);
+                st.executeUpdate();
+                rs = st.getGeneratedKeys();
+                if(rs.next()) return rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }        
+        return 0;
     }
 }

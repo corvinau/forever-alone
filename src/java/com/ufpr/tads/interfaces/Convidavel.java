@@ -11,4 +11,5 @@ package com.ufpr.tads.interfaces;
  */
 public interface Convidavel {
     
+    public int getId();
 }

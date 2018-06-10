@@ -28,7 +28,7 @@
             function getCidades(preencherPrimeiroForm){
                 preencherPrimeiroForm = false;
                 var estadoId = $("#uf").val();
-                var url = "http://localhost:19935/ForeverAlone/webresources/Ajax/cidade/"+estadoId;
+                var url = "http://localhost:28313/ForeverAlone/webresources/Ajax/cidade/"+estadoId;
                 $.ajax({
                     type : "GET",
                     url : url, // URL da sua Servlet

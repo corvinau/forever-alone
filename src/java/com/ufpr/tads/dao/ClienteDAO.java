@@ -273,5 +273,58 @@ public class ClienteDAO {
         
         return lista;
     }
+
+    public List<Cliente> getListaClienteFestaNotInvite(int idFesta) {
+        List<Cliente> lista = new ArrayList<Cliente>();
+        Cliente c ;
+        PreparedStatement st;
+        
+        try {
+            st = con.prepareStatement(
+                    "SELECT C.idCliente, C.nome, C.cpf, "
+                    + "C.sexo, C.disponibilidade, "
+                    + "C.Descricao_idDescricao, D.resumo, "
+                    + "C.Usuario_idUsuario, U.email "
+                    + "FROM (Cliente C, Festa F) "
+                    + "INNER JOIN usuario U ON C.Usuario_idUsuario = U.idUsuario "
+                    + "INNER JOIN descricao D ON C.Descricao_idDescricao = D.idDescricao "
+                    + "INNER JOIN endereco EC ON C.Endereco_idEndereco = EC.idEndereco "
+                    + "INNER JOIN local L ON L.idLocal = F.Local_idLocal "
+                    + "INNER JOIN endereco EF ON EF.idEndereco = L.Endereco_idEndereco "
+                    + "WHERE C.disponibilidade = TRUE AND F.idFesta = ? "
+                    + "AND EF.Cidade_idCidade = EC.Cidade_idCidade "
+                    + "AND C.IDCLIENTE NOT IN ( "
+                            + "SELECT C.Cliente_idCliente FROM convite C " 
+                            + "INNER JOIN festa_has_convite FC ON FC.Convite_idConvite = C.idConvite) "
+            );
+            st.setInt(1, idFesta);
+            
+            rs = st.executeQuery();
+            Descricao descricao;
+            while(rs.next()){
+                c = new Cliente();
+                c.setIdCliente(rs.getInt("C.idCliente"));
+                c.setNome(rs.getString("C.nome"));
+                c.setCpf(rs.getString("C.cpf"));
+                c.setSexo(rs.getString("C.sexo").charAt(0));
+                c.setDisp(rs.getBoolean("C.disponibilidade"));
+                descricao = new Descricao();
+                descricao.setIdDescricao(rs.getInt("C.Descricao_idDescricao"));
+                descricao.setResumo(rs.getString("D.resumo"));
+                c.setDescricao(descricao);
+                c.setEmail(rs.getString("U.email"));
+                lista.add(c);
+            }
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+        
+        return lista;
+    }
     
 }

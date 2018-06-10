@@ -86,6 +86,11 @@ public class Festa implements Convidavel {
     public void setConvites(List<Convite> convites) {
         this.convites = convites;
     }
+
+    @Override
+    public int getId() {
+        return this.getIdFesta();
+    }
     
     
     

@@ -76,5 +76,10 @@ public class Encontro implements Convidavel {
     public void setPagamento(Pagamento pagamento) {
         this.pagamento = pagamento;
     }
+
+    @Override
+    public int getId() {
+        return this.getIdEncontro();
+    }
     
 }
