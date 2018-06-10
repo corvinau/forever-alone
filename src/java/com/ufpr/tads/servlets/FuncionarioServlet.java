@@ -10,8 +10,11 @@ import com.ufpr.tads.beans.Cliente;
 import com.ufpr.tads.beans.Descricao;
 import com.ufpr.tads.beans.Endereco;
 import com.ufpr.tads.beans.Funcionario;
+import com.ufpr.tads.beans.Local;
 import com.ufpr.tads.beans.Preferencia;
 import com.ufpr.tads.beans.UF;
+import com.ufpr.tads.facades.FestaFacade;
+import com.ufpr.tads.facades.LocalFacade;
 import com.ufpr.tads.facades.UsuarioFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -46,7 +49,7 @@ public class FuncionarioServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher rd = getServletContext().getRequestDispatcher("/clienteOpcoes.jsp");
+        RequestDispatcher rd = getServletContext().getRequestDispatcher("/portal.jsp");
         HttpSession session = request.getSession();
         Funcionario usuarioLogado = (Funcionario) session.getAttribute("loginBean");
         if(usuarioLogado == null || usuarioLogado.getIdUsuario() == 0 ||
@@ -61,6 +64,7 @@ public class FuncionarioServlet extends HttpServlet {
         }
         if(action != null){
             Funcionario f;
+            Local l;
             switch (action){
                 case "cadastroFuncionario":
                     f = getPostFuncionario(request);
@@ -69,6 +73,17 @@ public class FuncionarioServlet extends HttpServlet {
                         rd = getServletContext().getRequestDispatcher("/portal.jsp");
                     }
                     break;
+                case "cadastroLocal":
+                    l = getPostLocal(request);
+                    if(LocalFacade.createLocal(l) != 0){
+                        request.setAttribute("msg", "Local cadastrado com sucesso");
+                        rd = getServletContext().getRequestDispatcher("/portal.jsp");
+                    }
+                    break;
+                case "localForm":
+                    request.setAttribute("estados", UsuarioFacade.getEstados());
+                    rd = getServletContext().getRequestDispatcher("/localForm.jsp");
+                    break;
                 case "clienteForm":
                     request.setAttribute("estados", UsuarioFacade.getEstados());
                     rd = getServletContext().getRequestDispatcher("/clienteForm.jsp");
@@ -76,6 +91,10 @@ public class FuncionarioServlet extends HttpServlet {
                 case "funcionarioForm":
                     request.setAttribute("estados", UsuarioFacade.getEstados());
                     rd = getServletContext().getRequestDispatcher("/funcionarioForm.jsp");
+                    break;
+                case "listaLocal":
+                    request.setAttribute("listaLocal", LocalFacade.getListaLocal());
+                    rd = getServletContext().getRequestDispatcher("/localListar.jsp");
                     break;
                 case "listaFuncionarios":
                     request.setAttribute("listaFuncionarios", UsuarioFacade.getListaFuncionario());
@@ -93,6 +112,28 @@ public class FuncionarioServlet extends HttpServlet {
                             
         }
         rd.forward(request, response);
+    }
+    
+    private Local getPostLocal(HttpServletRequest request){
+        Local local = new Local();
+        
+        local.setNomeEstabelecimento((String) request.getParameter("nomeEstabelecimento"));
+        
+        Endereco endereco = new Endereco();
+        UF uf = new UF();
+        Cidade cidade = new Cidade();
+        
+        uf.setIdUF(Integer.parseInt( (String) request.getParameter("uf") ));
+        cidade.setUf(uf);
+        cidade.setIdCidade(Integer.parseInt( (String) request.getParameter("cidade") ));
+        endereco.setCidade(cidade);
+        endereco.setBairro((String) request.getParameter("bairro"));
+        endereco.setRua((String) request.getParameter("rua"));
+        endereco.setNumero(Integer.parseInt((String) request.getParameter("numero")));
+        endereco.setComplemento((String) request.getParameter("complemento"));
+        
+        local.setEndereco(endereco);
+        return local;
     }
     
     private Funcionario getPostFuncionario(HttpServletRequest request){
