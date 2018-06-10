@@ -67,78 +67,250 @@
                     <h3>Cadastro</h3>
                 </div>
                 <div class="col-md-12 login-form-w3-agile">
-                    <form action="UsuarioServlet?action=cadastroCliente" method="POST">
-                        <div class="w3_form_body_grid">
-                            <span>Email*</span>
-                            <input type="text" name="email" placeholder="Email" value="" required>
-                        </div>
-                        <c:if test="${(empty loginBean)}">
+                <c:choose>
+                    <c:when test="${(not empty loginBean)}">
+                        <form action="#" method="POST">
+                    </c:when>
+                    <c:otherwise>
+                        <form action="UsuarioServlet?action=cadastroCliente" method="POST">
+                    </c:otherwise>
+                </c:choose>
+                
+                    <c:choose>
+                        <c:when test="${(not empty loginBean)}">
+                            <div class="w3_form_body_grid">
+                                <span>Email*</span>
+                                <input type="text" name="email" placeholder="Email" value="" required>
+                            </div>
+                        </c:when>
+                        <c:otherwise>
+                            <div class="w3_form_body_grid">
+                                <span>Email*</span>
+                                <input type="text" name="email" placeholder="Email" value="" required>
+                            </div>
+                        </c:otherwise>
+                    </c:choose>
+
+                    <c:choose>
+                        <c:when test="${(not empty loginBean)}">
                             <div class="w3_form_body_grid">
                                 <span>Senha*</span>
                                 <input type="password" name="senha" placeholder="Senha" value="" required>
                             </div>
+                        </c:when>
+                        <c:otherwise>
+                            <div class="w3_form_body_grid">
+                                <span>Senha*</span>
+                                <input type="password" name="senha" placeholder="Senha" value="" required>
+                            </div>
+                        </c:otherwise>
+                    </c:choose>
+
+                    <c:choose>
+                        <c:when test="${(not empty loginBean)}">
                             <div class="w3_form_body_grid">
                                 <span>Confirmar senha*</span>
                                 <input type="password" name="senhaConfirm" placeholder="Confirmar senha" value="" required>
                             </div>
-                        </c:if>
-                        <div class="w3_form_body_grid">
-                            <span>Nome*</span>
-                            <input type="text" name="nome" placeholder="Nome" value="" required>
-                        </div>
-                        <div class="w3_form_body_grid">
-                            <span>CPF*</span>
-                            <input type="text" name="cpf" placeholder="CPF" value="" required>
-                        </div>
-                        <div class="w3_form_body_grid w3_form_body_grid1">
-                            <span>Data de nascimento*</span>
-                            <input class="date" id="datepicker" name="dataNascimento" type="text" placeholder="dd/mm/yyyy" value="" required>
-                        </div>
-                        <div class="w3_form_body_grid">
-                            <span>Sexo*</span>
-                            <select id="w3_country" name="sexo" class="frm-field" required>
-                                <option value="M">Homem</option>
-                                <option value="F">Mulher</option>   						
-                            </select>
-                        </div>
-                        <div class="w3_form_body_grid">
-                            <span>Estado*</span>
-                            <select id="uf" name="uf" class="frm-field" required>
-                                <c:forEach items="${estados}" var="estado">
-                                    <c:choose>
-                                        <c:when test="${cliente.endereco.cidade.uf.idUF == estado.idUF}">
-                                            <option value="${estado.idUF}" selected>${estado.nome} - ${estado.sigla}</option>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <option value="${estado.idUF}">${estado.nome} - ${estado.sigla}</option>
-                                        </c:otherwise>
-                                     </c:choose>
-                                </c:forEach>  						
-                            </select>
-                        </div>
-                        <div class="w3_form_body_grid">
-                            <span>Cidade*</span>
-                            <select id="cidade" name="cidade" class="frm-field" required>
-                                <option value="${cliente.cidadeCliente.idCidade}" selected>${cliente.cidadeCliente.nomeCidade}</option>						
-                            </select>
-                        </div>
-                        <div class="w3_form_body_grid">
-                            <span>Bairro*</span>
-                            <input type="text" name="bairro" placeholder="Bairro" value="" required>
-                        </div>
-                        <div class="w3_form_body_grid">
-                            <span>Rua*</span>
-                            <input type="text" name="rua" placeholder="Rua" value="" required>
-                        </div>
-                        <div class="w3_form_body_grid">
-                            <span>Número*</span>
-                            <input type="text" name="numero" placeholder="Número" value="" required>
-                        </div>
-                        <div class="w3_form_body_grid">
-                            <span>Complemento</span>
-                            <input type="text" name="complemento" placeholder="Complemento" value="">
-                        </div>
-                        <input type="submit" value="Cadastrar">
+                        </c:when>
+                        <c:otherwise>
+                            <div class="w3_form_body_grid">
+                                <span>Confirmar senha*</span>
+                                <input type="password" name="senhaConfirm" placeholder="Confirmar senha" value="" required>
+                            </div>
+                        </c:otherwise>
+                    </c:choose>
+
+                    <c:choose>
+                        <c:when test="${(not empty loginBean)}">
+                            <div class="w3_form_body_grid">
+                                <span>Nome*</span>
+                                <input type="text" name="nome" placeholder="Nome" value="" required>
+                            </div>
+                        </c:when>
+                        <c:otherwise>
+                            <div class="w3_form_body_grid">
+                                <span>Nome*</span>
+                                <input type="text" name="nome" placeholder="Nome" value="" required>
+                            </div>
+                        </c:otherwise>
+                    </c:choose>
+
+                    <c:choose>
+                        <c:when test="${(not empty loginBean)}">
+                            <div class="w3_form_body_grid">
+                                <span>CPF*</span>
+                                <input type="text" name="cpf" placeholder="CPF" value="" required>
+                            </div>
+                        </c:when>
+                        <c:otherwise>
+                            <div class="w3_form_body_grid">
+                                <span>CPF*</span>
+                                <input type="text" name="cpf" placeholder="CPF" value="" required>
+                            </div>
+                        </c:otherwise>
+                    </c:choose>
+
+                    <c:choose>
+                        <c:when test="${(not empty loginBean)}">
+                            <div class="w3_form_body_grid w3_form_body_grid1">
+                                <span>Data de nascimento*</span>
+                                <input class="date" id="datepicker" name="dataNascimento" type="text" placeholder="dd/mm/yyyy" value="" required>
+                            </div>
+                        </c:when>
+                        <c:otherwise>
+                            <div class="w3_form_body_grid w3_form_body_grid1">
+                                <span>Data de nascimento*</span>
+                                <input class="date" id="datepicker" name="dataNascimento" type="text" placeholder="dd/mm/yyyy" value="" required>
+                            </div>
+                        </c:otherwise>
+                    </c:choose>
+
+                    <c:choose>
+                        <c:when test="${(not empty loginBean)}">
+                            <div class="w3_form_body_grid">
+                                <span>Sexo*</span>
+                                <select id="w3_country" name="sexo" class="frm-field" required>
+                                    <option value="M">Homem</option>
+                                    <option value="F">Mulher</option>   						
+                                </select>
+                            </div>
+                        </c:when>
+                        <c:otherwise>
+                            <div class="w3_form_body_grid">
+                                <span>Sexo*</span>
+                                <select id="w3_country" name="sexo" class="frm-field" required>
+                                    <option value="M">Homem</option>
+                                    <option value="F">Mulher</option>   						
+                                </select>
+                            </div>
+                        </c:otherwise>
+                    </c:choose>
+
+                    <c:choose>
+                        <c:when test="${(not empty loginBean)}">
+                            <div class="w3_form_body_grid">
+                                <span>Estado*</span>
+                                <select id="uf" name="uf" class="frm-field" required>
+                                    <c:forEach items="${estados}" var="estado">
+                                        <c:choose>
+                                            <c:when test="${cliente.endereco.cidade.uf.idUF == estado.idUF}">
+                                                <option value="${estado.idUF}" selected>${estado.nome} - ${estado.sigla}</option>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <option value="${estado.idUF}">${estado.nome} - ${estado.sigla}</option>
+                                            </c:otherwise>
+                                         </c:choose>
+                                    </c:forEach>  						
+                                </select>
+                            </div>
+                        </c:when>
+                        <c:otherwise>
+                            <div class="w3_form_body_grid">
+                                <span>Estado*</span>
+                                <select id="uf" name="uf" class="frm-field" required>
+                                    <c:forEach items="${estados}" var="estado">
+                                        <c:choose>
+                                            <c:when test="${cliente.endereco.cidade.uf.idUF == estado.idUF}">
+                                                <option value="${estado.idUF}" selected>${estado.nome} - ${estado.sigla}</option>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <option value="${estado.idUF}">${estado.nome} - ${estado.sigla}</option>
+                                            </c:otherwise>
+                                         </c:choose>
+                                    </c:forEach>  						
+                                </select>
+                            </div>
+                        </c:otherwise>
+                    </c:choose>
+
+                    <c:choose>
+                        <c:when test="${(not empty loginBean)}">
+                            <div class="w3_form_body_grid">
+                                <span>Cidade*</span>
+                                <select id="cidade" name="cidade" class="frm-field" required>
+                                    <option value="${cliente.cidadeCliente.idCidade}" selected>${cliente.cidadeCliente.nomeCidade}</option>						
+                                </select>
+                            </div>
+                        </c:when>
+                        <c:otherwise>
+                            <div class="w3_form_body_grid">
+                                <span>Cidade*</span>
+                                <select id="cidade" name="cidade" class="frm-field" required>
+                                    <option value="${cliente.cidadeCliente.idCidade}" selected>${cliente.cidadeCliente.nomeCidade}</option>						
+                                </select>
+                            </div>
+                        </c:otherwise>
+                    </c:choose>
+
+                    <c:choose>
+                        <c:when test="${(not empty loginBean)}">
+                            <div class="w3_form_body_grid">
+                                <span>Bairro*</span>
+                                <input type="text" name="bairro" placeholder="Bairro" value="" required>
+                            </div>
+                        </c:when>
+                        <c:otherwise>
+                            <div class="w3_form_body_grid">
+                                <span>Bairro*</span>
+                                <input type="text" name="bairro" placeholder="Bairro" value="" required>
+                            </div>
+                        </c:otherwise>
+                    </c:choose>
+
+                    <c:choose>
+                        <c:when test="${(not empty loginBean)}">
+                            <div class="w3_form_body_grid">
+                                <span>Rua*</span>
+                                <input type="text" name="rua" placeholder="Rua" value="" required>
+                            </div>
+                        </c:when>
+                        <c:otherwise>
+                            <div class="w3_form_body_grid">
+                                <span>Rua*</span>
+                                <input type="text" name="rua" placeholder="Rua" value="" required>
+                            </div>
+                        </c:otherwise>
+                    </c:choose>
+
+                    <c:choose>
+                        <c:when test="${(not empty loginBean)}">
+                            <div class="w3_form_body_grid">
+                                <span>Número*</span>
+                                <input type="text" name="numero" placeholder="Número" value="" required>
+                            </div>
+                        </c:when>
+                        <c:otherwise>
+                            <div class="w3_form_body_grid">
+                                <span>Número*</span>
+                                <input type="text" name="numero" placeholder="Número" value="" required>
+                            </div>
+                        </c:otherwise>
+                    </c:choose>
+
+                    <c:choose>
+                        <c:when test="${(not empty loginBean)}">
+                            <div class="w3_form_body_grid">
+                                <span>Complemento</span>
+                                <input type="text" name="complemento" placeholder="Complemento" value="">
+                            </div>
+                        </c:when>
+                        <c:otherwise>
+                            <div class="w3_form_body_grid">
+                                <span>Complemento</span>
+                                <input type="text" name="complemento" placeholder="Complemento" value="">
+                            </div>
+                        </c:otherwise>
+                    </c:choose>
+
+                    <c:choose>
+                        <c:when test="${(not empty loginBean)}">
+                            <input type="submit" value="Atualizar">
+                        </c:when>
+                        <c:otherwise>
+                            <input type="submit" value="Cadastrar">
+                        </c:otherwise>
+                    </c:choose>
                     </form>
                 </div>
             </div>
