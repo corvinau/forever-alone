@@ -6,11 +6,13 @@
 package com.ufpr.tads.dao;
 
 import com.ufpr.tads.beans.Cidade;
+import com.ufpr.tads.beans.Cliente;
 import com.ufpr.tads.beans.Convite;
 import com.ufpr.tads.beans.Endereco;
 import com.ufpr.tads.beans.Festa;
 import com.ufpr.tads.beans.Funcionario;
 import com.ufpr.tads.beans.Local;
+import com.ufpr.tads.beans.Pagamento;
 import com.ufpr.tads.beans.Status;
 import com.ufpr.tads.beans.UF;
 import java.sql.Connection;
@@ -115,30 +117,43 @@ public class FestaDAO {
     
     public List<Convite> getConvites(int idFesta){
         List<Convite> listaConvites = new ArrayList<Convite>();
-        Festa f = null;
+        Convite c = null;
         PreparedStatement st;
         
         try {
             st = con.prepareStatement(
-                    "Festa_idFesta, Convite_idConvite idConvite, status, tipo, Pagamento_idPagamento, Cliente_idCliente" +
-                    "SELECT F.idFesta, F.data, F.tema, F.hora ,S.idStatus , S.nome "
-                    + "FROM Festa F "
-                    + "INNER JOIN status S ON F.Status_idStatus = S.idStatus "
+                    "SELECT C.idConvite, C.status, C.tipo, C.Pagamento_idPagamento, C.Cliente_idCliente "
+                    + "FROM festa_has_convite F "
+                    + "INNER JOIN convite C ON F.Convite_idConvite = C.idConvite "
+                    + "WHERE F.Festa_idFesta = ? "
             );
+            st.setInt(1, idFesta);
             
             rs = st.executeQuery();
             Status status;
+            int aux;
+            Festa f = new Festa();
+            f.setIdFesta(idFesta);
+            Pagamento pagamento;
+            Cliente cliente;
             while(rs.next()){
-                f = new Festa();
-                f.setIdFesta(rs.getInt("F.idFesta"));
-                f.setData(rs.getDate("F.data"));
-                f.setTema(rs.getString("F.tema"));
-                f.setHora(rs.getTimestamp("F.hora"));
-                status = new Status();
-                status.setIdStatus(rs.getInt("S.idStatus"));
-                status.setNome(rs.getString("S.nome"));
-                f.setStatus(status);
-                listaConvites.add(f);
+                c = new Convite();
+                c.setIdConvite(rs.getInt("C.idConvite"));
+                c.setStatus(rs.getString("C.status"));
+                c.setTipo(rs.getString("C.tipo"));
+                aux = rs.getInt("C.Pagamento_idPagamento");
+                c.setPagamento(null);
+                if(aux > 0){
+                    pagamento = new Pagamento();
+                    pagamento.setIdPagamento(rs.getInt("C.Pagamento_idPagamento"));
+                    c.setPagamento(pagamento);
+                }
+                
+                cliente = new Cliente();
+                cliente.setIdCliente(rs.getInt("C.Cliente_idCliente"));
+                c.setConvidado(cliente);
+                
+                listaConvites.add(c);
             }
             
             
@@ -165,7 +180,9 @@ public class FestaDAO {
                     + "INNER JOIN endereco E ON L.Endereco_idEndereco = E.idEndereco "
                     + "INNER JOIN cidade C ON E.Cidade_idCidade = C.idCidade "
                     + "INNER JOIN uf UF ON C.UF_idUF = UF.idUF "
+                    + "WHERE F.idFesta = ?"
             );
+            st.setInt(1, idFesta);
             
             rs = st.executeQuery();
             Status status;
@@ -214,6 +231,8 @@ public class FestaDAO {
                 local.setEndereco(endereco);
                 
                 f.setLocal(local);
+                
+                f.setConvites(getConvites(idFesta));
                 
             }
             

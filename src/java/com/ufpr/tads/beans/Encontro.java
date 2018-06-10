@@ -19,6 +19,7 @@ public class Encontro implements Convidavel {
     private Local local;
     private Status status;
     private Convite convite;
+    private Pagamento pagamento;
 
     public int getIdEncontro() {
         return idEncontro;
@@ -67,6 +68,13 @@ public class Encontro implements Convidavel {
     public void setConvite(Convite convite) {
         this.convite = convite;
     }
-    
+
+    public Pagamento getPagamento() {
+        return pagamento;
+    }
+
+    public void setPagamento(Pagamento pagamento) {
+        this.pagamento = pagamento;
+    }
     
 }
