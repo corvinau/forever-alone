@@ -32,7 +32,7 @@
             </div>
 	</div>
         
-<div class="row">
+<!--<div class="row">
   <div class="col-sm-4 login-center-info">
     <div class="card">
       <div class="card-body">
@@ -70,7 +70,7 @@
       </div>
     </div>
   </div>
-</div>
+</div>-->
         
         <%@include file="footer.jsp"%>
     </body>
