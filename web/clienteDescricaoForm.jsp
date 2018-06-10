@@ -14,6 +14,9 @@
     <body>
         <h1>DescricaoForm</h1>
         <form action="ClienteServlet?action=updateDescricao" method="POST">
+            <div>
+                <input id="imagem" type="text" name="imagem"/>
+            </div>
             <div><input type="text" name="resumo" value="" placeholder="Resumo"/></div>
             <div>
                 <select id="corCabelo" name="corCabelo">

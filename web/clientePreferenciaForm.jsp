@@ -14,9 +14,6 @@
     <body>
         <form action="ClienteServlet?action=updatePreferencia" method="POST">
             <div>
-                <input id="imagem" type="text" name="imagem"/>
-            </div>
-            <div>
                 <select id="sexo" name="sexo">
                     <option value="M">M</option>
                     <option value="F">F</option>
