@@ -99,7 +99,7 @@ public class DescricaoDAO {
     
     public boolean updateDescricao(Descricao descricao){
         PreparedStatement st;
-        if(descricao.getIdDescricao() == 0){
+        if(descricao.getIdDescricao() != 0){
             try {
                 st = con.prepareStatement(
                         "UPDATE descricao SET resumo = ?, CorCabelo_idCorCabelo = ? , "
