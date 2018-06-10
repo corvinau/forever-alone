@@ -348,7 +348,7 @@ ul.nav.navbar-nav.navbar-right li:nth-child(6) a {
     -o-background-size: cover;
     -ms-background-size: cover;
     /* padding-bottom: 2.5em; */
-    min-height: 750px;
+    min-height: 250px;
 }
 .logo-w3layouts h1 a {
     position: absolute;
