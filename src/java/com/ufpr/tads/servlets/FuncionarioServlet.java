@@ -66,10 +66,7 @@ public class FuncionarioServlet extends HttpServlet {
                     f = getPostFuncionario(request);
                     if(UsuarioFacade.createFuncionario(f) != 0){
                         request.setAttribute("msg", "Usuario cadastrado com sucesso");
-                        rd = getServletContext().getRequestDispatcher("/login.jsp");
-                        if(usuarioLogado != null && usuarioLogado.getTipo() == 'F' && usuarioLogado.getTipo() == 'f'){
-                            rd = getServletContext().getRequestDispatcher("/portal.jsp");
-                        }
+                        rd = getServletContext().getRequestDispatcher("/portal.jsp");
                     }
                     break;
                 case "clienteForm":
@@ -78,7 +75,7 @@ public class FuncionarioServlet extends HttpServlet {
                     break;
                 case "funcionarioForm":
                     request.setAttribute("estados", UsuarioFacade.getEstados());
-                    rd = getServletContext().getRequestDispatcher("/clienteForm.jsp");
+                    rd = getServletContext().getRequestDispatcher("/funcionarioForm.jsp");
                     break;
                 case "listaFuncionarios":
                     request.setAttribute("listaFuncionarios", UsuarioFacade.getListaFuncionario());
@@ -105,6 +102,7 @@ public class FuncionarioServlet extends HttpServlet {
         
         f.setEmail((String)request.getParameter("email"));
         f.setNome((String) request.getParameter("nome"));
+        f.setCargo((String) request.getParameter("cargo"));
         f.setCpf((String) request.getParameter("cpf"));
         aux = (String) request.getParameter("dataNascimento");
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");

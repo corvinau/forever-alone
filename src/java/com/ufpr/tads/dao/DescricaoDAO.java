@@ -45,7 +45,7 @@ public class DescricaoDAO {
         try {
             st = con.prepareStatement(
                     "SELECT idDescricao, resumo, CorCabelo_idCorCabelo, "
-                    + "CorPele_idCorPele FROM Descricao WHERE idDescricao = ?"
+                    + "CorPele_idCorPele, imagem FROM Descricao WHERE idDescricao = ?"
             );
             st.setInt(1, idDescricao);
             
@@ -55,6 +55,7 @@ public class DescricaoDAO {
             while(rs.next()){
                 d = new Descricao();
                 d.setIdDescricao(idDescricao);
+                d.setImagem(rs.getString("imagem"));
                 d.setResumo(rs.getString("resumo"));
                 d.setCorCabelo(corCabeloDAO.getCorCabelo(rs.getInt("CorCabelo_idCorCabelo")));
                 d.setCorPele(corPeleDAO.getCorPele(rs.getInt("CorPele_idCorPele")));
@@ -77,11 +78,12 @@ public class DescricaoDAO {
         try {
             st = con.prepareStatement(
                     "INSERT INTO descricao(resumo, CorCabelo_idCorCabelo, "
-                    + "CorPele_idCorPele) VALUES(?,?,?)",Statement.RETURN_GENERATED_KEYS
+                    + "CorPele_idCorPele,imagem) VALUES(?,?,?,?)",Statement.RETURN_GENERATED_KEYS
             );
             st.setString(1, descricao.getResumo());
             st.setInt(2, descricao.getCorCabelo().getIdCorCabelo());
             st.setInt(3, descricao.getCorPele().getIdCorPele());
+            st.setString(4, descricao.getImagem());
             
             st.executeUpdate();
             
@@ -101,12 +103,13 @@ public class DescricaoDAO {
             try {
                 st = con.prepareStatement(
                         "UPDATE descricao SET resumo = ?, CorCabelo_idCorCabelo = ? , "
-                        + "CorPele_idCorPele = ? WHERE idDescricao = ?"
+                        + "CorPele_idCorPele = ?, imagem = ? WHERE idDescricao = ?"
                 );
                 st.setString(1, descricao.getResumo());
                 st.setInt(2, descricao.getCorCabelo().getIdCorCabelo());
                 st.setInt(3, descricao.getCorPele().getIdCorPele());
-                st.setInt(4, descricao.getIdDescricao());
+                st.setString(4, descricao.getImagem());
+                st.setInt(5, descricao.getIdDescricao());
                 
                 int rowsAffected = st.executeUpdate();
                 
