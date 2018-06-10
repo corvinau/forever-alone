@@ -115,6 +115,11 @@ public class Casamento implements Convidavel {
     public void setOrcamento(Orcamento orcamento) {
         this.orcamento = orcamento;
     }
+
+    @Override
+    public int getId() {
+        return this.getIdCasamento();
+    }
     
     
 }

@@ -127,4 +127,9 @@ public class UsuarioFacade {
         FuncionarioDAO funcionarioDao = new FuncionarioDAO();
         return funcionarioDao.getListaFuncionario();
     }
+
+    public static List<Cliente> getListaClienteFestaNotInvite(int aux) {
+        ClienteDAO clienteDAO = new ClienteDAO();
+        return clienteDAO.getListaClienteFestaNotInvite(aux);
+    }
 }
