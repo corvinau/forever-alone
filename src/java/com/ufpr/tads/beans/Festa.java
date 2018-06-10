@@ -7,6 +7,7 @@ package com.ufpr.tads.beans;
 
 import com.ufpr.tads.interfaces.Convidavel;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -20,6 +21,7 @@ public class Festa implements Convidavel {
     private Funcionario func;
     private Status status;
     private Local local;
+    private List<Convite> convites;
 
     public int getIdFesta() {
         return idFesta;
@@ -75,6 +77,14 @@ public class Festa implements Convidavel {
 
     public void setLocal(Local local) {
         this.local = local;
+    }
+
+    public List<Convite> getConvites() {
+        return convites;
+    }
+
+    public void setConvites(List<Convite> convites) {
+        this.convites = convites;
     }
     
     

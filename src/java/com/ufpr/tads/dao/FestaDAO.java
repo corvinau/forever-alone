@@ -5,7 +5,8 @@
  */
 package com.ufpr.tads.dao;
 
-import com.ufpr.tads.beans.Cidade;
+import com.ufpr.tads.beans.Festa;
+import com.ufpr.tads.beans.Funcionario;
 import com.ufpr.tads.beans.Local;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -21,12 +22,12 @@ import java.util.logging.Logger;
  *
  * @author ArtVin
  */
-public class LocalDAO {
+public class FestaDAO {
     private Connection con;
     private ResultSet rs;
     
     
-    public LocalDAO(){
+    public FestaDAO(){
         try {
             con = ConnectionFactory.getConnection();
         } catch (ClassNotFoundException ex) {
@@ -35,29 +36,30 @@ public class LocalDAO {
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public LocalDAO(Connection con){
+    public FestaDAO(Connection con){
         this.con = con;
     }
 
-    public List<Local> getListaLocal() {
-        List<Local> listaLocal = new ArrayList<Local>();
-        Local l = null;
+    public List<Festa> getListaFesta() {
+        List<Festa> listaFesta = new ArrayList<Festa>();
+        Festa f = null;
         PreparedStatement st;
         
         try {
             st = con.prepareStatement(
-                    "SELECT idLocal, nomeEstabelecimento, Endereco_idEndereco"
-                    + " FROM local"
+                    "SELECT idFesta, data, tema, hora "
+                    + "FROM Festa"
             );
             
             rs = st.executeQuery();
-            EnderecoDAO enderecoDAO = new EnderecoDAO(con);
+            Funcionario func;
             while(rs.next()){
-                l = new Local();
-                l.setIdLocal(rs.getInt("idLocal"));
-                l.setNomeEstabelecimento(rs.getString("nomeEstabelecimento"));
-                l.setEndereco(enderecoDAO.getEndereco(rs.getInt("Endereco_idEndereco")));
-                listaLocal.add(l);
+                f = new Festa();
+                f.setIdFesta(rs.getInt("idFesta"));
+                f.setData(rs.getDate("data"));
+                f.setTema(rs.getString("tema"));
+                f.setHora(rs.getTimestamp("hora"));
+                listaFesta.add(f);
             }
             
             
@@ -68,37 +70,34 @@ public class LocalDAO {
         
         
         
-        return listaLocal;
+        return listaFesta;
     }
 
-    public int createLocal(Local l) {
+    public int createFesta(Festa f) {
         PreparedStatement st;
-        
         
         try {
             st = con.prepareStatement(
-                    "INSERT INTO local( nomeEstabelecimento, Endereco_idEndereco) "
-                    + "VALUES (?,?) ",Statement.RETURN_GENERATED_KEYS
+                    "INSERT INTO festa( data, tema, hora,Local_idLocal, Funcionario_idFuncionario , Status_idStatus) "
+                    + "VALUES(?,?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS
             );
-            st.setString(1, l.getNomeEstabelecimento());
-            if(l.getEndereco() != null){
-                EnderecoDAO enderecoDAO = new EnderecoDAO(con);
-                l.getEndereco().setIdEndereco(enderecoDAO.insertEndereco(l.getEndereco()));
-                if(l.getEndereco().getIdEndereco() > 0){
-                    st.setInt(2, l.getEndereco().getIdEndereco());
-                }
-                else return 0;
-            }
-            else return 0;            
+            st.setDate(1, new java.sql.Date(f.getData().getTime()));
+            st.setString(2, f.getTema());
+            st.setTimestamp(3, new java.sql.Timestamp(f.getHora().getTime()));
+            st.setInt(4, f.getLocal().getIdLocal());
+            st.setInt(5, f.getFunc().getIdFuncionario());
+            st.setInt(6, f.getStatus().getIdStatus());
+            
             st.executeUpdate();
-
             rs = st.getGeneratedKeys();
             if(rs.next()) return rs.getInt(1);
-
-
+            
+            
         } catch (SQLException ex) {
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        
         
         
         return 0;

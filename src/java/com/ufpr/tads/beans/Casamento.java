@@ -24,6 +24,7 @@ public class Casamento implements Convidavel {
     private String localLuaDeMel;
     private List<Padrinhos> padrinhos;
     private Orcamento orcamento;
+    private Convite convite;
 
     public int getIdCasamento() {
         return idCasamento;
@@ -95,6 +96,14 @@ public class Casamento implements Convidavel {
 
     public void setPadrinhos(List<Padrinhos> padrinhos) {
         this.padrinhos = padrinhos;
+    }
+
+    public Convite getConvite() {
+        return convite;
+    }
+
+    public void setConvite(Convite convite) {
+        this.convite = convite;
     }
 
     

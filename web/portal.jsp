@@ -27,6 +27,7 @@
                 Funcionario
                 <a href="FuncionarioServlet?action=listaClientes">Clientes</a>
                 <a href="FuncionarioServlet?action=listaLocal">Local</a>
+                <a href="FestaServlet?action=listaFesta">Festa</a>
                 <c:if test="${loginBean.nome == \"admin\" }">
                     <a href="FuncionarioServlet?action=listaFuncionarios">Funcionario</a>
                 </c:if>

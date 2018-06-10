@@ -13,6 +13,7 @@ import com.ufpr.tads.beans.Funcionario;
 import com.ufpr.tads.beans.Local;
 import com.ufpr.tads.beans.Preferencia;
 import com.ufpr.tads.beans.UF;
+import com.ufpr.tads.facades.FestaFacade;
 import com.ufpr.tads.facades.LocalFacade;
 import com.ufpr.tads.facades.UsuarioFacade;
 import java.io.IOException;
