@@ -176,7 +176,7 @@
                         <c:when test="${(not empty loginBean)}">
                             <div class="w3_form_body_grid">
                                 <span>Sexo*</span>
-                                <select id="w3_country" name="sexo" class="frm-field" required>
+                                <select id="sexo" name="sexo" class="frm-field" required>
                                     <option value="M">Homem</option>
                                     <option value="F">Mulher</option>   						
                                 </select>
@@ -185,7 +185,7 @@
                         <c:otherwise>
                             <div class="w3_form_body_grid">
                                 <span>Sexo*</span>
-                                <select id="w3_country" name="sexo" class="frm-field" required>
+                                <select id="sexo" name="sexo" class="frm-field" required>
                                     <option value="M">Homem</option>
                                     <option value="F">Mulher</option>   						
                                 </select>
