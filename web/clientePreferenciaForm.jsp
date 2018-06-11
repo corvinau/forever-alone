@@ -9,9 +9,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Forever Alone</title>
     </head>
     <body>
+        <%@include file="headerLogged.jsp"%>
+        
         <form action="ClienteServlet?action=updatePreferencia" method="POST">
             <div>
                 <select id="sexo" name="sexo">
@@ -117,5 +119,7 @@
             </div>
             <input type="submit" class="btn btn-primary" value="Salvar"/>
         </form>
+        
+        <%@include file="footer.jsp"%>
     </body>
 </html>

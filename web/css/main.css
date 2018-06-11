@@ -21,14 +21,8 @@ and open the template in the editor.
     width: 100%;
 }
 
-.login-center-info {
-    padding: 2.5em;
-    border: 2px solid #44c7f4;
-    margin: 5%;
-}
-
 .login-center-info .sim-button {
     margin-top: 0em!important;
     background: rgb(65, 131, 154)!important;
-    width: 200px!important;
+    width: 25%!important;
 }

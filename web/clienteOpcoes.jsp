@@ -14,63 +14,44 @@
     <body>
         <%@include file="headerLogged.jsp"%>
         
-        <div class="container">
-            <div class="col-md-3 login-center-info">
-                <h1>Opcões</h1>
-                <div class="sim-button button12">
-                    <a href="ClienteServlet?action=formDescricao">Descricao</a>
-                </div>
-                <div class="sim-button button12">
-                    <a href="ClienteServlet?action=formPreferencia">Preferencia</a>
-                </div>
-                <div class="sim-button button12">
-                    <a href="ClienteServlet?action=formHorario">Horario</a>
-                </div>
-                <div class="sim-button button12">
-                    <a href="ClienteServlet?action=switchDisp">On/Off</a>
+        <section class="text-center">
+            <div class="container">
+                <div class="tittle-agileinfo">
+                    <h3>Opcões do perfil</h3>
                 </div>
             </div>
-	</div>
+        </section>
         
-<!--<div class="row">
-  <div class="col-sm-4 login-center-info">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Special title treatment</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-4 login-center-info">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Special title treatment</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-sm-4 login-center-info">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Special title treatment</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-4 login-center-info">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Special title treatment</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
-      </div>
-    </div>
-  </div>
-</div>-->
+        <div class="container" style="margin-bottom: 5%;">
+            <div class="row">
+                <div class="login-center-info text-center">
+                    <div class="sim-button button12">
+                        <a href="ClienteServlet?action=formDescricao">Descrição</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="login-center-info text-center">
+                    <div class="sim-button button12">
+                        <a href="ClienteServlet?action=formPreferencia">Preferências de encontros</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="login-center-info text-center">
+                    <div class="sim-button button12">
+                        <a href="ClienteServlet?action=formHorario">Horários</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="login-center-info text-center">
+                    <div class="sim-button button12">
+                        <a href="ClienteServlet?action=switchDisp">On/Off</a>
+                    </div>
+                </div>
+            </div>
+        </div>
         
         <%@include file="footer.jsp"%>
     </body>

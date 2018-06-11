@@ -26,46 +26,6 @@
             </div>
         </c:if>
         
-        <%--<c:choose>--%>
-            <%--<c:when test="${loginBean.tipo == 'C' || loginBean.tipo == 'c'}">--%>
-<!--                <div class="w3l_agileits_breadcrumbs">
-                    <div class="container">
-                        <div class="w3l_agileits_breadcrumbs_inner">
-                            <ul>
-                                <li>
-                                    <a href="ClienteServlet">Opções</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>-->
-            <%--</c:when>--%>
-            <%--<c:otherwise>--%>
-<!--                <div class="w3l_agileits_breadcrumbs">
-                    <div class="container">
-                        <div class="w3l_agileits_breadcrumbs_inner">
-                            <ul>
-                                <li>
-                                    <a href="FuncionarioServlet?action=listaClientes">Clientes</a>
-                                </li>
-                                <li>
-                                    <a href="FuncionarioServlet?action=listaLocal">Local</a>
-                                </li>
-                                <li>
-                                    <a href="FestaServlet?action=listaFesta">Festa</a>
-                                </li>
-                                <li>-->
-                                    <%--<c:if test="${loginBean.nome == \"admin\" }">--%>
-                                        <!--<a href="FuncionarioServlet?action=listaFuncionarios">Funcionario</a>-->
-                                    <%--</c:if>--%>
-<!--                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>-->
-            <%--</c:otherwise>--%>
-        <%--</c:choose>--%>
-        
         <section class="w3ls-team text-center">
             <div class="container">
                 <div class="tittle-agileinfo">

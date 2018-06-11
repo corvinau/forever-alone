@@ -9,44 +9,143 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Forever Alone</title>
     </head>
     <body>
-        <h1>DescricaoForm</h1>
-        <form action="ClienteServlet?action=updateDescricao" method="POST">
-            <div>
-                <input id="imagem" type="text" name="imagem"/>
+        <%@include file="headerLogged.jsp"%>
+        
+        <div class="login elite-app">
+            <div class="container">
+                <div class="tittle-agileinfo">
+                    <h3>Descrição</h3>
+                </div>
+                <div class="col-md-12 login-form-w3-agile">
+                <c:choose>
+                    <c:when test="${(not empty loginBean)}">
+                        <form action="#" method="POST">
+                    </c:when>
+                    <c:otherwise>
+                        <form action="ClienteServlet?action=updateDescricao" method="POST">
+                    </c:otherwise>
+                </c:choose>
+                
+                    <c:choose>
+                        <c:when test="${(not empty loginBean)}">
+                            <div class="w3_form_body_grid">
+                                <span>Foto de Perfil</span>
+                                <input id="imagem" type="text" name="imagem" placeholder="Link para imagem"/>
+                            </div>
+                        </c:when>
+                        <c:otherwise>
+                            <div class="w3_form_body_grid">
+                                <span>Foto de Perfil</span>
+                                <input id="imagem" type="text" name="imagem" placeholder="Link para imagem"/>
+                            </div>
+                        </c:otherwise>
+                    </c:choose>
+
+                    <c:choose>
+                        <c:when test="${(not empty loginBean)}">
+                            <div class="w3_form_body_grid">
+                                <span>Descrição Pessoal</span>
+                                <input type="text" name="resumo" value="" placeholder="Descrição"/>
+                            </div>
+                        </c:when>
+                        <c:otherwise>
+                            <div class="w3_form_body_grid">
+                                <span>Descrição Pessoal</span>
+                                <input type="text" name="resumo" value="" placeholder="Descrição"/>
+                            </div>
+                        </c:otherwise>
+                    </c:choose>
+
+                    <c:choose>
+                        <c:when test="${(not empty loginBean)}">
+                            <div class="w3_form_body_grid">
+                                <span>Cor do Cabelo</span>
+                                <select id="corCabelo" name="corCabelo" class="frm-field">
+                                    <c:forEach items="${listaCorCabelo}" var="cabelo">
+                                        <c:choose>
+                                            <c:when test="${loginBean.descricao.corCabelo.idCorCabelo == cabelo.idCorCabelo}">
+                                                <option value="${cabelo.idCorCabelo}" selected> ${cabelo.nome}</option>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <option value="${cabelo.idCorCabelo}"> ${cabelo.nome}</option>
+                                            </c:otherwise>
+                                         </c:choose>
+                                    </c:forEach>
+                                </select>
+                            </div>
+                        </c:when>
+                        <c:otherwise>
+                            <div class="w3_form_body_grid">
+                                <span>Cor do Cabelo</span>
+                                <select id="corCabelo" name="corCabelo" class="frm-field">
+                                    <c:forEach items="${listaCorCabelo}" var="cabelo">
+                                        <%--<c:choose>--%>
+                                            <%--<c:when test="${loginBean.descricao.corCabelo.idCorCabelo == cabelo.idCorCabelo}">--%>
+                                                <!--<option value="${cabelo.idCorCabelo}" selected> ${cabelo.nome}</option>-->
+                                            <%--</c:when>--%>
+                                            <%--<c:otherwise>--%>
+                                                <option value="${cabelo.idCorCabelo}"> ${cabelo.nome}</option>
+                                            <%--</c:otherwise>--%>
+                                         <%--</c:choose>--%>
+                                    </c:forEach>
+                                </select>
+                            </div>
+                        </c:otherwise>
+                    </c:choose>
+                    
+                    <c:choose>
+                        <c:when test="${(not empty loginBean)}">
+                            <div class="w3_form_body_grid">
+                                <span>Cor da Pele</span>
+                                <select id="corPele" name="corPele" class="frm-field">
+                                    <c:forEach items="${listaCorPele}" var="pele">
+                                        <c:choose>
+                                            <c:when test="${loginBean.descricao.corPele.idCorPele == pele.idCorPele}">
+                                                <option value="${pele.idCorPele}" selected> ${pele.nome}</option>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <option value="${pele.idCorPele}"> ${pele.nome}</option>
+                                            </c:otherwise>
+                                         </c:choose>
+                                    </c:forEach>
+                                </select>
+                            </div>
+                        </c:when>
+                        <c:otherwise>
+                            <div class="w3_form_body_grid">
+                                <span>Cor da Pele</span>
+                                <select id="corPele" name="corPele" class="frm-field">
+                                    <c:forEach items="${listaCorPele}" var="pele">
+                                        <%--<c:choose>--%>
+                                            <%--<c:when test="${loginBean.descricao.corPele.idCorPele == pele.idCorPele}">--%>
+                                                <!--<option value="${pele.idCorPele}" selected> ${pele.nome}</option>-->
+                                            <%--</c:when>--%>
+                                            <%--<c:otherwise>--%>
+                                                <option value="${pele.idCorPele}"> ${pele.nome}</option>
+                                            <%--</c:otherwise>--%>
+                                         <%--</c:choose>--%>
+                                    </c:forEach>
+                                </select>
+                            </div>
+                        </c:otherwise>
+                    </c:choose>
+
+                    <c:choose>
+                        <c:when test="${(not empty loginBean)}">
+                            <input type="submit" value="Atualizar">
+                        </c:when>
+                        <c:otherwise>
+                            <input type="submit" value="?">
+                        </c:otherwise>
+                    </c:choose>
+                    </form>
+                </div>
             </div>
-            <div><input type="text" name="resumo" value="" placeholder="Resumo"/></div>
-            <div>
-                <select id="corCabelo" name="corCabelo">
-                    <c:forEach items="${listaCorCabelo}" var="cabelo">
-                        <c:choose>
-                            <c:when test="${loginBean.descricao.corCabelo.idCorCabelo == cabelo.idCorCabelo}">
-                                <option value="${cabelo.idCorCabelo}" selected> ${cabelo.nome}</option>
-                            </c:when>
-                            <c:otherwise>
-                                <option value="${cabelo.idCorCabelo}"> ${cabelo.nome}</option>
-                            </c:otherwise>
-                         </c:choose>
-                    </c:forEach>
-                </select>
-            </div>
-            <div>
-                <select id="corPele" name="corPele">
-                    <c:forEach items="${listaCorPele}" var="pele">
-                        <c:choose>
-                            <c:when test="${loginBean.descricao.corPele.idCorPele == pele.idCorPele}">
-                                <option value="${pele.idCorPele}" selected> ${pele.nome}</option>
-                            </c:when>
-                            <c:otherwise>
-                                <option value="${pele.idCorPele}"> ${pele.nome}</option>
-                            </c:otherwise>
-                         </c:choose>
-                    </c:forEach>
-                </select>
-            </div>
-            <div><input type="submit" class="btn btn-primary" value="Update"/></div>
-        </form>
+        </div>
+        
+        <%@include file="footer.jsp"%>
     </body>
 </html>

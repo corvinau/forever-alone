@@ -488,7 +488,7 @@ img.img-responsive {
 	position: absolute;
 	top: 50px;
 	left: -5px;
-	width: 0;
+	width: 100%;
 	height: 0;
 	border-left: 100px solid transparent;
 	border-right: 100px solid transparent;
@@ -504,7 +504,7 @@ img.img-responsive {
 	position: absolute;
 	top: 50px;
 	left: -5px;
-	width: 0;
+	width: 100%;
 	height: 0;
 	border-left: 100px solid transparent;
 	border-right: 100px solid transparent;

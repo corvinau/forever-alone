@@ -40,7 +40,7 @@
                     <div class="container">
                         <div class="header-inner">
                             <h1 class="logo">
-                                <a>Forever Alone</a>
+                                <a href="portal.jsp">Forever Alone</a>
                             </h1>
                             <div class="header-right-w3ls">
                                 <a href="ClienteServlet">Opções</a>
