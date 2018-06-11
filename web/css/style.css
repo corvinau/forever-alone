@@ -1427,7 +1427,7 @@ background: rgba(0, 0, 0, 0.17);
     padding-top: 1.3em;
     font-family: 'Raleway', sans-serif;
 }
-.login-form-w3-agile input[type="email"], input[type="number"], .login-form-w3-agile input[type="password"], .login-form-w3-agile input[type="text"],.frm-field {
+.login-form-w3-agile input[type="email"], .login-form-w3-agile input[type="password"], .login-form-w3-agile input[type="text"],.frm-field {
     outline: none;
     border: none;
     border-bottom: 1px solid #999;
