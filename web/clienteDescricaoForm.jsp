@@ -22,10 +22,10 @@
                 <div class="col-md-12 login-form-w3-agile">
                 <c:choose>
                     <c:when test="${(not empty loginBean)}">
-                        <form action="#" method="POST">
+                        <form action="ClienteServlet?action=updateDescricao" method="POST">
                     </c:when>
                     <c:otherwise>
-                        <form action="ClienteServlet?action=updateDescricao" method="POST">
+                        <form action="#" method="POST">
                     </c:otherwise>
                 </c:choose>
                 
@@ -82,14 +82,14 @@
                                 <span>Cor do Cabelo</span>
                                 <select id="corCabelo" name="corCabelo" class="frm-field">
                                     <c:forEach items="${listaCorCabelo}" var="cabelo">
-                                        <%--<c:choose>--%>
-                                            <%--<c:when test="${loginBean.descricao.corCabelo.idCorCabelo == cabelo.idCorCabelo}">--%>
-                                                <!--<option value="${cabelo.idCorCabelo}" selected> ${cabelo.nome}</option>-->
-                                            <%--</c:when>--%>
-                                            <%--<c:otherwise>--%>
+                                        <c:choose>
+                                            <c:when test="${loginBean.descricao.corCabelo.idCorCabelo == cabelo.idCorCabelo}">
+                                                <option value="${cabelo.idCorCabelo}" selected> ${cabelo.nome}</option>
+                                            </c:when>
+                                            <c:otherwise>
                                                 <option value="${cabelo.idCorCabelo}"> ${cabelo.nome}</option>
-                                            <%--</c:otherwise>--%>
-                                         <%--</c:choose>--%>
+                                            </c:otherwise>
+                                         </c:choose>
                                     </c:forEach>
                                 </select>
                             </div>
@@ -119,14 +119,14 @@
                                 <span>Cor da Pele</span>
                                 <select id="corPele" name="corPele" class="frm-field">
                                     <c:forEach items="${listaCorPele}" var="pele">
-                                        <%--<c:choose>--%>
-                                            <%--<c:when test="${loginBean.descricao.corPele.idCorPele == pele.idCorPele}">--%>
-                                                <!--<option value="${pele.idCorPele}" selected> ${pele.nome}</option>-->
-                                            <%--</c:when>--%>
-                                            <%--<c:otherwise>--%>
+                                        <c:choose>
+                                            <c:when test="${loginBean.descricao.corPele.idCorPele == pele.idCorPele}">
+                                                <option value="${pele.idCorPele}" selected> ${pele.nome}</option>
+                                            </c:when>
+                                            <c:otherwise>
                                                 <option value="${pele.idCorPele}"> ${pele.nome}</option>
-                                            <%--</c:otherwise>--%>
-                                         <%--</c:choose>--%>
+                                            </c:otherwise>
+                                        </c:choose>
                                     </c:forEach>
                                 </select>
                             </div>
