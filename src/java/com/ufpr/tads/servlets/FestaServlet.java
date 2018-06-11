@@ -6,6 +6,7 @@
 package com.ufpr.tads.servlets;
 
 import com.ufpr.tads.beans.Cidade;
+import com.ufpr.tads.beans.Convite;
 import com.ufpr.tads.beans.Endereco;
 import com.ufpr.tads.beans.Festa;
 import com.ufpr.tads.beans.Funcionario;
@@ -57,15 +58,25 @@ public class FestaServlet extends HttpServlet {
             session.invalidate();
             rd.forward(request, response);
         }
-        String action = (String) request.getParameter("action");
-        if(action == null){
-             action = (String) request.getAttribute("action");
+        String action = (String) request.getAttribute("action");
+        if(action == null || action.isEmpty()){
+            action = (String) request.getParameter("action");
         }
         if(action != null){
             Festa f;
+            int aux = 0;
+            String parameter;
+            String[] parameterList;
             switch (action){
-                case "adicionarConvidado":
-                    
+                case "convidarClientes":
+                    parameterList = (String[]) request.getParameterValues("idCliente");
+                    parameter = (String) request.getParameter("idFesta");
+                    if(!parameter.isEmpty() && parameterList.length != 0){
+                        FestaFacade.insertConvites(parameter,parameterList);
+                    }
+                    request.setAttribute("action", "listaConvidados");
+                    request.setAttribute("id", parameter);
+                    rd = getServletContext().getRequestDispatcher("/FestaServlet");
                     break;
                 case "cadastroFesta":
                     f = getPostFesta(request);
@@ -75,13 +86,29 @@ public class FestaServlet extends HttpServlet {
                         rd = getServletContext().getRequestDispatcher("/portal.jsp");
                     }
                     break;
+                case "adcionarConvidado" :
+                    parameter = (String) request.getParameter("id");
+                    if(parameter != null || !parameter.isEmpty()){
+                        aux = Integer.parseInt(parameter);
+                    }
+                    if(aux != 0){
+                        request.setAttribute("idFesta",aux);
+                        request.setAttribute("listaCliente",UsuarioFacade.getListaClienteFestaNotInvite(aux));
+                        rd = getServletContext().getRequestDispatcher("/festaAdicionaConvidados.jsp");
+                    }
+                    break;
                 case "festaForm":
                     request.setAttribute("locais", LocalFacade.getListaLocal());
                     rd = getServletContext().getRequestDispatcher("/festaForm.jsp");
                     break;
                 case "listaConvidados":
-                    f = FestaFacade.getFesta(Integer.parseInt((String) request.getParameter("id")));
-                    rd = getServletContext().getRequestDispatcher("/festaForm.jsp");
+                    parameter = (String) request.getParameter("id");
+                    if(parameter == null || parameter.isEmpty()){
+                        parameter = (String) request.getAttribute("id");
+                    }
+                    f = FestaFacade.getFesta(Integer.parseInt(parameter));
+                    request.setAttribute("festa", f);
+                    rd = getServletContext().getRequestDispatcher("/festaListaConvidados.jsp");
                     break;
                 case "listaFesta":
                     request.setAttribute("listaFesta", FestaFacade.getListaFesta());

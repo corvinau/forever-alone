@@ -12,7 +12,7 @@
     </head>
     <body>
         <!-- footer -->
-        <div>
+        <div class="footer">
             <div class="footer-w3layouts">
                 <div class="container">
                     <div class="agile-copy">

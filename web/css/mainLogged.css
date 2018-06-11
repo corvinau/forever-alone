@@ -1,0 +1,29 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 10/06/2018, 19:14:35
+    Author     : Tatiane
+*/
+
+h1.logo {
+    float: left;
+    border-right: 10px solid rgba(255, 255, 255, 0.29);
+	border-bottom: 10px solid rgba(255, 255, 255, 0.29);
+    border-left: 10px solid rgba(68, 199, 244, 0.37);
+	border-top: 10px solid rgba(68, 199, 244, 0.37);
+    padding: 5px 5px;
+    position: relative;
+    font-size: 47px;
+    font-family: 'Allura', cursive;
+}
+h1.logo a {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    display: block;
+}
+.banner-w3ls {
+    min-height: 115px;
+}

@@ -41,7 +41,7 @@
                                 <i class="material-icons">visibility</i> 
                             </a>
                             <a href="FestaServlet?action=listaConvidados&id=${festa.idFesta}">
-                                Add convidado
+                                Gerenciar convidados
                             </a>
                         </td>
                     </tr>
