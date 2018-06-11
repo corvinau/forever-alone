@@ -8,24 +8,39 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <!--Pegar o jquery do projeto, botei esse só pra testar-->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Preferências</title>
+        <script>
+            function valorMudou()
+            {
+                if($('#check-segunda').is(":checked"))   
+                    $("#horario-segunda").show();
+                else
+                    $("#horario-segunda").hide();
+            }
+        </script>
     </head>
     <body>
         <form action="ClienteServlet?action=updatePreferencia" method="POST">
             <div>
+                <label for="sexo">Sexo:</label>
                 <select id="sexo" name="sexo">
                     <option value="M">M</option>
                     <option value="F">F</option>
                 </select>
             </div>
             <div>
+                <label for="idadeMin">Idade Mínima:</label>
                 <input id="idadeMin" type="number" name="idadeMin"/>
             </div>
             <div>
+                <label for="idadeMax">Idade Máxima:</label>
                 <input id="idadeMax" type="number" name="idadeMax"/>
             </div>
             <div class="CoresCabelo">
+                <span>Cor de Cabelo:</span>
                 <div>
                     <c:forEach items="${listaCorCabelo}" var="cabelo">
                         <c:choose>
@@ -42,6 +57,7 @@
                 </div>
             </div>
             <div class="CoresPele">
+                <span>Cor de Pele:</span>
                 <div>
                     <c:forEach items="${listaCorPele}" var="pele">
                         <c:choose>
@@ -59,12 +75,14 @@
             </div>
             <div>
                 <div>
-                    <input type="checkbox" id="coding" name="diaSemana" value="Segunda">
+                    <input type="checkbox" id="check-segunda" name="diaSemana" value="Segunda" onchange="valorMudou()">
                     <label for="coding">Segunda</label>
-                    <input id="horaMin" type="number" name="horaMin"/>
-                    <input id="horaMin" type="number" name="minutoMin"/>
-                    <input id="horaMax" type="number" name="horaMax"/>
-                    <input id="horaMax" type="number" name="minutoMax"/>
+                    <div id="horario-segunda" hidden="hidden">
+                        <input id="horaMin" type="number" name="horaMin"/>
+                        <input id="horaMin" type="number" name="minutoMin"/>
+                        <input id="horaMax" type="number" name="horaMax"/>
+                        <input id="horaMax" type="number" name="minutoMax"/>
+                    </div>
                 </div>
                 <div>
                     <input type="checkbox" id="coding" name="diaSemana" value="Terca" >
