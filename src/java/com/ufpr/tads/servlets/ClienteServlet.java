@@ -11,10 +11,8 @@ import com.ufpr.tads.beans.CorPele;
 import com.ufpr.tads.beans.Descricao;
 import com.ufpr.tads.beans.Horario;
 import com.ufpr.tads.beans.Preferencia;
-import com.ufpr.tads.beans.Usuario;
 import com.ufpr.tads.facades.UsuarioFacade;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -150,11 +148,15 @@ public class ClienteServlet extends HttpServlet {
         for(int i = 0; i < tamanhoLista; i++){
             dataAux = new Date();
             horario = listaHorario.get(i);
-            if(listaForm[i].isEmpty()){
+            if(!listaForm[i].isEmpty()){
                 horario = listaHorario.get(i);
                 dataAux.setHours(Integer.parseInt(listaForm[i]));
                 dataAux.setMinutes(Integer.parseInt(listaForm1[i]));
                 horario.setHoraInicial(dataAux);
+            }
+            else{
+                tamanhoLista--;
+                i--;
             }
             listaHorario.set(i,horario);
         }
@@ -163,9 +165,15 @@ public class ClienteServlet extends HttpServlet {
         for(int i = 0; i < listaHorario.size(); i++){
             dataAux = new Date();
             horario = listaHorario.get(i);
-            dataAux.setHours(Integer.parseInt(listaForm[i]));
-            dataAux.setMinutes(Integer.parseInt(listaForm1[i]));
-            horario.setHoraInicial(dataAux);
+            if(!listaForm[i].isEmpty()){
+                dataAux.setHours(Integer.parseInt(listaForm[i]));
+                dataAux.setMinutes(Integer.parseInt(listaForm1[i]));
+                horario.setHoraInicial(dataAux);
+            }
+            else{
+                tamanhoLista--;
+                i--;
+            }
             listaHorario.set(i,horario);
         }
        
