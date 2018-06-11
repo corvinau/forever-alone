@@ -26,3 +26,19 @@ and open the template in the editor.
     background: rgb(65, 131, 154)!important;
     width: 25%!important;
 }
+
+#horaMin, #horaMax {
+    width: 50px;
+    padding: 0 10px;
+}
+
+.diaSemana {
+    margin-left: 215px;
+    margin-bottom: 20px;
+}
+
+.horaMin, .horaMax {
+    margin-left: 18px;
+    margin-top: 10px;
+    height: 25px;
+}
