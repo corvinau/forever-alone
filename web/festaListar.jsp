@@ -10,44 +10,64 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Forever Alone</title>
     </head>
     <body>
-        <h1>Lista Festas</h1>
-        <table>
-            <thead>
-                <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Data</th>
-                    <th scope="col">Tema</th>
-                    <th scope="col">Hora</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Situacao</th>
-                    <th scope="col">Ação</th>
-                </tr>
-            </thead>
-            <tbody>
-                <c:forEach items="${listaFesta}" var="festa" >
+        <%@include file="headerLogged.jsp"%>
+        
+        <section class="text-center">
+            <div class="container">
+                <div class="tittle-agileinfo">
+                    <h3>Lista de Festas</h3>
+                </div>
+            </div>
+        </section>
+        
+        
+        <div class="container">
+            <div class="sim-button button12" style="margin-top: 0px; float: right; background: rgb(65, 131, 154); margin-bottom: 15px;">
+                <a href="FestaServlet?action=festaForm">Novo</a>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+        
+        <div class="container">
+            <table class="table">
+                <thead>
                     <tr>
-                        <td>${festa.idFesta}</td>
-                        <td>${festa.data}</td>
-                        <td>${festa.tema} </td>
-                        <td>${festa.hora}</td>
-                        <td>${festa.status.nome}</td>
-                        <td>Tem q ver</td>
-                        <td>
-                            <a href="ClientesServlet?action=show&id=${festa.idFesta}">
-                                Não faz nd
-                                <i class="material-icons">visibility</i> 
-                            </a>
-                            <a href="FestaServlet?action=listaConvidados&id=${festa.idFesta}">
-                                Gerenciar convidados
-                            </a>
-                        </td>
+                        <th>Id</th>
+                        <th>Data</th>
+                        <th>Tema</th>
+                        <th>Hora</th>
+                        <th>Status</th>
+                        <th>Situacao</th>
+                        <th>Ação</th>
                     </tr>
-                </c:forEach>
-            </tbody>
-        </table>
-        <a href="FestaServlet?action=festaForm">Novo</a>
+                </thead>
+                <tbody>
+                    <c:forEach items="${listaFesta}" var="festa" >
+                        <tr>
+                            <td>${festa.idFesta}</td>
+                            <td>${festa.data}</td>
+                            <td>${festa.tema} </td>
+                            <td>${festa.hora}</td>
+                            <td>${festa.status.nome}</td>
+                            <td>Tem q ver</td>
+                            <td>
+                                <a href="ClientesServlet?action=show&id=${festa.idFesta}">
+                                    <!--Não faz nd-->
+                                    <i class="material-icons">visibility</i> 
+                                </a>
+                                <a href="FestaServlet?action=listaConvidados&id=${festa.idFesta}">
+                                    Gerenciar convidados
+                                </a>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+        </div>
+        
+        <%@include file="footer.jsp"%>
     </body>
 </html>

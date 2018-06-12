@@ -10,35 +10,82 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Forever Alone</title>
+        <link href="css/jquery-ui.css" rel="stylesheet" type="text/css" media="all" />
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script type="text/javascript" >
+            $(function(){
+                $("#datepicker").datepicker({dateFormat: 'dd/mm/yy'});
+            });
+        </script>
     </head>
     <body>
-        <h1>Form festa</h1>
-        <c:if test="${!(empty loginBean) && loginBean.tipo != 'F' && loginBean.tipo != 'f'}">
+        
+        <%@include file="headerLogged.jsp"%>
+        
+         <c:if test="${!(empty loginBean) && loginBean.tipo != 'F' && loginBean.tipo != 'f'}">
             <jsp:forward page="index.jsp">
-                <jsp:param name="msg" value="Apenas funcionarios podem cadastrar clientes enquanto estão logados" />
+                <jsp:param name="msg" value="Apenas funcionarios podem cadastrar festas enquanto estão logados" />
             </jsp:forward>
         </c:if>
-        <form action="FestaServlet?action=cadastroFesta" method="POST">
-            <div><input type="text" name="tema" value="" placeholder="tema"/></div>
-            <div><input type="text" name="data" value="" placeholder="data"/></div>
-            <div><input type="number" name="hora" value="" placeholder="Hora"/></div>
-            <div><input type="number" name="minuto" value="" placeholder="Minuto"/></div>
-            <div>
-                <select id="local" name="local">
-                    <c:forEach items="${locais}" var="local">
-                        <c:choose>
-                            <c:when test="${festa.local.idLocal == local.idLocal}">
-                                <option value="${local.idLocal}" selected>${local.nomeEstabelecimento}</option>
-                            </c:when>
-                            <c:otherwise>
-                                <option value="${local.idLocal}">${local.nomeEstabelecimento}</option>
-                            </c:otherwise>
-                         </c:choose>
-                    </c:forEach>
-                </select>
+        
+        <c:if test="${not empty msg}">
+            <div class="container alert alert-warning" role="alert">
+                <span>${msg}</span>
             </div>
-            <div><input type="submit" class="btn btn-primary" value="Entrar"/></div>
-        </form>
+        </c:if>
+        
+        <div class="login elite-app">
+            <div class="container">
+                <div class="tittle-agileinfo">
+                    <h3>Cadastro festa</h3>
+                </div>
+                <div class="col-md-12 login-form-w3-agile">
+                    <form action="FestaServlet?action=cadastroFesta" method="POST">
+                
+                    <div class="w3_form_body_grid">
+                        <span>Tema da Festa</span>
+                        <input type="text" name="tema" value="" placeholder="Tema da festa"/>
+                    </div>
+                        
+                    <div class="w3_form_body_grid w3_form_body_grid1">
+                        <span>Data</span>
+                        <input id="datepicker" name="data" type="text" placeholder="dd/mm/yyyy" value="">
+                    </div>
+                        
+                    <div class="w3_form_body_grid w3_form_body_grid1">
+                        <span>Hora</span>
+                        <input type="number" name="hora" value="" placeholder="Hora"/>
+                    </div>
+                        
+                    <div class="w3_form_body_grid w3_form_body_grid1">
+                        <span>Minuto</span>
+                        <input type="number" name="minuto" value="" placeholder="Minuto"/>
+                    </div>
+
+                    <div class="w3_form_body_grid">
+                        <span>Local da Festa</span>
+                        <select id="local" name="local" class="frm-field">
+                            <c:forEach items="${locais}" var="local">
+                                <c:choose>
+                                    <c:when test="${festa.local.idLocal == local.idLocal}">
+                                        <option value="${local.idLocal}" selected>${local.nomeEstabelecimento}</option>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <option value="${local.idLocal}">${local.nomeEstabelecimento}</option>
+                                    </c:otherwise>
+                                 </c:choose>
+                            </c:forEach>
+                        </select>
+                    </div>
+
+                    <input type="submit" value="Salvar">
+                    </form>
+                </div>
+            </div>
+        </div>
+                
+        <%@include file="footer.jsp"%>
     </body>
 </html>

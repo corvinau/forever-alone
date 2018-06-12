@@ -10,26 +10,16 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-        <script src="js/jquery-3.3.1.min.js"></script>
-        <script src="js/main.js"></script>
-        <script src="js/ui/jquery-ui.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.min.js"></script>
+        <title>Forever Alone</title>
+        <link href="css/jquery-ui.css" rel="stylesheet" type="text/css" media="all" />
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script type="text/javascript" >
+            $(function(){
+                $("#datepicker").datepicker({dateFormat: 'dd/mm/yy'});
+            });
             
             $(document).ready(function(){
-                var date_input=$('input[name="data"]'); //our date input has the name "date"
-                var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
-                var options={
-                  format: 'dd/mm/yyyy',
-                  container: container,
-                  todayHighlight: true,
-                  autoclose: true
-                };
-                date_input.datepicker(options);
-                
-                
-                
                 $( "#uf" ).change(function() {
                   getCidades(false);
                 });
@@ -40,61 +30,105 @@
                 var estadoId = $("#uf").val();
                 var url = "http://localhost:28313/ForeverAlone/webresources/Ajax/cidade/"+estadoId;
                 $.ajax({
-                        type : "GET",
-                        url : url, // URL da sua Servlet
-                         // Parâmetro passado para a Servlet
-                        dataType : 'json',
-                        success : function(data) {
-                            // Se sucesso, limpa e preenche a combo de cidade
-                            // alert(JSON.stringify(data));
-                            if(!preencherPrimeiroForm){
-                                $("#cidade").empty();
-                            }
-                            $.each(data, function(i, obj) {
-                                $("#cidade").append('<option value=' + obj.idCidade + '>' + obj.nome + '</option>');
-                            });
-                        },
-                        error : function(request, textStatus, errorThrown) {
-                            alert(request.status + ', Error: ' + request.statusText);
-                             // Erro
+                    type : "GET",
+                    url : url, // URL da sua Servlet
+                    // Parâmetro passado para a Servlet
+                    dataType : 'json',
+                    success : function(data) {
+                        // Se sucesso, limpa e preenche a combo de cidade
+                        // alert(JSON.stringify(data));
+                        if(!preencherPrimeiroForm){
+                            $("#cidade").empty();
                         }
-                    });
+                        $.each(data, function(i, obj) {
+                            $("#cidade").append('<option value=' + obj.idCidade + '>' + obj.nome + '</option>');
+                        });
+                    },
+                    error : function(request, textStatus, errorThrown) {
+                        alert(request.status + ', Error: ' + request.statusText);
+                        // Erro
+                    }
+                });
             }
-            
         </script>
     </head>
     <body>
+        <%@include file="headerLogged.jsp"%>
+        
         <c:if test="${!(empty loginBean) && loginBean.tipo != 'F' && loginBean.tipo != 'f'}">
             <jsp:forward page="index.jsp">
-                <jsp:param name="msg" value="Apenas funcionarios podem cadastrar clientes enquanto estão logados" />
+                <jsp:param name="msg" value="Apenas funcionarios podem cadastrar locais enquanto estão logados" />
             </jsp:forward>
         </c:if>
-        <form action="FuncionarioServlet?action=cadastroLocal" method="POST">
-            <div><input type="text" name="nomeEstabelecimento" value="" placeholder="nomeEstabelecimento"/></div>
-            <div>
-                <select id="uf" name="uf">
-                    <c:forEach items="${estados}" var="estado">
-                        <c:choose>
-                            <c:when test="${cliente.endereco.cidade.uf.idUF == estado.idUF}">
-                                <option value="${estado.idUF}" selected>${estado.nome} - ${estado.sigla}</option>
-                            </c:when>
-                            <c:otherwise>
-                                <option value="${estado.idUF}">${estado.nome} - ${estado.sigla}</option>
-                            </c:otherwise>
-                         </c:choose>
-                    </c:forEach>
-                </select>
+        
+        <c:if test="${not empty msg}">
+            <div class="container alert alert-warning" role="alert">
+                <span>${msg}</span>
             </div>
-            <div>
-                <select id="cidade" name="cidade">
-                    <option value="${cliente.cidadeCliente.idCidade}" selected>${cliente.cidadeCliente.nomeCidade}</option>
-                </select>
+        </c:if>
+        
+        <div class="login elite-app">
+            <div class="container">
+                <div class="tittle-agileinfo">
+                    <h3>Cadastro local</h3>
+                </div>
+                <div class="col-md-12 login-form-w3-agile">
+                    <form action="FuncionarioServlet?action=cadastroLocal" method="POST">
+                
+                    <div class="w3_form_body_grid">
+                        <span>Estabelecimento</span>
+                        <input type="text" name="nomeEstabelecimento" value="" value="" placeholder="Nome estabelecimento"/>
+                    </div>
+
+                    <div class="w3_form_body_grid">
+                        <span>Estado</span>
+                        <select id="uf" name="uf" class="frm-field">
+                            <c:forEach items="${estados}" var="estado">
+                                <c:choose>
+                                    <c:when test="${cliente.endereco.cidade.uf.idUF == estado.idUF}">
+                                        <option value="${estado.idUF}" selected>${estado.nome} - ${estado.sigla}</option>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <option value="${estado.idUF}">${estado.nome} - ${estado.sigla}</option>
+                                    </c:otherwise>
+                                 </c:choose>
+                            </c:forEach>
+                        </select>
+                    </div>
+
+                    <div class="w3_form_body_grid">
+                        <span>Cidade</span>
+                        <select id="cidade" name="cidade" class="frm-field">
+                            <option value="${cliente.cidadeCliente.idCidade}" selected>${cliente.cidadeCliente.nomeCidade}</option>
+                        </select>
+                    </div>
+
+                    <div class="w3_form_body_grid">
+                        <span>Bairro</span>
+                        <input type="text" name="bairro" value="" placeholder="Bairro"/>
+                    </div>
+
+                    <div class="w3_form_body_grid">
+                        <span>Rua</span>
+                        <input type="text" name="rua" value="" placeholder="Rua"/>
+                    </div>
+
+                    <div class="w3_form_body_grid">
+                        <span>Número</span>
+                        <input type="text" name="numero" value="" placeholder="Número"/>
+                    </div>
+
+                    <div class="w3_form_body_grid">
+                        <span>Complemento</span>
+                        <input type="text" name="complemento" value="" placeholder="Complemento"/>
+                    </div>
+
+                    <input type="submit" value="Cadastrar">
+                    </form>
+                </div>
             </div>
-            <div><input type="text" name="bairro" value="" placeholder="bairro"/></div>
-            <div><input type="text" name="rua" value="" placeholder="rua"/></div>
-            <div><input type="text" name="numero" value="" placeholder="numero"/></div>
-            <div><input type="text" name="complemento" value="" placeholder="complemento"/></div>
-            <div><input type="submit" class="btn btn-primary" value="Entrar"/></div>
-        </form>
+        </div>
+                
+        <%@include file="footer.jsp"%>
     </body>
 </html>

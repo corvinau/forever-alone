@@ -9,43 +9,63 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Forever Alone</title>
     </head>
     <body>
-        <h1>lista Clientes</h1>
-        <table>
-            <thead>
-                <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">cpf</th>
-                    <th scope="col">sexo</th>
-                    <th scope="col">disponibilidade</th>
-                    <th scope="col">resumo</th>
-                    <th scope="col">Ação</th>
-                </tr>
-            </thead>
-            <tbody>
-                <c:forEach items="${listaClientes}" var="cliente" >
+        <%@include file="headerLogged.jsp"%>
+        
+        <section class="text-center">
+            <div class="container">
+                <div class="tittle-agileinfo">
+                    <h3>Lista de Clientes</h3>
+                </div>
+            </div>
+        </section>
+        
+        
+        <div class="container">
+            <div class="sim-button button12" style="margin-top: 0px; float: right; background: rgb(65, 131, 154); margin-bottom: 15px;">
+                <a href="FuncionarioServlet?action=clienteForm">Novo</a>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+        
+        <div class="container">
+            <table class="table">
+                <thead>
                     <tr>
-                        <td>${cliente.idCliente}</td>
-                        <td>${cliente.nome}</td>
-                        <td>${cliente.email}</td>
-                        <td>${cliente.cpf}</td>
-                        <td>${cliente.sexo}</td>
-                        <td>${cliente.disp}</td>
-                        <td>${cliente.descricao.resumo}</td>
-                        <td>
-                            <a href="ClientesServlet?action=show&id=${cliente.idCliente}">
-                                Não faz nd
-                                <i class="material-icons">visibility</i> 
-                            </a>
-                        </td>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>CPF</th>
+                        <th>Sexo</th>
+                        <th>Disponibilidade</th>
+                        <th>Resumo</th>
+                        <th>Ação</th>
                     </tr>
-                </c:forEach>
-            </tbody>
-        </table>
-        <a href="FuncionarioServlet?action=clienteForm">Novo</a>
+                </thead>
+                <tbody>
+                    <c:forEach items="${listaClientes}" var="cliente" >
+                        <tr>
+                            <td>${cliente.idCliente}</td>
+                            <td>${cliente.nome}</td>
+                            <td>${cliente.email}</td>
+                            <td>${cliente.cpf}</td>
+                            <td>${cliente.sexo}</td>
+                            <td>${cliente.disp}</td>
+                            <td>${cliente.descricao.resumo}</td>
+                            <td>
+                                <a href="ClientesServlet?action=show&id=${cliente.idCliente}">
+                                    <!--Não faz nd-->
+                                    <i class="material-icons">visibility</i> 
+                                </a>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+        </div>
+        
+        <%@include file="footer.jsp"%>
     </body>
 </html>

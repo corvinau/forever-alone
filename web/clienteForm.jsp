@@ -53,7 +53,16 @@
         </script>
     </head>
     <body>
-        <%@include file="header.jsp"%>
+        
+        <c:choose>
+            <c:when test="${(not empty loginBean)}">
+                <%@include file="headerLogged.jsp"%>
+            </c:when>
+            <c:otherwise>
+                <%@include file="header.jsp"%>
+            </c:otherwise>
+        </c:choose>
+        
         
         <c:if test="${!(empty loginBean) && loginBean.tipo != 'F' && loginBean.tipo != 'f'}">
             <jsp:forward page="index.jsp">

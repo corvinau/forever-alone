@@ -10,41 +10,61 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Forever Alone</title>
     </head>
     <body>
-        <h1>Lista local</h1>
-        <table>
-            <thead>
-                <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Estado</th>
-                    <th scope="col">Cidade</th>
-                    <th scope="col">Bairo</th>
-                    <th scope="col">Rua</th>
-                    <th scope="col">Ação</th>
-                </tr>
-            </thead>
-            <tbody>
-                <c:forEach items="${listaLocal}" var="local" >
+        <%@include file="headerLogged.jsp"%>
+        
+        <section class="text-center">
+            <div class="container">
+                <div class="tittle-agileinfo">
+                    <h3>Lista de Locais</h3>
+                </div>
+            </div>
+        </section>
+        
+        
+        <div class="container">
+            <div class="sim-button button12" style="margin-top: 0px; float: right; background: rgb(65, 131, 154); margin-bottom: 15px;">
+                <a href="FuncionarioServlet?action=localForm">Novo</a>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+        
+        <div class="container">
+            <table class="table">
+                <thead>
                     <tr>
-                        <td>${local.idLocal}</td>
-                        <td>${local.nomeEstabelecimento}</td>
-                        <td>${local.endereco.cidade.uf.sigla} </td>
-                        <td>${local.endereco.cidade.nome}</td>
-                        <td>${local.endereco.bairro}</td>
-                        <td>${local.endereco.rua}</td>
-                        <td>
-                            <a href="ClientesServlet?action=show&id=${local.idLocal}">
-                                Não faz nd
-                                <i class="material-icons">visibility</i> 
-                            </a>
-                        </td>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Estado</th>
+                        <th>Cidade</th>
+                        <th>Bairo</th>
+                        <th>Rua</th>
+                        <th>Ação</th>
                     </tr>
-                </c:forEach>
-            </tbody>
-        </table>
-        <a href="FuncionarioServlet?action=localForm">Novo</a>                        
+                </thead>
+                <tbody>
+                    <c:forEach items="${listaLocal}" var="local" >
+                        <tr>
+                            <td>${local.idLocal}</td>
+                            <td>${local.nomeEstabelecimento}</td>
+                            <td>${local.endereco.cidade.uf.sigla} </td>
+                            <td>${local.endereco.cidade.nome}</td>
+                            <td>${local.endereco.bairro}</td>
+                            <td>${local.endereco.rua}</td>
+                            <td>
+                                <a href="ClientesServlet?action=show&id=${local.idLocal}">
+                                    <!--Não faz nd-->
+                                    <i class="material-icons">visibility</i> 
+                                </a>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+        </div>
+        
+        <%@include file="footer.jsp"%>
     </body>
 </html>

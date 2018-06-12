@@ -10,42 +10,60 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Forever Alone</title>
     </head>
     <body>
-        <h1>lista Funcionarios</h1>
-        <table>
-            <thead>
-                <tr>
-                    
-                    <th scope="col">Id</th>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">cpf</th>
-                    <th scope="col">cargo</th>
-                    <th scope="col">dataNascimento</th>
-                    <th scope="col">Ação</th>
-                </tr>
-            </thead>
-            <tbody>
-                <c:forEach items="${listaFuncionarios}" var="funcionario" >
+        <%@include file="headerLogged.jsp"%>
+        
+        <section class="text-center">
+            <div class="container">
+                <div class="tittle-agileinfo">
+                    <h3>Lista de Funcionários</h3>
+                </div>
+            </div>
+        </section>
+        
+        <div class="container">
+            <div class="sim-button button12" style="margin-top: 0px; float: right; background: rgb(65, 131, 154); margin-bottom: 15px;">
+                <a href="FuncionarioServlet?action=funcionarioForm">Novo</a>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+        
+        <div class="container">
+            <table class="table">
+                <thead>
                     <tr>
-                        <td>${funcionario.idFuncionario}</td>
-                        <td>${funcionario.nome}</td>
-                        <td>${funcionario.email}</td>
-                        <td>${funcionario.cpf}</td>
-                        <td>${funcionario.cargo}</td>
-                        <td>${funcionario.dataNasc}</td>
-                        <td>
-                            <a href="FuncionarioServlet?action=show&id=${funcionario.idFuncionario}">
-                                Não faz nd
-                                <i class="material-icons">visibility</i> 
-                            </a>
-                        </td>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>CPF</th>
+                        <th>Cargo</th>
+                        <th>Data de Nascimento</th>
+                        <th>Ação</th>
                     </tr>
-                </c:forEach>
-            </tbody>
-        </table>
-        <a href="FuncionarioServlet?action=funcionarioForm">Novo</a>                        
+                </thead>
+                <tbody>
+                    <c:forEach items="${listaFuncionarios}" var="funcionario">
+                        <tr>
+                            <td>${funcionario.idFuncionario}</td>
+                            <td>${funcionario.nome}</td>
+                            <td>${funcionario.email}</td>
+                            <td>${funcionario.cpf}</td>
+                            <td>${funcionario.cargo}</td>
+                            <td>${funcionario.dataNasc}</td>
+                            <td>
+                                <a href="FuncionarioServlet?action=show&id=${funcionario.idFuncionario}">
+                                    <!--Não faz nd-->
+                                    <i class="material-icons">visibility</i> 
+                                </a>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+        </div>
+        
+        <%@include file="footer.jsp"%>
     </body>
 </html>

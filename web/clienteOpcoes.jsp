@@ -26,6 +26,13 @@
             <div class="row">
                 <div class="login-center-info text-center">
                     <div class="sim-button button12">
+                        <a href="#">Edição de dados</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="login-center-info text-center">
+                    <div class="sim-button button12">
                         <a href="ClienteServlet?action=formDescricao">Descrição</a>
                     </div>
                 </div>
@@ -37,13 +44,13 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <!--<div class="row">
                 <div class="login-center-info text-center">
                     <div class="sim-button button12">
                         <a href="ClienteServlet?action=formHorario">Horários</a>
                     </div>
                 </div>
-            </div>
+            </div>-->
             <div class="row">
                 <div class="login-center-info text-center">
                     <div class="sim-button button12">
