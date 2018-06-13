@@ -44,6 +44,7 @@
                             </h1>
                             <div class="header-right-w3ls">
                                 <a href="ClienteServlet">Opções</a>
+                                <a href="ClienteServlet?action=listaEncontro">Encontros</a>
                                 <a href="#">Sair</a>
                             </div>
                             <div class="clearfix"></div>

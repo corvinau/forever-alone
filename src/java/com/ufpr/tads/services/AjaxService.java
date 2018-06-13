@@ -6,6 +6,7 @@
 package com.ufpr.tads.services;
 
 import com.ufpr.tads.beans.Cidade;
+import com.ufpr.tads.beans.Convite;
 import com.ufpr.tads.facades.UsuarioFacade;
 import java.util.List;
 import javax.ws.rs.core.Context;
@@ -49,6 +50,19 @@ public class AjaxService {
         List<Cidade> cidades = UsuarioFacade.getCidades(Integer.parseInt(id));
         GenericEntity<List<Cidade>> lista =
         new GenericEntity<List<Cidade>>(cidades) {};
+        return Response
+            .ok()
+            .entity(lista)
+            .build();
+    }
+    @GET
+    @Path("/convites/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getConvites(@PathParam("id") String id) {
+        
+        List<Convite> convites = UsuarioFacade.getConvitesAguardando(Integer.parseInt(id));
+        GenericEntity<List<Convite>> lista =
+        new GenericEntity<List<Convite>>(convites) {};
         return Response
             .ok()
             .entity(lista)

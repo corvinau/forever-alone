@@ -16,6 +16,7 @@ public class Encontro implements Convidavel {
     private int idEncontro;
     private Date data;
     private Date hora;
+    private Cliente cliente;
     private Local local;
     private Status status;
     private Convite convite;
@@ -75,6 +76,14 @@ public class Encontro implements Convidavel {
 
     public void setPagamento(Pagamento pagamento) {
         this.pagamento = pagamento;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     @Override
