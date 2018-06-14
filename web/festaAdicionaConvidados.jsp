@@ -17,48 +17,57 @@
         <section class="text-center">
             <div class="container">
                 <div class="tittle-agileinfo">
-                    <h3>Lista de Convidados</h3>
+                    <h3>Adicionar convidados a ${idFesta}</h3>
                 </div>
             </div>
         </section>
         
-        <h1>Adicionar convidados a ${idFesta}</h1>
-        <form action="FestaServlet?action=convidarClientes" method="POST">
-            <input type="text" name="idFesta" hidden="true" value="${idFesta}">
-            <table>
-                <thead>
-                    <tr>
-                        <th scope="col">Convidar</th>
-                        <th scope="col">Id</th>
-                        <th scope="col">Nome</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">cpf</th>
-                        <th scope="col">sexo</th>
-                        <th scope="col">resumo</th>
-                        <th scope="col">Ação</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <c:forEach items="${listaCliente}" var="cliente" >
-                        <tr>
-                            <td><input type="checkbox" id="coding" name="idCliente" value="${cliente.idCliente}"></td>
-                            <td>${cliente.idCliente}</td>
-                            <td>${cliente.nome}</td>
-                            <td>${cliente.email}</td>
-                            <td>${cliente.cpf}</td>
-                            <td>${cliente.sexo}</td>
-                            <td>${cliente.descricao.resumo}</td>
-                            <td>
-                                <a href="ClientesServlet?action=show&id=${cliente.idCliente}">
-                                    <i class="fa fa-eye"></i>
-                                </a>
-                            </td>
-                        </tr>
-                    </c:forEach>
-                </tbody>
-            </table>
-            <input type="submit" value="Atualizar">
-        </form>
+        <div class="list-festa-convida">
+            <form action="FestaServlet?action=convidarClientes" method="POST">
+                <div class="container">
+                    <input type="text" name="idFesta" hidden="true" value="${idFesta}">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Convidar</th>
+                                <th>Id</th>
+                                <th>Nome</th>
+                                <th>Email</th>
+                                <th>cpf</th>
+                                <th>sexo</th>
+                                <th>resumo</th>
+                                <th>Ação</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <c:forEach items="${listaCliente}" var="cliente" >
+                                <tr>
+                                    <td><input type="checkbox" id="coding" name="idCliente" value="${cliente.idCliente}"></td>
+                                    <td>${cliente.idCliente}</td>
+                                    <td>${cliente.nome}</td>
+                                    <td>${cliente.email}</td>
+                                    <td>${cliente.cpf}</td>
+                                    <td>${cliente.sexo}</td>
+                                    <td>${cliente.descricao.resumo}</td>
+                                    <td>
+                                        <a href="ClientesServlet?action=show&id=${cliente.idCliente}">
+                                            <i class="fa fa-eye"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="container">
+                    <input type="submit" value="Convidar Pessoas">
+                    <div class="clearfix"> </div>
+                </div>
+
+            </form>
+        </div>
+
         <%@include file="footer.jsp"%>
     </body>
 </html>

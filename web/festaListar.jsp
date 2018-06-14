@@ -54,9 +54,6 @@
                             <td>${festa.status.nome}</td>
                             <td>Tem q ver</td>
                             <td>
-                                <a href="ClientesServlet?action=show&id=${festa.idFesta}">
-                                    <i class="fa fa-eye"></i>
-                                </a>
                                 <a href="#">
                                     <i class="fa fa-pencil"></i>
                                 </a>

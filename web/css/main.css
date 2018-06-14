@@ -55,3 +55,23 @@ and open the template in the editor.
 .alert-warning {
     margin-top: 40px;
 }
+
+.list-festa-convida input[type="submit"] {
+    outline: none;
+    padding: 10px 0;
+    font-size: 1em;
+    color: #fff;
+    border: none;
+    background: rgb(65, 131, 154);
+    text-transform: uppercase;
+    width: 16.9%;
+    float: right;
+    margin-right: auto;
+    margin-left: auto;
+    height: 50px;
+    margin-bottom: 25px;
+}
+
+.list-festa-convida input[type="submit"]:hover {
+    background: #44c7f4;
+}

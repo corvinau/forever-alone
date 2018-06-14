@@ -40,7 +40,6 @@
                         <th>Idade</th>
                         <th>Sexo</th>
                         <th>Status</th>
-                        <th>Ação</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -52,17 +51,6 @@
                             <td>${convite.convidado.dataNasc}</td>
                             <td>${convite.convidado.sexo}</td>
                             <td>${convite.status}</td>
-                            <td>
-                                <a href="FuncionarioServlet?action=show&id=${convite.convidado.idCliente}">
-                                    <i class="fa fa-eye"></i>
-                                </a>
-                                <a href="#">
-                                    <i class="fa fa-pencil"></i>
-                                </a>
-                                <a href="#">
-                                    <i class="fa fa-times"></i>
-                                </a>
-                            </td>
                         </tr>
                     </c:forEach>
                 </tbody>
