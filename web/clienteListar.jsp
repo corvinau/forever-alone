@@ -22,8 +22,11 @@
             </div>
         </section>
         
-        
-        <div class="container">
+        <div class="container"> <!--arrumar aqui-->
+            <div class="" style="margin-top: 0px; margin-bottom: 15px;">
+                <input id="search" type="text" name="search"/>
+                <i class="fa fa-search"></i>
+            </div>
             <div class="sim-button button12" style="margin-top: 0px; float: right; background: rgb(65, 131, 154); margin-bottom: 15px;">
                 <a href="FuncionarioServlet?action=clienteForm">Novo</a>
             </div>
@@ -56,8 +59,13 @@
                             <td>${cliente.descricao.resumo}</td>
                             <td>
                                 <a href="ClientesServlet?action=show&id=${cliente.idCliente}">
-                                    <!--Não faz nd-->
-                                    <i class="material-icons">visibility</i> 
+                                    <i class="fa fa-eye"></i>
+                                </a>
+                                <a href="#">
+                                    <i class="fa fa-pencil"></i>
+                                </a>
+                                <a href="#">
+                                    <i class="fa fa-times"></i>
                                 </a>
                             </td>
                         </tr>

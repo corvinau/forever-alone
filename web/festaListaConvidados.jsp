@@ -10,42 +10,65 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Forever Alone</title>
     </head>
     <body>
-        <h1>Lista Convidados </h1>
-        <table>
-            <thead>
-                <tr>
-                    
-                    <th scope="col">Id</th>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Idade</th>
-                    <th scope="col">Sexo</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Ação</th>
-                </tr>
-            </thead>
-            <tbody>
-                <c:forEach items="${festa.convites}" var="convite" >
+        <%@include file="headerLogged.jsp"%>
+        
+        <section class="text-center">
+            <div class="container">
+                <div class="tittle-agileinfo">
+                    <h3>Lista de Convidados</h3>
+                </div>
+            </div>
+        </section>
+        
+        <div class="container">
+            <div class="sim-button button12" style="margin-top: 0px; float: right; background: rgb(65, 131, 154); margin-bottom: 15px;">
+                <a href="FestaServlet?action=adcionarConvidado&id=${festa.idFesta}">Adicionar Convidado</a>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+        
+        <div class="container">
+            <table class="table">
+                <thead>
                     <tr>
-                        <td>${convite.convidado.idCliente}</td>
-                        <td>${convite.convidado.nome}</td>
-                        <td>${convite.convidado.email}</td>
-                        <td>${convite.convidado.dataNasc}</td>
-                        <td>${convite.convidado.sexo}</td>
-                        <td>${convite.status}</td>
-                        <td>
-                            <a href="FuncionarioServlet?action=show&id=${convite.convidado.idCliente}">
-                                Não faz nd
-                                <i class="material-icons">visibility</i> 
-                            </a>
-                        </td>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>Idade</th>
+                        <th>Sexo</th>
+                        <th>Status</th>
+                        <th>Ação</th>
                     </tr>
-                </c:forEach>
-            </tbody>
-        </table>
-        <a href="FestaServlet?action=adcionarConvidado&id=${festa.idFesta}">Adicionar Convidados</a>
+                </thead>
+                <tbody>
+                    <c:forEach items="${festa.convites}" var="convite" >
+                        <tr>
+                            <td>${convite.convidado.idCliente}</td>
+                            <td>${convite.convidado.nome}</td>
+                            <td>${convite.convidado.email}</td>
+                            <td>${convite.convidado.dataNasc}</td>
+                            <td>${convite.convidado.sexo}</td>
+                            <td>${convite.status}</td>
+                            <td>
+                                <a href="FuncionarioServlet?action=show&id=${convite.convidado.idCliente}">
+                                    <i class="fa fa-eye"></i>
+                                </a>
+                                <a href="#">
+                                    <i class="fa fa-pencil"></i>
+                                </a>
+                                <a href="#">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+        </div>
+        
+        <%@include file="footer.jsp"%>
     </body>
 </html>

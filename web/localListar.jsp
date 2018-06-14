@@ -23,7 +23,6 @@
             </div>
         </section>
         
-        
         <div class="container">
             <div class="sim-button button12" style="margin-top: 0px; float: right; background: rgb(65, 131, 154); margin-bottom: 15px;">
                 <a href="FuncionarioServlet?action=localForm">Novo</a>
@@ -55,8 +54,13 @@
                             <td>${local.endereco.rua}</td>
                             <td>
                                 <a href="ClientesServlet?action=show&id=${local.idLocal}">
-                                    <!--Não faz nd-->
-                                    <i class="material-icons">visibility</i> 
+                                    <i class="fa fa-eye"></i>
+                                </a>
+                                <a href="#">
+                                    <i class="fa fa-pencil"></i>
+                                </a>
+                                <a href="#">
+                                    <i class="fa fa-times"></i>
                                 </a>
                             </td>
                         </tr>

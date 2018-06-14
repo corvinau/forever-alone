@@ -9,9 +9,19 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Forever Alone</title>
     </head>
     <body>
+        <%@include file="headerLogged.jsp"%>
+        
+        <section class="text-center">
+            <div class="container">
+                <div class="tittle-agileinfo">
+                    <h3>Lista de Convidados</h3>
+                </div>
+            </div>
+        </section>
+        
         <h1>Adicionar convidados a ${idFesta}</h1>
         <form action="FestaServlet?action=convidarClientes" method="POST">
             <input type="text" name="idFesta" hidden="true" value="${idFesta}">
@@ -40,8 +50,7 @@
                             <td>${cliente.descricao.resumo}</td>
                             <td>
                                 <a href="ClientesServlet?action=show&id=${cliente.idCliente}">
-                                    Não faz nd
-                                    <i class="material-icons">visibility</i> 
+                                    <i class="fa fa-eye"></i>
                                 </a>
                             </td>
                         </tr>
@@ -49,6 +58,7 @@
                 </tbody>
             </table>
             <input type="submit" value="Atualizar">
-        </form>                        
+        </form>
+        <%@include file="footer.jsp"%>
     </body>
 </html>

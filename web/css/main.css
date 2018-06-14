@@ -42,3 +42,16 @@ and open the template in the editor.
     margin-top: 10px;
     height: 25px;
 }
+
+.fa {
+    margin-left: 12px;
+    font-size: medium;
+}
+
+.table {
+    margin-bottom: 5%;
+}
+
+.alert-warning {
+    margin-top: 40px;
+}

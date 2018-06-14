@@ -54,8 +54,13 @@
                             <td>${funcionario.dataNasc}</td>
                             <td>
                                 <a href="FuncionarioServlet?action=show&id=${funcionario.idFuncionario}">
-                                    <!--Não faz nd-->
-                                    <i class="material-icons">visibility</i> 
+                                    <i class="fa fa-eye"></i>
+                                </a>
+                                <a href="#">
+                                    <i class="fa fa-pencil"></i>
+                                </a>
+                                <a href="#">
+                                    <i class="fa fa-times"></i>
                                 </a>
                             </td>
                         </tr>

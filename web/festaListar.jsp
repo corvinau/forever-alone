@@ -55,11 +55,16 @@
                             <td>Tem q ver</td>
                             <td>
                                 <a href="ClientesServlet?action=show&id=${festa.idFesta}">
-                                    <!--Não faz nd-->
-                                    <i class="material-icons">visibility</i> 
+                                    <i class="fa fa-eye"></i>
+                                </a>
+                                <a href="#">
+                                    <i class="fa fa-pencil"></i>
+                                </a>
+                                <a href="#">
+                                    <i class="fa fa-times"></i>
                                 </a>
                                 <a href="FestaServlet?action=listaConvidados&id=${festa.idFesta}">
-                                    Gerenciar convidados
+                                    <i class="fa fa-group"></i>
                                 </a>
                             </td>
                         </tr>
