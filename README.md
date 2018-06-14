@@ -4,4 +4,4 @@ Trabalho desenvolvido para a matéria de Desenvolvimento de Aplicações Corpora
 
 **Obs.:** Este projeto trabalha em conjunto com o [Always Together](https://github.com/corvinau/AlwaysTogether)
 
-**Devs:** Arthur Vianna Landeo ([ArthurVianna](https://github.com/ArthurVianna)), Marcelo Toniolo Hey ([MarceloHey](https://github.com/MarceloHey)), Jorge Madson Santos Viana ([JorgeMadson](https://github.com/JorgeMadson)), Tatiane Portela Medeiros ([corvinau](https://github.com/corvinau)).
+**Devs:** Arthur Vianna Landeo ([ArthurVianna](https://github.com/ArthurVianna)), Jorge Madson Santos Viana ([JorgeMadson](https://github.com/JorgeMadson)), Lucas Andrei das Neves ([lka1994](https://github.com/lka1994)), Tatiane Portela Medeiros ([corvinau](https://github.com/corvinau)), Sara Lourenço de Carcova Gutierrez ([saragutierrez](https://github.com/saragutierrez)).
