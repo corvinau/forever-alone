@@ -83,7 +83,7 @@
                 </div>
                 <div class="col-md-12 login-form-w3-agile">
                 <c:choose>
-                    <c:when test="${(not empty loginBean)}">
+                    <c:when test="${(not empty loginBean) && loginBean.tipo != 'F' && loginBean.tipo != 'f'}">
                         <form action="#" method="POST">
                     </c:when>
                     <c:otherwise>
@@ -319,7 +319,7 @@
                     </c:choose>
 
                     <c:choose>
-                        <c:when test="${(not empty loginBean)}">
+                        <c:when test="${(not empty loginBean) && loginBean.tipo != 'F' && loginBean.tipo != 'f'}">
                             <input type="submit" value="Atualizar">
                         </c:when>
                         <c:otherwise>

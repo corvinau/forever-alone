@@ -14,6 +14,7 @@ package com.ufpr.tads.facades;
 
 import com.ufpr.tads.beans.Cidade;
 import com.ufpr.tads.beans.Cliente;
+import com.ufpr.tads.beans.Convite;
 import com.ufpr.tads.beans.CorCabelo;
 import com.ufpr.tads.beans.CorPele;
 import com.ufpr.tads.beans.Funcionario;
@@ -21,6 +22,7 @@ import com.ufpr.tads.beans.UF;
 import com.ufpr.tads.beans.Usuario;
 import com.ufpr.tads.dao.CidadeDAO;
 import com.ufpr.tads.dao.ClienteDAO;
+import com.ufpr.tads.dao.ConviteDAO;
 import com.ufpr.tads.dao.CorCabeloDAO;
 import com.ufpr.tads.dao.CorPeleDAO;
 import com.ufpr.tads.dao.DescricaoDAO;
@@ -189,5 +191,10 @@ public class UsuarioFacade {
     public static List<Cliente> getListaClienteFestaNotInvite(int aux) {
         ClienteDAO clienteDAO = new ClienteDAO();
         return clienteDAO.getListaClienteFestaNotInvite(aux);
+    }
+
+    public static List<Convite> getConvitesAguardando(int idCliente) {
+        ConviteDAO conviteDAO = new ConviteDAO();
+        return conviteDAO.getListaConviteClienteAguardando(idCliente);
     }
 }

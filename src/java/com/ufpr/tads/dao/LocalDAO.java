@@ -38,7 +38,32 @@ public class LocalDAO {
     public LocalDAO(Connection con){
         this.con = con;
     }
-
+    
+    public Local getLocal(int idLocal){
+        Local local = null;
+        PreparedStatement st;
+        
+        try {
+            st = con.prepareStatement(
+                    "SELECT idLocal, nomeEstabelecimento, Endereco_idEndereco"
+                    + " FROM local"
+            );
+            
+            rs = st.executeQuery();
+            EnderecoDAO enderecoDAO = new EnderecoDAO(con);
+            if(rs.next()){
+                local = new Local();
+                local.setIdLocal(rs.getInt("idLocal"));
+                local.setNomeEstabelecimento(rs.getString("nomeEstabelecimento"));
+                local.setEndereco(enderecoDAO.getEndereco(rs.getInt("Endereco_idEndereco")));
+            }
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return local;
+    }
     public List<Local> getListaLocal() {
         List<Local> listaLocal = new ArrayList<Local>();
         Local l = null;

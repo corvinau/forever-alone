@@ -281,4 +281,22 @@ public class FestaDAO {
         }        
         return 0;
     }
+
+    public Festa getFestaByConvite(int idConvite) {
+        PreparedStatement st;
+        int aux = 0;
+        try {
+            st = con.prepareStatement(
+                    "SELECT Festa_idFesta FROM festa_has_convite "
+                    + "WHERE Convite_idConvite = ?"
+            );
+            st.setInt(1, idConvite);
+            
+            rs = st.executeQuery();
+            if(rs.next()) return getFesta(rs.getInt(1));
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }        
+        return null;
+    }
 }

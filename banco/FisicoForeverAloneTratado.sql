@@ -294,7 +294,7 @@ CREATE TABLE IF NOT EXISTS Encontro (
   idEncontro INT NOT NULL AUTO_INCREMENT,
   data DATE NULL,
   hora DATE NULL,
-  Encontrocol VARCHAR(45) NULL,
+  Local_idLocal INT NOT NULL,
   Status_idStatus INT NOT NULL,
   Cliente_idCliente INT NOT NULL,
   Pagamento_idPagamento INT NOT NULL,
@@ -307,6 +307,11 @@ CREATE TABLE IF NOT EXISTS Encontro (
   CONSTRAINT fk_Encontro_Status1
     FOREIGN KEY (Status_idStatus)
     REFERENCES Status (idStatus)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT fk_Encontro_Local1
+    FOREIGN KEY (Local_idLocal)
+    REFERENCES Local (idLocal)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT fk_Encontro_Cliente1

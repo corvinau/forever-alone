@@ -40,7 +40,49 @@ public class ClienteDAO {
     public ClienteDAO(Connection con){
         this.con = con;
     }
-    
+    public Cliente getCliente(int idCliente){
+        Cliente c = null;
+        PreparedStatement st;
+        
+        try {
+            st = con.prepareStatement(
+                    "SELECT idCliente, nome, cpf, dataNascimento,"
+                    + " dataCadastro, sexo, disponibilidade, qtdTokens, "
+                    + "Endereco_idEndereco, Descricao_idDescricao, "
+                    + "Preferencias_idPreferencias "
+                    + "FROM Cliente WHERE idCliente = ?"
+            );
+            st.setInt(1, idCliente);
+            
+            rs = st.executeQuery();
+            EnderecoDAO enderecoDAO = new EnderecoDAO(con);
+            DescricaoDAO descricaoDAO = new DescricaoDAO(con);
+            PreferenciaDAO preferenciaDAO = new PreferenciaDAO(con);
+            while(rs.next()){
+                c = new Cliente();
+                c.setIdCliente(rs.getInt("idCliente"));
+                c.setNome(rs.getString("nome"));
+                c.setCpf(rs.getString("cpf"));
+                c.setDataNasc(rs.getDate("dataNascimento"));
+                c.setDataCadast(rs.getDate("dataCadastro"));
+                c.setSexo(rs.getString("sexo").charAt(0));
+                c.setDisp(rs.getBoolean("disponibilidade"));
+                c.setQtdTokens(rs.getInt("qtdTokens"));
+                c.setEndereco(enderecoDAO.getEndereco(rs.getInt("Endereco_idEndereco")));
+                c.setDescricao(descricaoDAO.getDescricao(rs.getInt("Descricao_idDescricao")));
+                c.setPreferencia(preferenciaDAO.getPreferencia(rs.getInt("Preferencias_idPreferencias")));
+            }
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+        
+        return c;
+    }
     public Cliente getCliente(Usuario u){
         Cliente c = null;
         PreparedStatement st;
@@ -237,29 +279,37 @@ public class ClienteDAO {
         
         try {
             st = con.prepareStatement(
-                    "SELECT C.idCliente, C.nome, C.cpf, "
+                    "(SELECT C.idCliente, C.nome, C.cpf, "
                     + "C.sexo, C.disponibilidade, "
                     + "C.Descricao_idDescricao, D.resumo, "
                     + "C.Usuario_idUsuario, U.email "
-                    + "FROM Cliente C "
+                    + "FROM (Cliente C, Descricao D) "
                     + "INNER JOIN usuario U ON C.Usuario_idUsuario = U.idUsuario "
-                    + "INNER JOIN descricao D ON C.Descricao_idDescricao = D.idDescricao "
+                    + "WHERE C.Descricao_idDescricao = D.idDescricao) "
+                    + "UNION " 
+                    + "(SELECT C.idCliente, C.nome, C.cpf, " 
+                    + "C.sexo, C.disponibilidade, " 
+                    + "C.Descricao_idDescricao, NULL, " 
+                    + "C.Usuario_idUsuario, U.email " 
+                    + "FROM (Cliente C, Descricao D) " 
+                    + "INNER JOIN usuario U ON C.Usuario_idUsuario = U.idUsuario " 
+                    + "WHERE C.Descricao_idDescricao IS NULL) "
             );
             
             rs = st.executeQuery();
             Descricao descricao;
             while(rs.next()){
                 c = new Cliente();
-                c.setIdCliente(rs.getInt("C.idCliente"));
-                c.setNome(rs.getString("C.nome"));
-                c.setCpf(rs.getString("C.cpf"));
-                c.setSexo(rs.getString("C.sexo").charAt(0));
-                c.setDisp(rs.getBoolean("C.disponibilidade"));
+                c.setIdCliente(rs.getInt(1));
+                c.setNome(rs.getString(2));
+                c.setCpf(rs.getString(3));
+                c.setSexo(rs.getString(4).charAt(0));
+                c.setDisp(rs.getBoolean(5));
                 descricao = new Descricao();
-                descricao.setIdDescricao(rs.getInt("C.Descricao_idDescricao"));
-                descricao.setResumo(rs.getString("D.resumo"));
+                descricao.setIdDescricao(rs.getInt(6));
+                descricao.setResumo(rs.getString(7));
                 c.setDescricao(descricao);
-                c.setEmail(rs.getString("U.email"));
+                c.setEmail(rs.getString(8));
                 lista.add(c);
             }
             
