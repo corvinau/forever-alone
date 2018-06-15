@@ -39,11 +39,14 @@
                 <h3>Sobre Nós</h3>
             </div>
             <div class="about-right">
-                <h3 class="subheading-agileits-w3layouts">BLABLABLA</h3>
+                <h3 class="subheading-agileits-w3layouts">VENHA ENCONTRAR A PESSOA IDEAL PARA SUA VIDA</h3>
+                <h2>VENHA ACHAR SEU CRUSH, ELE ESTÁ AQUI !!!</h2></br>
+                <h3 class="subheading-agileits-w3layouts">NOSSO INTUITO</h3>
                 <p class="para-agileits-w3layouts">
-                    Duis sit amet nisi quis leo fermentum vestibulum vitae eget augue. Nulla quam nunc,
-                    vulputate id urna at, tempor tincidunt metus. Sed feugiat quam nec mauris mattis malesuada.
+                    Vamos unir pessoas e concretizar relacionamentos para vida toda, e se não quiser casar VENHA FESTAR!!
                 </p>
+                <h3 class="subheading-agileits-w3layouts">Protegendo seus dados pessoais.</h3>
+                <p>Nós garantimos que suas informações pessoais e suas comunicações com seus candidatos não podem ser acessados ​​por qualquer parte externa.</p>
             </div>
             <div class="clearfix"> </div>
         </div>

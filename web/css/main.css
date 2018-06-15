@@ -75,3 +75,12 @@ and open the template in the editor.
 .list-festa-convida input[type="submit"]:hover {
     background: #44c7f4;
 }
+
+.well {
+    margin: 0px 20px;
+    width: inherit;
+}
+
+h4 {
+    text-align: center !important;
+}

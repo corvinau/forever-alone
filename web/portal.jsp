@@ -30,10 +30,33 @@
             <div class="container">
                 <div class="tittle-agileinfo">
                     <h3>Bem vindo ${loginBean.nome}</h3>
-                </div>
+                </div>    
             </div>
         </section>
-        
+
+        <div class="container">
+            <div class="grid_3 grid_5 wow fadeInUp animated" data-wow-delay=".5s" style="width: 100%; display: inline-flex;">
+                <div class="well">
+                    <h4 id="h4.-bootstrap-heading">
+                        Encontros efetivados
+                    </h4>
+                    45
+                </div>
+                <div class="well">
+                    <h4 id="h4.-bootstrap-heading">
+                        Encontros pendentes
+                    </h4>
+                    23
+                </div>
+                <div class="well">
+                    <h4 id="h4.-bootstrap-heading">
+                        Encontros solicitados
+                    </h4>
+                    69
+                </div>
+            </div>
+        </div>
+                
         <%@include file="footer.jsp"%>
     </body>
 </html>
