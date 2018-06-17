@@ -5632,7 +5632,7 @@ VALUES  ('Negro'),
         
         
 INSERT INTO USUARIO(EMAIL,SENHA,TIPO)
-VALUES ('admin@admin.com','21232f297a57a5a743894a0e4a801fc3','F');
+VALUES ('admin@admin.com',md5(123),'F');
 
 INSERT INTO ENDERECO(BAIRRO,RUA,NUMERO,COMPLEMENTO,CIDADE_IDCIDADE)
 VALUES ('Admins','Adm',555,'Ele e Admin',4006);
