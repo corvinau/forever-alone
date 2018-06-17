@@ -95,7 +95,7 @@ padding: 0 0em 0;
 .ui-datepicker .ui-datepicker-header {
     position: relative;
     padding: .56em 0;
-    background: #ea3621;
+    background: rgb(65, 131, 154);
     text-transform: uppercase;
 }
 .ui-datepicker .ui-datepicker-prev, .ui-datepicker .ui-datepicker-next { position:absolute; top: 13px; width: 1.8em; height: 1.8em; }

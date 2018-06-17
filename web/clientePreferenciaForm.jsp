@@ -169,125 +169,41 @@
                                 <div class="diaSemana">
                                     <input type="checkbox" id="coding" name="diaSemana" value="Segunda" onchange="segunda()">
                                     <label for="coding">Segunda</label>
-                                    <div id="horario-segunda" hidden>
-                                        <div class="horaMin">
-                                            <label>Início</label>
-                                            <input id="horaMin" type="number" name="horaMin"/>h
-                                            <input id="horaMin" type="number" name="minutoMin"/>min
-                                        </div>
-                                        <div class="horaMax">
-                                            <label>Fim</label>
-                                            <input id="horaMax" type="number" name="horaMax"/>h
-                                            <input id="horaMax" type="number" name="minutoMax"/>min
-                                        </div>
-                                    </div>
+                                    <div id="horario-segunda"></div>
                                 </div>
                                 <div class="diaSemana">
                                     <input type="checkbox" id="coding" name="diaSemana" value="Terca" onchange="terca()">
                                     <label for="coding">Terca</label>
-                                    <div id="horario-terca" hidden>
-                                        <div class="horaMin">
-                                            <label>Início</label>
-                                            <input id="horaMin" type="number" name="horaMin"/>h
-                                            <input id="horaMin" type="number" name="minutoMin"/>min
-                                        </div>
-                                        <div class="horaMax">
-                                            <label>Fim</label>
-                                            <input id="horaMax" type="number" name="horaMax"/>h
-                                            <input id="horaMax" type="number" name="minutoMax"/>min
-                                        </div>
-                                    </div>
+                                    <div id="horario-terca"></div>
                                 </div>
                                 <div class="diaSemana">
                                     <input type="checkbox" id="coding" name="diaSemana" value="Quarta" onchange="quarta()">
                                     <label for="coding">Quarta</label>
-                                    <div id="horario-quarta" hidden>
-                                        <div class="horaMin">
-                                            <label>Início</label>
-                                            <input id="horaMin" type="number" name="horaMin"/>h
-                                            <input id="horaMin" type="number" name="minutoMin"/>min
-                                        </div>
-                                        <div class="horaMax">
-                                            <label>Fim</label>
-                                            <input id="horaMax" type="number" name="horaMax"/>h
-                                            <input id="horaMax" type="number" name="minutoMax"/>min
-                                        </div>
-                                    </div>
+                                    <div id="horario-quarta"></div>
                                 </div>
                                 <div class="diaSemana">
                                     <input type="checkbox" id="coding" name="diaSemana" value="Quinta" onchange="quinta()">
                                     <label for="coding">Quinta</label>
-                                    <div id="horario-quinta" hidden>
-                                        <div class="horaMin">
-                                            <label>Início</label>
-                                            <input id="horaMin" type="number" name="horaMin"/>h
-                                            <input id="horaMin" type="number" name="minutoMin"/>min
-                                        </div>
-                                        <div class="horaMax">
-                                            <label>Fim</label>
-                                            <input id="horaMax" type="number" name="horaMax"/>h
-                                            <input id="horaMax" type="number" name="minutoMax"/>min
-                                        </div>
-                                    </div>
+                                    <div id="horario-quinta"></div>
                                 </div>
                                 <div class="diaSemana">
                                     <input type="checkbox" id="coding" name="diaSemana" value="Sexta" onchange="sexta()">
                                     <label for="coding">Sexta</label>
-                                    <div id="horario-sexta" hidden>
-                                        <div class="horaMin">
-                                            <label>Início</label>
-                                            <input id="horaMin" type="number" name="horaMin"/>h
-                                            <input id="horaMin" type="number" name="minutoMin"/>min
-                                        </div>
-                                        <div class="horaMax">
-                                            <label>Fim</label>
-                                            <input id="horaMax" type="number" name="horaMax"/>h
-                                            <input id="horaMax" type="number" name="minutoMax"/>min
-                                        </div>
-                                    </div>
+                                    <div id="horario-sexta"></div>
                                 </div>
                                 <div class="diaSemana">
                                     <input type="checkbox" id="coding" name="diaSemana" value="Sabado" onchange="sabado()">
                                     <label for="coding">Sabado</label>
-                                    <div id="horario-sabado" hidden>
-                                        <div class="horaMin">
-                                            <label>Início</label>
-                                            <input id="horaMin" type="number" name="horaMin"/>h
-                                            <input id="horaMin" type="number" name="minutoMin"/>min
-                                        </div>
-                                        <div class="horaMax">
-                                            <label>Fim</label>
-                                            <input id="horaMax" type="number" name="horaMax"/>h
-                                            <input id="horaMax" type="number" name="minutoMax"/>min
-                                        </div>
-                                    </div>
+                                    <div id="horario-sabado"></div>
                                 </div>
                                 <div class="diaSemana">
                                     <input type="checkbox" id="coding" name="diaSemana" value="Domingo" onchange="domingo()">
                                     <label for="coding">Domingo</label>
-                                    <div id="horario-domingo" hidden>
-                                        <div class="horaMin">
-                                            <label>Início</label>
-                                            <input id="horaMin" type="number" name="horaMin"/>h
-                                            <input id="horaMin" type="number" name="minutoMin"/>min
-                                        </div>
-                                        <div class="horaMax">
-                                            <label>Fim</label>
-                                            <input id="horaMax" type="number" name="horaMax"/>h
-                                            <input id="horaMax" type="number" name="minutoMax"/>min
-                                        </div>
-                                    </div>
+                                    <div id="horario-domingo"></div>
                                 </div>
                             </div>
 
-                    <%--<c:choose>--%>
-                        <%--<c:when test="${(not empty loginBean)}">--%>
                             <input type="submit" value="Salvar">
-                        <%--</c:when>--%>
-                        <%--<c:otherwise>--%>
-                            <!--<input type="submit" value="?">-->
-                        <%--</c:otherwise>--%>
-                    <%--</c:choose>--%>
                     </form>
                 </div>
             </div>

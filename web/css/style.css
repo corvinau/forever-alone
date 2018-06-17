@@ -51,9 +51,9 @@ label{
 h1.logo {
     float: left;
     border-right: 10px solid rgba(255, 255, 255, 0.29);
-	border-bottom: 10px solid rgba(255, 255, 255, 0.29);
+    border-bottom: 10px solid rgba(255, 255, 255, 0.29);
     border-left: 10px solid rgba(68, 199, 244, 0.37);
-	border-top: 10px solid rgba(68, 199, 244, 0.37);
+    border-top: 10px solid rgba(68, 199, 244, 0.37);
     padding: 5px 5px;
     position: relative;
     font-size: 47px;
@@ -62,7 +62,7 @@ h1.logo {
 h1 span {
     color: rgba(255, 255, 255, 0.9);
     display: block;
-    font-size: 36px;
+    font-size: 47px;
     padding-left: 53px;
 }
 h1.logo a {
@@ -724,7 +724,7 @@ img.img-responsive {
 	border:2px solid #fff;
 }
 .w3_agileits_services_grid:hover .w3_agileits_services_grid_agile h3{
-	color:rgba(68, 199, 244, 0.5);
+        color: rgb(0, 0, 0);
 }
 .w3_agileits_services_grid {
     -webkit-transition: all .5s ease;
@@ -2500,8 +2500,8 @@ h2.typoh2{
 		border-width: 8px;
 	}
 	h1 span {
-		font-size: 32px;
-		letter-spacing: 5px;
+		font-size: 43px;
+		/*letter-spacing: 5px;*/
 	}
 	.header-right-w3ls {
 		margin-top: 35px;
@@ -2688,11 +2688,11 @@ h2.typoh2{
 @media(max-width:991px){
 	h1.logo {
 		font-size: 29px;
-		letter-spacing: 5px;
+		/*letter-spacing: 5px;*/
 	}
 	h1 span {
-		font-size: 25px;
-		letter-spacing: 4px;
+		font-size: 29px;
+		/*letter-spacing: 4px;*/
 		padding-left: 33px;
 	}
 	.navbar-default .navbar-nav > li > a {
@@ -3507,11 +3507,11 @@ h2.typoh2{
 @media(max-width:384px){
 	h1.logo {
 		font-size: 25px;
-		letter-spacing: 4px;
+		/*letter-spacing: 4px;*/
 	}
 	h1 span {
-		font-size: 21px;
-		letter-spacing: 3px;
+		font-size: 25px;
+		/*letter-spacing: 3px;*/
 	}
 	.navbar-default .navbar-toggle {
 		margin: 0px 0px 0 0px;

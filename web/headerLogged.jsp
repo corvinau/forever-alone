@@ -31,6 +31,35 @@
         <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Allura" rel="stylesheet">
         <!--//fonts-->
+        
+        <script src="js/jquery-3.3.1.min.js"></script>
+        <script src="js/jquery-ui.js"></script>
+        
+        <script type="text/javascript">
+            $(document).ready(function() {
+            /*
+                var defaults = {
+                containerID: 'toTop', // fading element id
+                containerHoverID: 'toTopHover', // fading element hover id
+                scrollSpeed: 1200,
+                easingType: 'linear' 
+                };
+            */								
+            $().UItoTop({ easingType: 'easeOutQuart' });
+            });
+	</script>
+	<a href="#home" class="scroll" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+        <script type="text/javascript" src="js/move-top.js"></script>
+        <script type="text/javascript" src="js/easing.js"></script>
+        <script type="text/javascript">
+            jQuery(document).ready(function($) {
+                $(".scroll").click(function(event){		
+                    event.preventDefault();
+                    $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+                });
+            });
+        </script>
+        <script type="text/javascript" src="js/bootstrap-3.1.1.min.js"></script>
     </head>
     <body>
         <!-- header -->
@@ -57,7 +86,7 @@
                     <div class="container">
                         <div class="header-inner">
                             <h1 class="logo">
-                                <a>Forever Alone</a>
+                                <a href="portal.jsp">Forever Alone</a>
                             </h1>
                             <div class="header-right-w3ls">
                                 <a href="FuncionarioServlet?action=listaClientes">Clientes</a>

@@ -28,8 +28,9 @@ and open the template in the editor.
 }
 
 #horaMin, #horaMax {
-    width: 50px;
-    padding: 0 10px;
+    width: 45px;
+    padding: 0 0px 0px 10px;
+    margin-left: 10px;
 }
 
 .diaSemana {
@@ -83,4 +84,9 @@ and open the template in the editor.
 
 h4 {
     text-align: center !important;
+}
+
+.pWell {
+    color: #000!important;
+    text-align: center;
 }

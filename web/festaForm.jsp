@@ -12,8 +12,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Forever Alone</title>
         <link href="css/jquery-ui.css" rel="stylesheet" type="text/css" media="all" />
-        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script src="js/jquery-3.3.1.min.js"></script>
+        <script src="js/jquery-ui.js"></script>
         <script type="text/javascript" >
             $(function(){
                 $("#datepicker").datepicker({dateFormat: 'dd/mm/yy'});

@@ -24,6 +24,7 @@
         <link href="css/lsb.css" rel="stylesheet" type="text/css"><!-- gallery -->
         <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
         <link href="css/main.css" rel="stylesheet" type="text/css" media="all" />
+        <link href="css/owl.carousel.css" rel="stylesheet"><!-- Clients -->
         <!--fonts-->
         <link href="//fonts.googleapis.com/css?family=Raleway:400,500,600,700,800,900" rel="stylesheet">
         <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
@@ -33,23 +34,118 @@
     <body>
         <%@include file="header.jsp"%>
         
+        <div class="services" id="services">
+            <div class="container">
+		<div class="tittle-agileinfo">
+                    <h3>Nossos serviços</h3>
+                </div>
+                <div class="w3_agileits_services_grids" style="display: flex;">
+                    <div class="w3_agileits_services_grid">
+                        <div class="w3_agileits_services_grid_agile">
+                            <div class="w3_agileits_services_grid_1">
+                                <i class="fa fa-search" aria-hidden="true" style="margin-left: auto;"></i>
+                            </div>
+                            <h3>Search within reach</h3>
+                        </div>
+                    </div>
+                    <div class="w3_agileits_services_grid">
+                        <div class="w3_agileits_services_grid_agile">
+                            <div class="w3_agileits_services_grid_1">
+                                <i class="fa fa-list-alt" aria-hidden="true" style="margin-left: auto;"></i>
+                            </div>
+                            <h3>Shortlisted matches</h3>
+                        </div>
+                    </div>
+                    <div class="w3_agileits_services_grid">
+                        <div class="w3_agileits_services_grid_agile">
+                            <div class="w3_agileits_services_grid_1">
+                                <i class="fa fa-users" aria-hidden="true" style="margin-left: auto;"></i>
+                            </div>
+                            <h3>Meet the prospects</h3>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+	</div>
+        
         <!-- sobre -->
         <div class="about-w3layouts" id="about">
             <div class="tittle-agileinfo">
                 <h3>Sobre Nós</h3>
             </div>
             <div class="about-right">
-                <h3 class="subheading-agileits-w3layouts">VENHA ENCONTRAR A PESSOA IDEAL PARA SUA VIDA</h3>
-                <h2>VENHA ACHAR SEU CRUSH, ELE ESTÁ AQUI !!!</h2></br>
-                <h3 class="subheading-agileits-w3layouts">NOSSO INTUITO</h3>
+                <h3 class="subheading-agileits-w3layouts">
+                    VENHA ENCONTRAR A PESSOA IDEAL PARA SUA VIDA
+                </h3>
                 <p class="para-agileits-w3layouts">
-                    Vamos unir pessoas e concretizar relacionamentos para vida toda, e se não quiser casar VENHA FESTAR!!
+                    VENHA ACHAR SEU CRUSH, ELE ESTÁ AQUI
                 </p>
-                <h3 class="subheading-agileits-w3layouts">Protegendo seus dados pessoais.</h3>
-                <p>Nós garantimos que suas informações pessoais e suas comunicações com seus candidatos não podem ser acessados ​​por qualquer parte externa.</p>
+                <br><br>
+                <h3 class="subheading-agileits-w3layouts">
+                    NOSSO INTUITO
+                </h3>
+                <p class="para-agileits-w3layouts">
+                    Vamos unir pessoas e concretizar relacionamentos para vida toda, e se não quiser casar 
+                    VENHA FESTAR!!
+                </p>
+                <br><br>
+                <h3 class="subheading-agileits-w3layouts">
+                    PROTEGENDO SEUS DADOS PESSOAIS
+                </h3>
+                <p class="para-agileits-w3layouts">
+                    Nós garantimos que suas informações pessoais e suas comunicações com seus candidatos 
+                    não podem ser acessados ​​por qualquer parte externa.</p>
             </div>
             <div class="clearfix"> </div>
         </div>
+        
+        
+        <div class="test" id="clients">
+            <div class="container">
+                <div class="tittle-agileinfo">
+                    <h3 class="white-w3ls">Depoimentos</h3>
+                </div>
+		<div class="test-gri1">
+                    <div id="owl-demo2" class="owl-carousel">
+                        <div class="test-grid1">
+                            <img src="images/t1.jpg" alt="" class="img-r">
+                            <h4>Heloise</h4>
+                            <p>Lorem ipsum dolor sit amet, Ut enim ad minim veniam, quis.Lorem ipsum dolor .</p>
+                        </div>	
+                        <div class="agile">
+                            <div class="test-grid1">
+                                <img src="images/t2.jpg" alt="" class="img-r">
+                                <h4>Bonnie</h4>
+                                <p>Lorem ipsum dolor sit amet, Ut enim ad minim veniam, quis.Lorem ipsum dolor .</p>
+                            </div>	
+                        </div>
+                        <div class="agile">
+                            <div class="test-grid1">
+                                <img src="images/t3.jpg" alt="" class="img-r">
+                                <h4>Jack</h4>
+                                <p>Lorem ipsum dolor sit amet, Ut enim ad minim veniam, quis.Lorem ipsum dolor .</p>
+                            </div>	
+                        </div>					
+                    </div>
+		</div>	
+            </div>
+	</div>
+        
+        <script src="js/owl.carousel.js"></script>
+        <!-- requried-jsfiles-for owl -->
+        <script>
+            $(document).ready(function() {
+                $("#owl-demo2").owlCarousel({
+                    items : 1,
+                    lazyLoad : false,
+                    autoPlay : true,
+                    navigation : false,
+                    navigationText :  false,
+                    pagination : true,
+                });
+            });
+        </script>
         
         <%@include file="footer.jsp"%>
     </body>

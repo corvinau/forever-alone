@@ -35,25 +35,34 @@
         </section>
 
         <div class="container">
-            <div class="grid_3 grid_5 wow fadeInUp animated" data-wow-delay=".5s" style="width: 100%; display: inline-flex;">
+            <div class="grid_3 grid_5 wow fadeInUp animated" data-wow-delay=".5s" style="width: 100%; display: inline-flex; margin-bottom: inherit;">
                 <div class="well">
                     <h4 id="h4.-bootstrap-heading">
                         Encontros efetivados
                     </h4>
-                    45
+                    <p class="pWell">45</p>
                 </div>
                 <div class="well">
                     <h4 id="h4.-bootstrap-heading">
                         Encontros pendentes
                     </h4>
-                    23
+                    <p class="pWell">23</p>
                 </div>
                 <div class="well">
                     <h4 id="h4.-bootstrap-heading">
                         Encontros solicitados
                     </h4>
-                    69
+                    <p class="pWell">69</p>
                 </div>
+            </div>
+        </div>
+        
+        <div class="container" style="margin: 1% auto 3%;">
+            <div class="col-md-12">
+                Alguma coisa aqui<br>
+                Alguma coisa aqui<br>
+                Alguma coisa aqui<br>
+                Sara decide hehe<br>
             </div>
         </div>
                 
