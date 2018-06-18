@@ -126,7 +126,7 @@
 
                             <div class="w3_form_body_grid w3_form_body_grid1">
                                 <span>Data de nascimento*</span>
-                                <input class="date" id="datepicker" name="dataNascimento" type="text" placeholder="dd/mm/yyyy" 
+                                <input class="date" id="datepicker" name="dataNascimento" type="text" placeholder="dd/mm/yyyy" onchange="validaIdade(this);"
                                        <c:if test="${(not empty cliente.dataNasc)}" >
                                         value="<fmt:formatDate value="${cliente.dataNasc}" pattern="dd/mm/yyyy" />"
                                        </c:if> 

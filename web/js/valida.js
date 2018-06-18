@@ -100,3 +100,37 @@ function validaCPF(campocpf) {
         return false;
     }
   }
+  
+ function validaIdade(campoidade) {
+     if(campoidade.value.length > 9){
+        var dia_aniversario = campoidade.value.substring(0,2);
+        var mes_aniversario = campoidade.value.substring(3,5);
+        var ano_aniversario = campoidade.value.substring(6,10);
+
+         var d = new Date,
+            ano_atual = d.getFullYear(),
+            mes_atual = d.getMonth() + 1,
+            dia_atual = d.getDate(),
+
+            ano_aniversario = +ano_aniversario,
+            mes_aniversario = +mes_aniversario,
+            dia_aniversario = +dia_aniversario,
+
+            quantos_anos = ano_atual - ano_aniversario;
+
+        if (mes_atual < mes_aniversario || mes_atual == mes_aniversario && dia_atual < dia_aniversario) {
+            quantos_anos--;
+        }
+
+        var idade = quantos_anos < 0 ? 0 : quantos_anos;
+
+        if(idade<18){
+            alert('Apenas maiores de 18 anos podem se cadastrar.');
+            campoidade.value = "";
+            campoidade.focus();
+            return false;
+        }else
+            return true;
+    }
+    return true;
+}
