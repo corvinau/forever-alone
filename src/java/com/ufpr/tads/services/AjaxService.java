@@ -68,7 +68,36 @@ public class AjaxService {
             .entity(lista)
             .build();
     }
+    
+    @GET
+    @Path("/existecpf/{cpf}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response verificaCpf(@PathParam("cpf") String cpf) {
+        String result;
+        if(UsuarioFacade.verificaCpf(cpf))
+            result = "true";
+        else
+            result = "false";
+        return Response
+            .ok()
+            .entity(result)
+            .build();
+    }
 
+    @GET
+    @Path("/existeemail/{email}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response verificaEmail(@PathParam("email") String email) {
+        String result;
+        if(UsuarioFacade.verificaEmail(email))
+            result = "true";
+        else
+            result = "false";
+        return Response
+            .ok()
+            .entity(result)
+            .build();
+    }
     /**
      * PUT method for updating or creating an instance of AjaxService
      * @param content representation for the resource

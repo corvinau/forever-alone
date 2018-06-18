@@ -14,6 +14,10 @@
         <link href="css/jquery-ui.css" rel="stylesheet" type="text/css" media="all" />
         <script src="js/jquery-3.3.1.min.js"></script>
         <script src="js/jquery-ui.js"></script>
+        <script src="js/valida.js"></script>
+        <script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+        <script src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
         <script type="text/javascript" >
             $(function(){
                 $("#datepicker").datepicker({dateFormat: 'dd/mm/yy'});
@@ -49,7 +53,11 @@
                         // Erro
                     }
                 });
-            }
+            }               
+
+            //Mascara CPF
+            $( "#cpf" ).mask('000.000.000-00');
+
         </script>
     </head>
     <body>
@@ -113,7 +121,7 @@
 
                             <div class="w3_form_body_grid">
                                 <span>CPF*</span>
-                                <input type="text" name="cpf" placeholder="CPF" onblur="existeCPF(this);" value="<c:out value="${cliente.cpf}"/>" required>
+                                <input type="text" name="cpf" id="cpf" placeholder="CPF" onblur="existeCPF(this);" value="<c:out value="${cliente.cpf}"/>" required>
                             </div>
 
                             <div class="w3_form_body_grid w3_form_body_grid1">

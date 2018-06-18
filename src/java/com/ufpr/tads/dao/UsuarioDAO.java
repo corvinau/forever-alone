@@ -25,6 +25,12 @@ import java.util.logging.Logger;
  */
 public class UsuarioDAO {
     
+    private final String CPF = "SELECT cpf FROM cliente WHERE cpf = ? \n" +
+                                        "UNION\n" +
+                                        "SELECT cpf FROM funcionario WHERE cpf = ?;";
+    private final String EMAIL = "SELECT email FROM usuario WHERE email = ?;";
+    
+    private PreparedStatement stmt;
     private Connection con;
     private ResultSet rs;
     
@@ -180,6 +186,41 @@ public class UsuarioDAO {
                 
                 
         return senhaHex;
+    }
+
+    public boolean verificaCpf(String cpf) {
+    	try {
+            con = new ConnectionFactory().getConnection();
+            stmt = con.prepareStatement(CPF);
+            stmt.setString(1, cpf);
+            stmt.setString(2, cpf);
+            rs = stmt.executeQuery();
+            if (rs.next())
+            	return true;
+            else
+            	return false;
+    	} catch (Exception e) {
+    		throw new RuntimeException(e);
+    	}finally{
+    		try {con.close();} catch (SQLException e) {}
+    	}
+    }
+
+    public boolean verificaEmail(String email) {
+    	try {
+            con = new ConnectionFactory().getConnection();
+            stmt = con.prepareStatement(EMAIL);
+            stmt.setString(1, email);
+            rs = stmt.executeQuery();
+            if (rs.next())
+            	return true;
+            else
+            	return false;
+    	} catch (Exception e) {
+    		throw new RuntimeException(e);
+    	}finally{
+    		try {con.close();} catch (SQLException e) {}
+    	}
     }
     
 }

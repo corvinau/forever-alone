@@ -197,4 +197,18 @@ public class UsuarioFacade {
         ConviteDAO conviteDAO = new ConviteDAO();
         return conviteDAO.getListaConviteClienteAguardando(idCliente);
     }
+    
+    public static boolean verificaCpf(String cpf){
+        if(new UsuarioDAO().verificaCpf(cpf))
+            return true;
+        else
+            return false;
+    }
+    
+    public static boolean verificaEmail(String email){
+        if(new UsuarioDAO().verificaEmail(email))
+            return true;
+        else
+            return false;
+    }
 }
