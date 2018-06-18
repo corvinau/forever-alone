@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -13,7 +15,13 @@
     </head>
     <body>
         <%@include file="header.jsp"%>
-        
+    
+        <c:if test="${not empty msg}">
+            <div class="container alert alert-warning" role="alert">
+                <span><c:out value="${msg}" /></span>
+            </div>
+        </c:if>
+    
         <div class="login elite-app">
             <div class="container">
                 <div class="tittle-agileinfo">
