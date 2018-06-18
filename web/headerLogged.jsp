@@ -74,7 +74,7 @@
                             <div class="header-right-w3ls">
                                 <a href="ClienteServlet">Opções</a>
                                 <a href="ClienteServlet?action=listaEncontro">Encontros</a>
-                                <a href="#">Sair</a>
+                                <a href="LogoutServlet">Sair</a>
                             </div>
                             <div class="clearfix"></div>
                         </div>
@@ -95,7 +95,7 @@
                                 <c:if test="${loginBean.nome == \"admin\" }">
                                     <a href="FuncionarioServlet?action=listaFuncionarios">Funcionario</a>
                                 </c:if>
-                                <a href="#">Sair</a>
+                                <a href="LogoutServlet">Sair</a>
                             </div>
                             <div class="clearfix"></div>
                         </div>
