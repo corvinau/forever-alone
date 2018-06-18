@@ -91,119 +91,48 @@
                     </c:otherwise>
                 </c:choose>
                 
-                    <c:choose>
-                        <c:when test="${(not empty loginBean)}">
                             <div class="w3_form_body_grid">
                                 <span>Email*</span>
-                                <input type="text" name="email" placeholder="Email" value="" required>
+                                <input type="text" name="email" placeholder="Email" onblur="existeEmail(this);" value="<c:out value="${cliente.email}"/>" required>
                             </div>
-                        </c:when>
-                        <c:otherwise>
-                            <div class="w3_form_body_grid">
-                                <span>Email*</span>
-                                <input type="text" name="email" placeholder="Email" value="" required>
-                            </div>
-                        </c:otherwise>
-                    </c:choose>
 
-                    <c:choose>
-                        <c:when test="${(not empty loginBean)}">
                             <div class="w3_form_body_grid">
                                 <span>Senha*</span>
-                                <input type="password" name="senha" placeholder="Senha" value="" required>
+                                <input type="password" name="senha" placeholder="<c:out value="${alterar? 'Nova' : ''}"/>Senha" value="" required>
                             </div>
-                        </c:when>
-                        <c:otherwise>
-                            <div class="w3_form_body_grid">
-                                <span>Senha*</span>
-                                <input type="password" name="senha" placeholder="Senha" value="" required>
-                            </div>
-                        </c:otherwise>
-                    </c:choose>
 
-                    <c:choose>
-                        <c:when test="${(not empty loginBean)}">
                             <div class="w3_form_body_grid">
                                 <span>Confirmar senha*</span>
                                 <input type="password" name="senhaConfirm" placeholder="Confirmar senha" value="" required>
                             </div>
-                        </c:when>
-                        <c:otherwise>
-                            <div class="w3_form_body_grid">
-                                <span>Confirmar senha*</span>
-                                <input type="password" name="senhaConfirm" placeholder="Confirmar senha" value="" required>
-                            </div>
-                        </c:otherwise>
-                    </c:choose>
 
-                    <c:choose>
-                        <c:when test="${(not empty loginBean)}">
                             <div class="w3_form_body_grid">
                                 <span>Nome*</span>
-                                <input type="text" name="nome" placeholder="Nome" value="" required>
+                                <input type="text" name="nome" placeholder="Nome" value="<c:out value="${cliente.nome}"/>" required>
                             </div>
-                        </c:when>
-                        <c:otherwise>
-                            <div class="w3_form_body_grid">
-                                <span>Nome*</span>
-                                <input type="text" name="nome" placeholder="Nome" value="" required>
-                            </div>
-                        </c:otherwise>
-                    </c:choose>
 
-                    <c:choose>
-                        <c:when test="${(not empty loginBean)}">
                             <div class="w3_form_body_grid">
                                 <span>CPF*</span>
-                                <input type="text" name="cpf" placeholder="CPF" value="" required>
+                                <input type="text" name="cpf" placeholder="CPF" onblur="existeCPF(this);" value="<c:out value="${cliente.cpf}"/>" required>
                             </div>
-                        </c:when>
-                        <c:otherwise>
-                            <div class="w3_form_body_grid">
-                                <span>CPF*</span>
-                                <input type="text" name="cpf" placeholder="CPF" value="" required>
-                            </div>
-                        </c:otherwise>
-                    </c:choose>
 
-                    <c:choose>
-                        <c:when test="${(not empty loginBean)}">
                             <div class="w3_form_body_grid w3_form_body_grid1">
                                 <span>Data de nascimento*</span>
-                                <input class="date" id="datepicker" name="dataNascimento" type="text" placeholder="dd/mm/yyyy" value="" required>
+                                <input class="date" id="datepicker" name="dataNascimento" type="text" placeholder="dd/mm/yyyy" 
+                                       <c:if test="${(not empty cliente.dataNasc)}" >
+                                        value="<fmt:formatDate value="${cliente.dataNasc}" pattern="dd/mm/yyyy" />"
+                                       </c:if> 
+                                        required>
                             </div>
-                        </c:when>
-                        <c:otherwise>
-                            <div class="w3_form_body_grid w3_form_body_grid1">
-                                <span>Data de nascimento*</span>
-                                <input class="date" id="datepicker" name="dataNascimento" type="text" placeholder="dd/mm/yyyy" value="" required>
-                            </div>
-                        </c:otherwise>
-                    </c:choose>
 
-                    <c:choose>
-                        <c:when test="${(not empty loginBean)}">
                             <div class="w3_form_body_grid">
                                 <span>Sexo*</span>
                                 <select id="sexo" name="sexo" class="frm-field" required>
-                                    <option value="M">Homem</option>
-                                    <option value="F">Mulher</option>   						
+                                    <option value="<c:out value="${(empty cliente.sexo)? 'M': cliente.sexo}"/>"><c:out value="${(empty cliente.sexo)? 'Homem': (cliente.sexo=='F'? 'Mulher': 'Homem')}"/></option>
+                                    <option value="<c:out value="${(empty cliente.sexo)? 'F': (cliente.sexo=='M'? 'F' : 'M')}"/>"><c:out value="${(empty cliente.sexo)? 'Mulher': (cliente.sexo=='M'? 'Mulher': 'Homem')}"/></option>
                                 </select>
                             </div>
-                        </c:when>
-                        <c:otherwise>
-                            <div class="w3_form_body_grid">
-                                <span>Sexo*</span>
-                                <select id="sexo" name="sexo" class="frm-field" required>
-                                    <option value="M">Homem</option>
-                                    <option value="F">Mulher</option>   						
-                                </select>
-                            </div>
-                        </c:otherwise>
-                    </c:choose>
 
-                    <c:choose>
-                        <c:when test="${(not empty loginBean)}">
                             <div class="w3_form_body_grid">
                                 <span>Estado*</span>
                                 <select id="uf" name="uf" class="frm-field" required>
@@ -219,104 +148,34 @@
                                     </c:forEach>  						
                                 </select>
                             </div>
-                        </c:when>
-                        <c:otherwise>
-                            <div class="w3_form_body_grid">
-                                <span>Estado*</span>
-                                <select id="uf" name="uf" class="frm-field" required>
-                                    <c:forEach items="${estados}" var="estado">
-                                        <c:choose>
-                                            <c:when test="${cliente.endereco.cidade.uf.idUF == estado.idUF}">
-                                                <option value="${estado.idUF}" selected>${estado.nome} - ${estado.sigla}</option>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <option value="${estado.idUF}">${estado.nome} - ${estado.sigla}</option>
-                                            </c:otherwise>
-                                         </c:choose>
-                                    </c:forEach>  						
-                                </select>
-                            </div>
-                        </c:otherwise>
-                    </c:choose>
 
-                    <c:choose>
-                        <c:when test="${(not empty loginBean)}">
+
                             <div class="w3_form_body_grid">
                                 <span>Cidade*</span>
                                 <select id="cidade" name="cidade" class="frm-field" required>
-                                    <option value="${cliente.cidadeCliente.idCidade}" selected>${cliente.cidadeCliente.nomeCidade}</option>						
+                                    <option value="<c:out value="${cliente.cidadeCliente.idCidade}" />" selected><c:out value="${cliente.cidadeCliente.nomeCidade}" /></option>						
                                 </select>
                             </div>
-                        </c:when>
-                        <c:otherwise>
-                            <div class="w3_form_body_grid">
-                                <span>Cidade*</span>
-                                <select id="cidade" name="cidade" class="frm-field" required>
-                                    <option value="${cliente.cidadeCliente.idCidade}" selected>${cliente.cidadeCliente.nomeCidade}</option>						
-                                </select>
-                            </div>
-                        </c:otherwise>
-                    </c:choose>
 
-                    <c:choose>
-                        <c:when test="${(not empty loginBean)}">
                             <div class="w3_form_body_grid">
                                 <span>Bairro*</span>
-                                <input type="text" name="bairro" placeholder="Bairro" value="" required>
+                                <input type="text" name="bairro" placeholder="Bairro" value="<c:out value="${cliente.endereco.bairro}" />" required>
                             </div>
-                        </c:when>
-                        <c:otherwise>
-                            <div class="w3_form_body_grid">
-                                <span>Bairro*</span>
-                                <input type="text" name="bairro" placeholder="Bairro" value="" required>
-                            </div>
-                        </c:otherwise>
-                    </c:choose>
 
-                    <c:choose>
-                        <c:when test="${(not empty loginBean)}">
                             <div class="w3_form_body_grid">
                                 <span>Rua*</span>
-                                <input type="text" name="rua" placeholder="Rua" value="" required>
+                                <input type="text" name="rua" placeholder="Rua" value="<c:out value="${cliente.endereco.rua}" />" required>
                             </div>
-                        </c:when>
-                        <c:otherwise>
-                            <div class="w3_form_body_grid">
-                                <span>Rua*</span>
-                                <input type="text" name="rua" placeholder="Rua" value="" required>
-                            </div>
-                        </c:otherwise>
-                    </c:choose>
 
-                    <c:choose>
-                        <c:when test="${(not empty loginBean)}">
                             <div class="w3_form_body_grid">
                                 <span>Número*</span>
-                                <input type="text" name="numero" placeholder="Número" value="" required>
+                                <input type="text" name="numero" placeholder="Número" value="<c:out value="${cliente.endereco.numero}" />" required>
                             </div>
-                        </c:when>
-                        <c:otherwise>
-                            <div class="w3_form_body_grid">
-                                <span>Número*</span>
-                                <input type="text" name="numero" placeholder="Número" value="" required>
-                            </div>
-                        </c:otherwise>
-                    </c:choose>
 
-                    <c:choose>
-                        <c:when test="${(not empty loginBean)}">
                             <div class="w3_form_body_grid">
                                 <span>Complemento</span>
-                                <input type="text" name="complemento" placeholder="Complemento" value="">
+                                <input type="text" name="complemento" placeholder="Complemento" value="<c:out value="${cliente.endereco.complemento}" />">
                             </div>
-                        </c:when>
-                        <c:otherwise>
-                            <div class="w3_form_body_grid">
-                                <span>Complemento</span>
-                                <input type="text" name="complemento" placeholder="Complemento" value="">
-                            </div>
-                        </c:otherwise>
-                    </c:choose>
 
                     <c:choose>
                         <c:when test="${(not empty loginBean) && loginBean.tipo != 'F' && loginBean.tipo != 'f'}">
