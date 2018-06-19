@@ -192,14 +192,16 @@
                                 <c:out value="${visualizar? 'disabled' : ''}"/> >
                             </div>
 
-                    <c:choose>
-                        <c:when test="${(not empty loginBean) && loginBean.tipo != 'F' && loginBean.tipo != 'f'}">
-                            <input type="submit" value="Atualizar">
-                        </c:when>
-                        <c:otherwise>
-                            <input type="submit" value="Cadastrar">
-                        </c:otherwise>
-                    </c:choose>
+					<c:if test="${!visualizar}">
+	                    <c:choose>
+	                        <c:when test="${(not empty loginBean) && loginBean.tipo != 'F' && loginBean.tipo != 'f'}">
+	                            <input type="submit" value="Atualizar">
+	                        </c:when>
+	                        <c:otherwise>
+	                            <input type="submit" value="Cadastrar">
+	                        </c:otherwise>
+	                    </c:choose>
+                    </c:if>
                     </form>
                 </div>
             </div>
