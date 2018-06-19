@@ -7,11 +7,89 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="css/jquery-ui.css" rel="stylesheet" type="text/css" media="all" />
-        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <body>
+       <table class="table">
+            <tbody>
+                <tr style="border-bottom: 1px solid #ddd;">
+                    <td>
+                        <i class="fa fa-dollar"></i>
+                    </td>
+                    <td>
+                        Orçamento. Lorem ipsum dolor sit amet, Ut enim ad minim veniam, quisenim ad minim.
+                    </td>
+                    <td style="width: 125px;">
+                        <a href="#">
+                            <i class="fa fa-eye"></i>
+                        </a>
+                        <a href="#">
+                            <i class="fa fa-check"></i>
+                        </a>
+                        <a href="#">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </td>
+                </tr>
+                <tr style="border-bottom: 1px solid #ddd;">
+                    <td>
+                        <i class="fa fa-music"></i>
+                    </td>
+                    <td>
+                        Festa. Lorem ipsum dolor sit amet, Ut enim ad minim veniam, quisenim ad minim.
+                    </td>
+                    <td style="width: 125px;">
+                        <a href="#">
+                            <i class="fa fa-eye"></i>
+                        </a>
+                        <a href="#">
+                            <i class="fa fa-check"></i>
+                        </a>
+                        <a href="#">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </td>
+                </tr>
+                <tr style="border-bottom: 1px solid #ddd;">
+                    <td>
+                        <i class="fa fa-glass"></i>
+                    </td>
+                    <td>
+                        Encontro. Lorem ipsum dolor sit amet, Ut enim ad minim veniam, quisenim ad minim.
+                    </td>
+                    <td style="width: 125px;">
+                        <a href="#">
+                            <i class="fa fa-eye"></i>
+                        </a>
+                        <a href="#">
+                            <i class="fa fa-check"></i>
+                        </a>
+                        <a href="#">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </td>
+                </tr>
+                <tr style="border-bottom: 1px solid #ddd;">
+                    <td>
+                        <i class="fa fa-heart"></i>
+                    </td>
+                    <td>
+                        Casamento. Lorem ipsum dolor sit amet, Ut enim ad minim veniam, quisenim ad minim.
+                    </td>
+                    <td style="width: 125px;">
+                        <a href="#">
+                            <i class="fa fa-eye"></i>
+                        </a>
+                        <a href="#">
+                            <i class="fa fa-check"></i>
+                        </a>
+                        <a href="#">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <!--<button id="convites" name="convites" value="${loginBean.idCliente}">Atualizar</button>-->
+                                
         <script type="text/javascript" >
             $(function(){
                 $("#datepicker").datepicker({dateFormat: 'dd/mm/yy'});
@@ -54,37 +132,5 @@
                 });
             }
         </script>
-    </head>
-    <body>
-       <table class="table">
-           <button id="convites" name="convites" value="${loginBean.idCliente}">Atualizar</button>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nome</th>
-                        <th>Email</th>
-                        <th>CPF</th>
-                        <th>Cargo</th>
-                        <th>Data de Nascimento</th>
-                        <th>Ação</th>
-                    </tr>
-                </thead>
-                <tbody id="tbody">
-                    <tr>
-                        <td>${funcionario.idFuncionario}</td>
-                        <td>${funcionario.nome}</td>
-                        <td>${funcionario.email}</td>
-                        <td>${funcionario.cpf}</td>
-                        <td>${funcionario.cargo}</td>
-                        <td>${funcionario.dataNasc}</td>
-                        <td>
-                            <a href="FuncionarioServlet?action=show&id=${funcionario.idFuncionario}">
-                                <!--Não faz nd-->
-                                <i class="material-icons">visibility</i> 
-                            </a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
     </body>
 </html>

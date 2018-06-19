@@ -30,12 +30,12 @@
                         <thead>
                             <tr>
                                 <th>Convidar</th>
-                                <th>Id</th>
+                                <th>ID</th>
                                 <th>Nome</th>
                                 <th>Email</th>
-                                <th>cpf</th>
-                                <th>sexo</th>
-                                <th>resumo</th>
+                                <th>CPF</th>
+                                <th>Sexo</th>
+                                <th>Resumo</th>
                                 <th>Ação</th>
                             </tr>
                         </thead>

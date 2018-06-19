@@ -90,3 +90,15 @@ h4 {
     color: #000!important;
     text-align: center;
 }
+
+.dropdown-menu {
+    width: max-content;
+    min-width: 540px;
+    overflow: auto;
+    min-height: 390px;
+    height: max-content;
+}
+
+td a i.fa {
+    color: rgb(65, 131, 154);
+}

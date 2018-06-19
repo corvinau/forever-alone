@@ -22,7 +22,7 @@
             </div>
         </section>
         
-        <div class="container" style="margin-bottom: 5%;">
+        <div class="container" style="margin-bottom: 15%;">
             <div class="row">
                 <div class="login-center-info text-center">
                     <div class="sim-button button12">

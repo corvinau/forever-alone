@@ -80,6 +80,23 @@
                         </div>
                     </div>
                 </div>
+                
+                <div class="w3l_agileits_breadcrumbs">
+                    <div class="container">
+                        <div class="w3l_agileits_breadcrumbs_inner">
+                            <ul>
+                                <li class="dropdown menu__item">
+                                    <a href="#" class="dropdown-toggle menu__link active"  data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fa fa-bell" style="font-size: 20px;"></i>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-right">
+                                        <%@include file="notificacao.jsp"%>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                 </div>
             </c:when>
             <c:otherwise>
                 <div class="banner-w3ls" id="home">
