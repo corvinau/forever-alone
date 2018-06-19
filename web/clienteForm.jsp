@@ -93,6 +93,12 @@
                     <c:when test="${(not empty loginBean) && loginBean.tipo != 'F' && loginBean.tipo != 'f'}">
                         <form action="#" method="POST">
                     </c:when>
+                    <c:when test="${alterar}">
+                        <form action="FuncionarioServlet?action=updateCliente" method="POST">
+                    </c:when>
+                    <c:when test="${visualizar}">
+                        <form action="FuncionarioServlet?action=listaClientes" method="POST">
+                    </c:when>
                     <c:otherwise>
                         <form action="UsuarioServlet?action=cadastroCliente" method="POST">
                     </c:otherwise>
@@ -106,8 +112,8 @@
 
 							<c:if test="${!visualizar}">
 	                            <div class="w3_form_body_grid">
-	                                <span>Senha*</span>
-	                                <input type="password" name="senha" placeholder="<c:out value="${alterar? 'Nova' : ''}"/>Senha" value="" required>
+	                                <span><c:out value="${alterar? 'Nova ' : ''}"/>Senha*</span>
+	                                <input type="password" name="senha" placeholder="<c:out value="${alterar? 'Nova ' : ''}"/>Senha" value="" required>
 	                            </div>
 	                            <div class="w3_form_body_grid">
 	                                <span>Confirmar senha*</span>
@@ -164,7 +170,7 @@
                             <div class="w3_form_body_grid">
                                 <span>Cidade*</span>
                                 <select id="cidade" name="cidade" class="frm-field" <c:out value="${visualizar? 'disabled' : ''}"/> required>
-                                    <option value="<c:out value="${cliente.cidadeCliente.idCidade}" />" selected><c:out value="${cliente.cidadeCliente.nomeCidade}" /></option>						
+                                    <option value="<c:out value="${cliente.endereco.cidade.idCidade}" />" selected><c:out value="${cliente.endereco.cidade.nome}" /></option>						
                                 </select>
                             </div>
 
@@ -192,16 +198,20 @@
                                 <c:out value="${visualizar? 'disabled' : ''}"/> >
                             </div>
 
-					<c:if test="${!visualizar}">
 	                    <c:choose>
 	                        <c:when test="${(not empty loginBean) && loginBean.tipo != 'F' && loginBean.tipo != 'f'}">
 	                            <input type="submit" value="Atualizar">
+	                        </c:when>
+                                <c:when test="${alterar}">
+	                            <input type="submit" value="Atualizar">
+	                        </c:when>
+                                <c:when test="${visualizar}">
+	                            <input type="submit" value="Voltar">
 	                        </c:when>
 	                        <c:otherwise>
 	                            <input type="submit" value="Cadastrar">
 	                        </c:otherwise>
 	                    </c:choose>
-                    </c:if>
                     </form>
                 </div>
             </div>

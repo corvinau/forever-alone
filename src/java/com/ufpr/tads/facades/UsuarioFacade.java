@@ -211,11 +211,20 @@ public class UsuarioFacade {
         else
             return false;
     }
-	public static void deleteCliente(int idCliente) {
-		//deleta o cliente logicamente do bd
-	}
-	public static Cliente getCliente(int idCliente) {
-		//retorna o cliente pelo id
-		return null;
-	}
+    
+    //retorna o cliente pelo id
+    public static Cliente getCliente(int idCliente) {
+            return new ClienteDAO().getCliente(idCliente);
+    }
+    
+    //deleta o cliente logicamente do bd
+    public static void deleteCliente(int idCliente) {
+        new UsuarioDAO().deleteUsuario(idCliente);
+    }
+
+    //atualiza as informações do cliente
+    public static void updateCliente(Cliente c) {
+        new UsuarioDAO().updateUsuario(c);
+        new ClienteDAO().updateCliente(c);
+    }
 }

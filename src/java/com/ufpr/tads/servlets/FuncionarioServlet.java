@@ -104,21 +104,27 @@ public class FuncionarioServlet extends HttpServlet {
                     request.setAttribute("listaClientes",UsuarioFacade.getListaCliente());
                     rd = getServletContext().getRequestDispatcher("/clienteListar.jsp");
                     break;
-                case "showCliente":
-                	request.setAttribute("cliente", UsuarioFacade.getCliente(Integer.parseInt(request.getParameter("id"))));
-                	request.setAttribute("visualizar", true);
-                	rd = getServletContext().getRequestDispatcher("/clienteForm.jsp");
-                	break;
+                    case "showCliente":
+                    request.setAttribute("cliente", UsuarioFacade.getCliente(Integer.parseInt(request.getParameter("id"))));
+                    request.setAttribute("visualizar", true);
+                    rd = getServletContext().getRequestDispatcher("/clienteForm.jsp");
+                    break;
                 case "formUpdateCliente":
-                	 request.setAttribute("cliente", UsuarioFacade.getCliente(Integer.parseInt(request.getParameter("id"))));
-                	 request.setAttribute("estados", UsuarioFacade.getEstados());
-                	 request.setAttribute("alterar", true);
-                     rd = getServletContext().getRequestDispatcher("/clienteForm.jsp");
-                	break;
+                    request.setAttribute("cliente", UsuarioFacade.getCliente(Integer.parseInt(request.getParameter("id"))));
+                    request.setAttribute("estados", UsuarioFacade.getEstados());
+                    request.setAttribute("alterar", true);
+                    rd = getServletContext().getRequestDispatcher("/clienteForm.jsp");
+                    break;
+                case "updateCliente":
+                    Cliente c = getPostCliente(request);
+                    UsuarioFacade.updateCliente(c);
+                    response.sendRedirect("/FuncionarioServler?action=listaClientes");
+                    break;
                 case "deleteCliente":
-                	 UsuarioFacade.deleteCliente(Integer.parseInt(request.getParameter("id")));
-                     response.sendRedirect("/FuncionarioServler?action=listaClientes");
-                	break;
+                    UsuarioFacade.deleteCliente(Integer.parseInt(request.getParameter("id")));
+                    response.sendRedirect("/FuncionarioServler?action=listaClientes");
+                    break;                    
+
                 default :
                     rd = getServletContext().getRequestDispatcher("/portal.jsp");
                     break;
@@ -188,6 +194,47 @@ public class FuncionarioServlet extends HttpServlet {
         return f;
     }
     
+    private Cliente getPostCliente(HttpServletRequest request){
+        Cliente c = new Cliente();
+        String aux;
+        Date data;
+        
+        c.setEmail((String)request.getParameter("email"));
+        aux = (String) request.getParameter("senha");
+        if(aux != null &&!aux.isEmpty()){
+            if(aux.equals((String)request.getParameter("senhaConfirm"))){
+                c.setSenha(aux);
+            }
+        }
+        c.setNome((String) request.getParameter("nome"));
+        c.setCpf((String) request.getParameter("cpf"));
+        aux = (String) request.getParameter("dataNascimento");
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+        try {
+            c.setDataNasc(format.parse(aux.replace("/", "-")));
+        } catch (ParseException ex) {
+            Logger.getLogger(UsuarioServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        aux = (String) request.getParameter("sexo");
+        c.setSexo(aux.charAt(0));
+        c.setTipo('C');
+        
+        Endereco endereco = new Endereco();
+        UF uf = new UF();
+        Cidade cidade = new Cidade();
+        
+        uf.setIdUF(Integer.parseInt( (String) request.getParameter("uf") ));
+        cidade.setUf(uf);
+        cidade.setIdCidade(Integer.parseInt( (String) request.getParameter("cidade") ));
+        endereco.setCidade(cidade);
+        endereco.setBairro((String) request.getParameter("bairro"));
+        endereco.setRua((String) request.getParameter("rua"));
+        endereco.setNumero(Integer.parseInt((String) request.getParameter("numero")));
+        endereco.setComplemento((String) request.getParameter("complemento"));
+        
+        c.setEndereco(endereco);
+        return c;
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
