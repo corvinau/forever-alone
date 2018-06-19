@@ -211,4 +211,11 @@ public class UsuarioFacade {
         else
             return false;
     }
+	public static void deleteCliente(int idCliente) {
+		//deleta o cliente logicamente do bd
+	}
+	public static Cliente getCliente(int idCliente) {
+		//retorna o cliente pelo id
+		return null;
+	}
 }

@@ -104,6 +104,19 @@ public class FuncionarioServlet extends HttpServlet {
                     request.setAttribute("listaClientes",UsuarioFacade.getListaCliente());
                     rd = getServletContext().getRequestDispatcher("/clienteListar.jsp");
                     break;
+                case "showCliente":
+                	request.setAttribute("cliente", UsuarioFacade.getCliente(Integer.parseInt(request.getParameter("id"))));
+                     rd = getServletContext().getRequestDispatcher("/clienteForm.jsp");
+                	break;
+                case "formUpdateCliente":
+                	 request.setAttribute("cliente", UsuarioFacade.getCliente(Integer.parseInt(request.getParameter("id"))));
+                	 request.setAttribute("estados", UsuarioFacade.getEstados());
+                     rd = getServletContext().getRequestDispatcher("/clienteForm.jsp");
+                	break;
+                case "deleteCliente":
+                	 UsuarioFacade.deleteCliente(Integer.parseInt(request.getParameter("id")));
+                     response.sendRedirect("/FuncionarioServler?action=listaClientes");
+                	break;
                 default :
                     rd = getServletContext().getRequestDispatcher("/portal.jsp");
                     break;

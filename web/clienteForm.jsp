@@ -71,7 +71,6 @@
             </c:otherwise>
         </c:choose>
         
-        
         <c:if test="${!(empty loginBean) && loginBean.tipo != 'F' && loginBean.tipo != 'f'}">
             <jsp:forward page="index.jsp">
                 <jsp:param name="msg" value="Apenas funcionarios podem cadastrar clientes enquanto estão logados" />
@@ -101,27 +100,31 @@
                 
                             <div class="w3_form_body_grid">
                                 <span>Email*</span>
-                                <input type="text" name="email" placeholder="Email" onblur="existeEmail(this);" value="<c:out value="${cliente.email}"/>" required>
+                                <input type="text" name="email" placeholder="Email" onblur="existeEmail(this);" value="<c:out value="${cliente.email}"/>" 
+                                <c:out value="${visualizar? 'disabled' : ''}"/> required>
                             </div>
 
-                            <div class="w3_form_body_grid">
-                                <span>Senha*</span>
-                                <input type="password" name="senha" placeholder="<c:out value="${alterar? 'Nova' : ''}"/>Senha" value="" required>
-                            </div>
-
-                            <div class="w3_form_body_grid">
-                                <span>Confirmar senha*</span>
-                                <input type="password" name="senhaConfirm" placeholder="Confirmar senha" value="" required>
-                            </div>
+							<c:if test="${!visualizar}">
+	                            <div class="w3_form_body_grid">
+	                                <span>Senha*</span>
+	                                <input type="password" name="senha" placeholder="<c:out value="${alterar? 'Nova' : ''}"/>Senha" value="" required>
+	                            </div>
+	                            <div class="w3_form_body_grid">
+	                                <span>Confirmar senha*</span>
+	                                <input type="password" name="senhaConfirm" placeholder="Confirmar senha" value="" required>
+	                            </div>
+							</c:if>
 
                             <div class="w3_form_body_grid">
                                 <span>Nome*</span>
-                                <input type="text" name="nome" placeholder="Nome" value="<c:out value="${cliente.nome}"/>" required>
+                                <input type="text" name="nome" placeholder="Nome" value="<c:out value="${cliente.nome}"/>" 
+                                <c:out value="${visualizar? 'disabled' : ''}"/> required>
                             </div>
 
                             <div class="w3_form_body_grid">
                                 <span>CPF*</span>
-                                <input type="text" name="cpf" id="cpf" placeholder="CPF" onblur="existeCPF(this);" value="<c:out value="${cliente.cpf}"/>" required>
+                                <input type="text" name="cpf" id="cpf" placeholder="CPF" onblur="existeCPF(this);" value="<c:out value="${cliente.cpf}"/>" 
+                                <c:out value="${visualizar? 'disabled' : ''}"/> required>
                             </div>
 
                             <div class="w3_form_body_grid w3_form_body_grid1">
@@ -130,12 +133,12 @@
                                        <c:if test="${(not empty cliente.dataNasc)}" >
                                         value="<fmt:formatDate value="${cliente.dataNasc}" pattern="dd/mm/yyyy" />"
                                        </c:if> 
-                                        required>
+                                        <c:out value="${visualizar? 'disabled' : ''}"/> required>
                             </div>
 
                             <div class="w3_form_body_grid">
                                 <span>Sexo*</span>
-                                <select id="sexo" name="sexo" class="frm-field" required>
+                                <select id="sexo" name="sexo" class="frm-field" <c:out value="${visualizar? 'disabled' : ''}"/> required>
                                     <option value="<c:out value="${(empty cliente.sexo)? 'M': cliente.sexo}"/>"><c:out value="${(empty cliente.sexo)? 'Homem': (cliente.sexo=='F'? 'Mulher': 'Homem')}"/></option>
                                     <option value="<c:out value="${(empty cliente.sexo)? 'F': (cliente.sexo=='M'? 'F' : 'M')}"/>"><c:out value="${(empty cliente.sexo)? 'Mulher': (cliente.sexo=='M'? 'Mulher': 'Homem')}"/></option>
                                 </select>
@@ -143,7 +146,7 @@
 
                             <div class="w3_form_body_grid">
                                 <span>Estado*</span>
-                                <select id="uf" name="uf" class="frm-field" required>
+                                <select id="uf" name="uf" class="frm-field" <c:out value="${visualizar? 'disabled' : ''}"/> required>
                                     <c:forEach items="${estados}" var="estado">
                                         <c:choose>
                                             <c:when test="${cliente.endereco.cidade.uf.idUF == estado.idUF}">
@@ -160,29 +163,33 @@
 
                             <div class="w3_form_body_grid">
                                 <span>Cidade*</span>
-                                <select id="cidade" name="cidade" class="frm-field" required>
+                                <select id="cidade" name="cidade" class="frm-field" <c:out value="${visualizar? 'disabled' : ''}"/> required>
                                     <option value="<c:out value="${cliente.cidadeCliente.idCidade}" />" selected><c:out value="${cliente.cidadeCliente.nomeCidade}" /></option>						
                                 </select>
                             </div>
 
                             <div class="w3_form_body_grid">
                                 <span>Bairro*</span>
-                                <input type="text" name="bairro" placeholder="Bairro" value="<c:out value="${cliente.endereco.bairro}" />" required>
+                                <input type="text" name="bairro" placeholder="Bairro" value="<c:out value="${cliente.endereco.bairro}" />" 
+                                <c:out value="${visualizar? 'disabled' : ''}"/> required>
                             </div>
 
                             <div class="w3_form_body_grid">
                                 <span>Rua*</span>
-                                <input type="text" name="rua" placeholder="Rua" value="<c:out value="${cliente.endereco.rua}" />" required>
+                                <input type="text" name="rua" placeholder="Rua" value="<c:out value="${cliente.endereco.rua}" />" 
+                                <c:out value="${visualizar? 'disabled' : ''}"/> required>
                             </div>
 
                             <div class="w3_form_body_grid">
                                 <span>Número*</span>
-                                <input type="text" name="numero" placeholder="Número" value="<c:out value="${cliente.endereco.numero}" />" required>
+                                <input type="text" name="numero" placeholder="Número" value="<c:out value="${cliente.endereco.numero}" />" 
+                                <c:out value="${visualizar? 'disabled' : ''}"/> required>
                             </div>
 
                             <div class="w3_form_body_grid">
                                 <span>Complemento</span>
-                                <input type="text" name="complemento" placeholder="Complemento" value="<c:out value="${cliente.endereco.complemento}" />">
+                                <input type="text" name="complemento" placeholder="Complemento" value="<c:out value="${cliente.endereco.complemento}" />"
+                                <c:out value="${visualizar? 'disabled' : ''}"/> >
                             </div>
 
                     <c:choose>
