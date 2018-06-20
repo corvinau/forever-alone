@@ -10,6 +10,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -80,6 +82,43 @@ public class EncontroDAO {
                 encontro.setLocal(localDAO.getLocal(rs.getInt("Local_idLocal")));
             }
             return encontro;
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }        
+        return null;
+    }
+
+    public List<Encontro> getListaEncontroCliente(int idCliente) {
+        List<Encontro> lista = new ArrayList<Encontro>();
+        PreparedStatement st;
+        Encontro encontro = null;
+        try {
+            st = con.prepareStatement(
+                    "SELECT idEncontro, data, hora, Status_idStatus, Cliente_idCliente, "
+                    + "Convite_idConvite, Local_idLocal "
+                    + "FROM encontro  "
+                    + "WHERE Cliente_idCliente = ?"
+            );
+            st.setInt(1, idCliente);
+            
+            StatusDAO statusDAO = new StatusDAO(con);
+            ClienteDAO clienteDAO = new ClienteDAO(con);
+            LocalDAO localDAO = new LocalDAO(con);
+            ConviteDAO conviteDAO = new ConviteDAO(con);
+            
+            rs = st.executeQuery();
+            while(rs.next()){
+                encontro = new Encontro();
+                encontro.setIdEncontro(rs.getInt("idEncontro"));
+                encontro.setData(rs.getDate("data"));
+                encontro.setHora(rs.getDate("hora"));
+                encontro.setStatus(statusDAO.getStatus(rs.getInt("Status_idStatus")));
+                encontro.setCliente(clienteDAO.getCliente(rs.getInt("Cliente_idCliente")));
+                encontro.setLocal(localDAO.getLocal(rs.getInt("Local_idLocal")));
+                encontro.setConvite(conviteDAO.getConviteEncontro(rs.getInt("Convite_idConvite")));
+                lista.add(encontro);
+            }
+            return lista;
         } catch (SQLException ex) {
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         }        

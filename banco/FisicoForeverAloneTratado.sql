@@ -338,11 +338,10 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS Horario (
   idHorario INT NOT NULL AUTO_INCREMENT,
   diaSemana VARCHAR(20) NULL,
-  horaInicial DATE NULL,
-  horaLimite DATE NULL,
+  horaInicial TIMESTAMP NULL,
+  horaLimite TIMESTAMP NULL,
   PRIMARY KEY (idHorario))
 ENGINE = InnoDB;
-
 
 -- -----------------------------------------------------
 -- Table Casamento

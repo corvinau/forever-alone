@@ -372,6 +372,35 @@ public class ClienteDAO {
         
         return lista;
     }
+
+    public boolean updateDisponibilidade(boolean disp, int idCliente) {
+        List<Cliente> lista = new ArrayList<Cliente>();
+        Cliente c ;
+        PreparedStatement st;
+        
+        try {
+            st = con.prepareStatement(
+                        "UPDATE cliente SET disponibilidade = ? "
+                        + " WHERE idCliente = ? "
+            );
+            st.setBoolean(1, disp);
+            st.setInt(2, idCliente);
+            
+            int rowsAffected = st.executeUpdate();
+            if(rowsAffected > 0){
+                return true;
+            }
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+        
+        return false;
+    }
     
         public String getEmailCliente(int idUsuario){
         PreparedStatement st;

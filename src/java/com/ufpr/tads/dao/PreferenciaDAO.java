@@ -145,9 +145,9 @@ public class PreferenciaDAO {
                     CorCabeloDAO corCabeloDAO = new CorCabeloDAO(con);
                     CorPeleDAO corPeleDAO = new CorPeleDAO(con);
                     HorarioDAO horarioDAO = new HorarioDAO(con);
-                    corCabeloDAO.deleteCorCabeloPreferencia(aux);
-                    corPeleDAO.deleteCorPelePreferencia(aux);
-                    horarioDAO.deleteHorarioPreferencia(aux);
+                    corCabeloDAO.deleteCorCabeloPreferencia(preferencia.getIdPreferencias());
+                    corPeleDAO.deleteCorPelePreferencia(preferencia.getIdPreferencias());
+                    horarioDAO.deleteHorarioPreferencia(preferencia.getIdPreferencias());
                     aux = preferencia.getIdPreferencias();
                     if(aux != 0){
                         if( corCabeloDAO.insertCorCabeloPreferencia(aux,preferencia.getCorCabelo()) &&
