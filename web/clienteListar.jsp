@@ -22,7 +22,7 @@
             </div>
         </section>
         
-        <div class="container"> <!--arrumar aqui-->
+        <div class="container">
             <div class="" style="margin-top: 0px; margin-bottom: 15px;">
                 <input id="search" type="text" name="search"/>
                 <i class="fa fa-search"></i>
@@ -57,7 +57,7 @@
                             <td>${cliente.sexo}</td>
                             <td>${cliente.disp}</td>
                             <td>${cliente.descricao.resumo}</td>
-                            <td>
+                            <td style="width: 125px;">
                                 <a href="FuncionarioServlet?action=showCliente&id=${cliente.idCliente}">
                                     <i class="fa fa-eye"></i>
                                 </a>

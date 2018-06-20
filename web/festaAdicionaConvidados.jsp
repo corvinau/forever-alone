@@ -49,7 +49,7 @@
                                     <td>${cliente.cpf}</td>
                                     <td>${cliente.sexo}</td>
                                     <td>${cliente.descricao.resumo}</td>
-                                    <td>
+                                    <td style="width: 125px;">
                                         <a href="ClientesServlet?action=show&id=${cliente.idCliente}">
                                             <i class="fa fa-eye"></i>
                                         </a>

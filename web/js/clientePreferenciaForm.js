@@ -1,5 +1,7 @@
 function segunda() {
+    console.log($(":checkbox").is(":checked"));
     if($(":checkbox").is(":checked")) {
+        console.log("if segunda");
         var horaMin = document.createElement("div");
         $(horaMin).attr('class', 'horaMin');
         
@@ -59,13 +61,16 @@ function segunda() {
         $("div#horario-segunda").append(horaMin);
         $("div#horario-segunda").append(horaMax);
     } else {
+        console.log("else segunda");
         $(".horaMin").remove();
         $(".horaMax").remove();
     }
 }
 
 function terca() {
+    console.log($(":checkbox").is(":checked"));
     if($(":checkbox").is(":checked")) {
+        console.log("if terca");
         var horaMin = document.createElement("div");
         $(horaMin).attr('class', 'horaMin');
         
@@ -125,13 +130,16 @@ function terca() {
         $("div#horario-terca").append(horaMin);
         $("div#horario-terca").append(horaMax);
     } else {
+        console.log("else terca");
         $(".horaMin").remove();
         $(".horaMax").remove();
     }
 }
 
 function quarta() {
+    console.log($(":checkbox").is(":checked"));
     if($(":checkbox").is(":checked")) {
+    console.log("if quarta");
         var horaMin = document.createElement("div");
         $(horaMin).attr('class', 'horaMin');
         
@@ -191,12 +199,15 @@ function quarta() {
         $("div#horario-quarta").append(horaMin);
         $("div#horario-quarta").append(horaMax);
     } else {
+        console.log("else quarta");
         $(".horaMin").remove();
         $(".horaMax").remove();
     }
 }
 function quinta() {
+    console.log($(":checkbox").is(":checked"));
     if($(":checkbox").is(":checked")) {
+        console.log("if quinta");
         var horaMin = document.createElement("div");
         $(horaMin).attr('class', 'horaMin');
         
@@ -256,13 +267,16 @@ function quinta() {
         $("div#horario-quinta").append(horaMin);
         $("div#horario-quinta").append(horaMax);
     } else {
+        console.log("else quinta");
         $(".horaMin").remove();
         $(".horaMax").remove();
     }
 }
 
 function sexta() {
+    console.log($(":checkbox").is(":checked"));
     if($(":checkbox").is(":checked")) {
+        console.log("if sexta");
         var horaMin = document.createElement("div");
         $(horaMin).attr('class', 'horaMin');
         
@@ -322,13 +336,16 @@ function sexta() {
         $("div#horario-sexta").append(horaMin);
         $("div#horario-sexta").append(horaMax);
     } else {
+        console.log("else sexta");
         $(".horaMin").remove();
         $(".horaMax").remove();
     }
 }
 
 function sabado() {
+    console.log($(":checkbox").is(":checked"));
     if($(":checkbox").is(":checked")) {
+        console.log("if sabado");
         var horaMin = document.createElement("div");
         $(horaMin).attr('class', 'horaMin');
         
@@ -388,13 +405,16 @@ function sabado() {
         $("div#horario-sabado").append(horaMin);
         $("div#horario-sabado").append(horaMax);
     } else {
+        console.log("else sabado");
         $(".horaMin").remove();
         $(".horaMax").remove();
     }
 }
 
 function domingo() {
+    console.log($(":checkbox").is(":checked"));
     if($(":checkbox").is(":checked")) {
+        console.log("if domingo");
         var horaMin = document.createElement("div");
         $(horaMin).attr('class', 'horaMin');
         
@@ -454,6 +474,7 @@ function domingo() {
         $("div#horario-domingo").append(horaMin);
         $("div#horario-domingo").append(horaMax);
     } else {
+        console.log("else domingo");
         $(".horaMin").remove();
         $(".horaMax").remove();
     }

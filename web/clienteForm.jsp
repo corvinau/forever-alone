@@ -78,7 +78,7 @@
         </c:if>
         
         <c:if test="${not empty msg}">
-            <div class="container alert alert-warning" role="alert">
+            <div class="container alert alert-primary" role="alert">
                 <span>${msg}</span>
             </div>
         </c:if>

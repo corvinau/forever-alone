@@ -9,13 +9,28 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Forever Alone</title>
     </head>
     <body>
-        <div class="sim-button button12" style="margin-top: 0px; float: right; background: rgb(65, 131, 154); margin-bottom: 15px;">
-                <a href="EncontroServlet?action=SolicitarEncontro">SolicitarEncontro</a>
+        <%@include file="headerLogged.jsp"%>
+        
+        <section class="text-center">
+            <div class="container">
+                <div class="tittle-agileinfo">
+                    <h3>Lista de Encontros</h3>
+                </div>
+            </div>
+        </section>
+        
+        <div class="container">
+            <div class="sim-button button12" style="margin-top: 0px; float: right; background: rgb(65, 131, 154); margin-bottom: 15px;">
+                <a href="EncontroServlet?action=SolicitarEncontro">Solicitar Encontro</a>
+            </div>
+            <div class="clearfix"> </div>
         </div>
-        <table class="table">
+        
+        <div class="container">
+            <table class="table">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -24,7 +39,7 @@
                         <th>Hora</th>
                         <th>Local</th>
                         <th>Status</th>
-                        <th>Acao</th>
+                        <th>Ação</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -56,8 +71,8 @@
                                 </a>
                                 <c:if test="${ encontro.status.nome.equals(\"Realizado\")}">
                                     <a href="EncontroServlet?action=cancelarEncontro&id=${encontro.idEncontro}">
-                                    <i class="fa fa-times">Casamento</i>
-                                </a>
+                                        <i class="fa fa-times">Casamento</i>
+                                    </a>
                                 </c:if>
                                     
                             </td>
@@ -65,5 +80,8 @@
                     </c:forEach>
                 </tbody>
             </table>
+        </div>
+        
+        <%@include file="footer.jsp"%>
     </body>
 </html>

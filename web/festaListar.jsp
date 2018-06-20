@@ -54,7 +54,7 @@
                             <td>${festa.hora}</td>
                             <td>${festa.status.nome}</td>
                             <td>${pendentes.get(count)} - ${aceitos.get(count)}</td>
-                            <td>
+                            <td style="width: 125px;">
                                 <a href="#">
                                     <i class="fa fa-pencil"></i>
                                 </a>
