@@ -26,7 +26,7 @@
             <div class="row">
                 <div class="login-center-info text-center">
                     <div class="sim-button button12">
-                        <a href="#">Edição de dados</a>
+                        <a href="ClientesServlet?action=formUpdateCliente&id=${loginBean.idCliente}">Edição de dados</a>
                     </div>
                 </div>
             </div>

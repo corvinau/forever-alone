@@ -444,7 +444,7 @@ public class ClienteDAO {
                     + "AND C.idCliente NOT IN "
                             + "(SELECT E1.Cliente_idCliente FROM encontro E1 "
                             + " INNER JOIN convite CO ON E1.Convite_idConvite = CO.idConvite "
-                            + " WHERE E1.Cliente_idCliente  = ? AND (E1.status = 'Recusado' OR E1.status = 'Aguardando') )"        
+                            + " WHERE E1.Cliente_idCliente  = ? AND (CO.status = 'Recusado' OR CO.status = 'Aguardando') )"        
             );
             st.setInt(1, usuarioLogado.getIdCliente());
             st.setInt(2, usuarioLogado.getEndereco().getCidade().getIdCidade());

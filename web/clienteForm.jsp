@@ -72,7 +72,7 @@
         </c:choose>
         
         <c:if test="${!(empty loginBean) && loginBean.tipo != 'F' && loginBean.tipo != 'f'}">
-            <jsp:forward page="index.jsp">
+            <jsp:forward page="login.jsp">
                 <jsp:param name="msg" value="Apenas funcionarios podem cadastrar clientes enquanto estão logados" />
             </jsp:forward>
         </c:if>

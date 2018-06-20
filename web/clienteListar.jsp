@@ -58,22 +58,22 @@
                             <td>${cliente.disp}</td>
                             <td>${cliente.descricao.resumo}</td>
                             <td>
-                                <a href="FuncionarioServlet?action=showCliente&id=${cliente.idCliente}">
+                                <a href="#" data-toggle="modal" data-target="#exampleModal${cliente.idCliente}">
                                     <i class="fa fa-eye"></i>
                                 </a>
                                 <a href="FuncionarioServlet?action=formUpdateCliente&id=${cliente.idCliente}">
                                     <i class="fa fa-pencil"></i>
                                 </a>
-                                <a href="FuncionarioServlet?action=deleteCliente&id=${cliente.idCliente}">
+                                <a href="FuncionarioServlet?action=desativarCliente&id=${cliente.idCliente}">
                                     <i class="fa fa-times"></i>
                                 </a>
                             </td>
                         </tr>
+                    <%@include file="modal.jsp"%>
                     </c:forEach>
                 </tbody>
             </table>
         </div>
-        
         <%@include file="footer.jsp"%>
     </body>
 </html>

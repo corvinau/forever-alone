@@ -119,11 +119,11 @@ public class FuncionarioServlet extends HttpServlet {
                 case "updateCliente":
                     Cliente c = getPostCliente(request);
                     UsuarioFacade.updateCliente(c);
-                    response.sendRedirect("/FuncionarioServler?action=listaClientes");
+                    rd = getServletContext().getRequestDispatcher("/FuncionarioServlet?action=listaClientes");
                     break;
-                case "deleteCliente":
-                    UsuarioFacade.deleteCliente(Integer.parseInt(request.getParameter("id")));
-                    response.sendRedirect("/FuncionarioServler?action=listaClientes");
+                case "desativarCliente":
+                    UsuarioFacade.switchDisponibilidadeCliente(Integer.parseInt(request.getParameter("id")));
+                    rd = getServletContext().getRequestDispatcher("/FuncionarioServlet?action=listaClientes");
                     break;                    
 
                 default :
@@ -133,7 +133,7 @@ public class FuncionarioServlet extends HttpServlet {
                             
                             
         }
-        rd.forward(request, response);
+    rd.forward(request, response);
     }
     
     private Local getPostLocal(HttpServletRequest request){

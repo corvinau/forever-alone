@@ -5,17 +5,24 @@
  */
 package com.ufpr.tads.servlets;
 
+import com.ufpr.tads.beans.Cidade;
 import com.ufpr.tads.beans.Cliente;
 import com.ufpr.tads.beans.CorCabelo;
 import com.ufpr.tads.beans.CorPele;
 import com.ufpr.tads.beans.Descricao;
+import com.ufpr.tads.beans.Endereco;
 import com.ufpr.tads.beans.Horario;
 import com.ufpr.tads.beans.Preferencia;
+import com.ufpr.tads.beans.UF;
 import com.ufpr.tads.facades.UsuarioFacade;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -89,6 +96,17 @@ public class ClienteServlet extends HttpServlet {
                     request.setAttribute("listaCorCabelo",UsuarioFacade.getListaCorCabelo());
                     request.setAttribute("listaCorPele",UsuarioFacade.getListaCorPele());
                     rd = getServletContext().getRequestDispatcher("/clientePreferenciaForm.jsp");
+                    break;
+                case "formUpdateCliente":
+                    request.setAttribute("cliente", UsuarioFacade.getCliente(Integer.parseInt(request.getParameter("id"))));
+                    request.setAttribute("estados", UsuarioFacade.getEstados());
+                    request.setAttribute("alterar", true);
+                    rd = getServletContext().getRequestDispatcher("/clienteForm.jsp");
+                    break;
+                case "updateCliente":
+                    Cliente c = getPostCliente(request);
+                    UsuarioFacade.updateCliente(c);
+                    rd = getServletContext().getRequestDispatcher("/FuncionarioServlet?action=listaClientes");
                     break;
                 default :
                     rd = getServletContext().getRequestDispatcher("/clienteOpcoes.jsp");
@@ -187,6 +205,50 @@ public class ClienteServlet extends HttpServlet {
         return preferencia;
     }
 
+    private Cliente getPostCliente(HttpServletRequest request){
+        Cliente c = new Cliente();
+        String aux;
+        Date data;
+        
+        c.setEmail((String)request.getParameter("email"));
+        aux = (String) request.getParameter("senha");
+        if(aux != null &&!aux.isEmpty()){
+            if(aux.equals((String)request.getParameter("senhaConfirm"))){
+                c.setSenha(aux);
+            }
+        }
+        c.setNome((String) request.getParameter("nome"));
+        c.setCpf((String) request.getParameter("cpf"));
+        c.setCpf(c.getCpf().replace(".", ""));
+        c.setCpf(c.getCpf().replace("-", ""));
+        aux = (String) request.getParameter("dataNascimento");
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+        try {
+            c.setDataNasc(format.parse(aux.replace("/", "-")));
+        } catch (ParseException ex) {
+            Logger.getLogger(UsuarioServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        aux = (String) request.getParameter("sexo");
+        c.setSexo(aux.charAt(0));
+        c.setTipo('C');
+        
+        Endereco endereco = new Endereco();
+        UF uf = new UF();
+        Cidade cidade = new Cidade();
+        
+        uf.setIdUF(Integer.parseInt( (String) request.getParameter("uf") ));
+        cidade.setUf(uf);
+        cidade.setIdCidade(Integer.parseInt( (String) request.getParameter("cidade") ));
+        endereco.setCidade(cidade);
+        endereco.setBairro((String) request.getParameter("bairro"));
+        endereco.setRua((String) request.getParameter("rua"));
+        endereco.setNumero(Integer.parseInt((String) request.getParameter("numero")));
+        endereco.setComplemento((String) request.getParameter("complemento"));
+        
+        c.setEndereco(endereco);
+        return c;
+    }
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

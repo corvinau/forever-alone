@@ -95,7 +95,7 @@ h4 {
     width: max-content;
     min-width: 540px;
     overflow: auto;
-    min-height: 390px;
+    /*min-height: 390px;*/
     height: max-content;
 }
 
