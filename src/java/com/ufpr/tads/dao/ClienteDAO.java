@@ -48,7 +48,7 @@ public class ClienteDAO {
             st = con.prepareStatement(
                     "SELECT idCliente, nome, cpf, dataNascimento, dataCadastro, sexo, disponibilidade, qtdTokens, "
                             + "Usuario_idUsuario, Endereco_idEndereco, Descricao_idDescricao, "
-                            + "Preferencias_idPreferencias FROM Cliente WHERE idCliente = ?"
+                            + "Preferencias_idPreferencias FROM Cliente WHERE idCliente = ?;"
             );
             st.setInt(1, idCliente);
             
@@ -305,7 +305,7 @@ public class ClienteDAO {
                 descricao.setIdDescricao(rs.getInt(6));
                 descricao.setResumo(rs.getString(7));
                 c.setDescricao(descricao);
-                c.setEmail(rs.getString(8));
+                c.setEmail(rs.getString(9));
                 lista.add(c);
             }
             
@@ -404,23 +404,18 @@ public class ClienteDAO {
     
         public String getEmailCliente(int idUsuario){
         PreparedStatement st;
+        ResultSet res;
         String email = null;
         try {
-            st = con.prepareStatement("SELECT EMAIL FROM USUARIO WHERE IDUSUARIO = ?");
+            st = con.prepareStatement("SELECT EMAIL FROM USUARIO WHERE IDUSUARIO = ?;");
                 st.setInt(1, idUsuario);
-                rs = st.executeQuery();
-            while(rs.next()){
-                email = rs.getString(1);
+                res = st.executeQuery();
+            while(res.next()){
+                email = res.getString(1);
             }
             
         } catch (SQLException ex) {
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }finally{
-            try {
-                rs.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
         }   
         return email;
     }

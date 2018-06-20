@@ -105,6 +105,7 @@ public class FuncionarioServlet extends HttpServlet {
                     rd = getServletContext().getRequestDispatcher("/clienteListar.jsp");
                     break;
                     case "showCliente":
+                    request.setAttribute("estados", UsuarioFacade.getEstados());
                     request.setAttribute("cliente", UsuarioFacade.getCliente(Integer.parseInt(request.getParameter("id"))));
                     request.setAttribute("visualizar", true);
                     rd = getServletContext().getRequestDispatcher("/clienteForm.jsp");
