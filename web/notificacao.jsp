@@ -104,7 +104,7 @@
             function getCidades(preencherPrimeiroForm){
                 preencherPrimeiroForm = false;
                 var clienteId = $("#convites").val();
-                var url = "http://localhost:28313/ForeverAlone/webresources/Ajax/convite/"+clienteId;
+                var url = "http://localhost:28313/ForeverAlone/webresources/Ajax/convites/"+clienteId;
                 $.ajax({
                     type : "GET",
                     url : url, // URL da sua Servlet

@@ -35,13 +35,14 @@
                                     <td>${encontro.convite.convidado.nome}</td>
                                 </c:when>
                                 <c:otherwise>
+                                    convidado
                                     <td>${encontro.cliente.nome}</td>
                                 </c:otherwise>
                             </c:choose>
                             <td>${encontro.data}</td>
                             <td>${encontro.hora}</td>
                             <td>${encontro.local.nomeEstabelecimento}</td>
-                            <td>${encontro.status}</td>
+                            <td>${encontro.status.nome}</td>
                             <td>
                                 <a href="EncontroServlet?action=showDetalhes&id=${encontro.idEncontro}">
                                     <i class="fa fa-eye"></i>

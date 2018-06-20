@@ -30,6 +30,7 @@ import com.ufpr.tads.dao.FuncionarioDAO;
 import com.ufpr.tads.dao.PreferenciaDAO;
 import com.ufpr.tads.dao.UFDAO;
 import com.ufpr.tads.dao.UsuarioDAO;
+import com.ufpr.tads.interfaces.Convidavel;
 import java.util.List;
 import java.util.Properties;
 import java.util.Random;
@@ -237,6 +238,11 @@ public class UsuarioFacade {
             }
         }
         return false;
+    }
+
+    public static Convite getEventoConvite(int idConvite) {
+        ConviteDAO conviteDAO = new ConviteDAO();
+        return conviteDAO.getConvite(idConvite);
     }
     
 }

@@ -236,6 +236,7 @@ public class EncontroDAO {
                                 }
                                 data.setTime(calendar.getTime().getTime());
                                 hora.setTime(menor.getTime() + rand.nextInt(Integer.parseInt(range + "")));
+                                return;
                             }
                         }
                     }

@@ -440,7 +440,11 @@ public class ClienteDAO {
                     + "AND CC.idCorCabelo IN "
                             + "(SELECT PHC.CorCabelo_idCorCabelo FROM preferencias_has_corcabelo PHC WHERE PHC.Preferencias_idPreferencias = ?) "
                     + "AND CP.idCorPele IN "
-                            + "(SELECT PHP.CorPele_idCorPele FROM preferencias_has_corPele PHP WHERE PHP.Preferencias_idPreferencias = ?) "                  
+                            + "(SELECT PHP.CorPele_idCorPele FROM preferencias_has_corPele PHP WHERE PHP.Preferencias_idPreferencias = ?) "
+                    + "AND C.idCliente NOT IN "
+                            + "(SELECT E1.Cliente_idCliente FROM encontro E1 "
+                            + " INNER JOIN convite CO ON E1.Convite_idConvite = CO.idConvite "
+                            + " WHERE E1.Cliente_idCliente  = ? AND (E1.status = 'Recusado' OR E1.status = 'Aguardando') )"        
             );
             st.setInt(1, usuarioLogado.getIdCliente());
             st.setInt(2, usuarioLogado.getEndereco().getCidade().getIdCidade());
@@ -449,6 +453,7 @@ public class ClienteDAO {
             st.setInt(5, usuarioLogado.getPreferencia().getIdadeMax());
             st.setInt(6, usuarioLogado.getPreferencia().getIdPreferencias());
             st.setInt(7, usuarioLogado.getPreferencia().getIdPreferencias());
+            st.setInt(8, usuarioLogado.getIdCliente());
             rs = st.executeQuery();
             while(rs.next()){
                 lista.add(getCliente(rs.getInt("C.idCliente")));
