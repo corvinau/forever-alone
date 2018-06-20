@@ -217,4 +217,29 @@ public class ConviteDAO {
         return convite;
     
     }
+
+    public boolean aceitarConvite(int idConvite) {
+        PreparedStatement st;
+        
+        try {
+            st = con.prepareStatement(
+                    "UPDATE convite SET status = 'Aceito' "
+                    + "WHERE idConvite = ?"
+            );
+            st.setInt(1,idConvite);
+         
+            int aux = st.executeUpdate();
+            
+            if(aux > 0)return true;
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+        
+        return false;
+    }
 }

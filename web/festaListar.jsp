@@ -40,11 +40,12 @@
                         <th>Tema</th>
                         <th>Hora</th>
                         <th>Status</th>
-                        <th>Situacao</th>
+                        <th>Pendentes - Aceitos</th>
                         <th>Ação</th>
                     </tr>
                 </thead>
                 <tbody>
+                    <c:set var="count" value="0" />
                     <c:forEach items="${listaFesta}" var="festa" >
                         <tr>
                             <td>${festa.idFesta}</td>
@@ -52,7 +53,7 @@
                             <td>${festa.tema} </td>
                             <td>${festa.hora}</td>
                             <td>${festa.status.nome}</td>
-                            <td>Tem q ver</td>
+                            <td>${pendentes.get(count)} - ${aceitos.get(count)}</td>
                             <td>
                                 <a href="#">
                                     <i class="fa fa-pencil"></i>
@@ -65,6 +66,7 @@
                                 </a>
                             </td>
                         </tr>
+                        <c:set var="count" value="${count+1}" />
                     </c:forEach>
                 </tbody>
             </table>

@@ -60,7 +60,7 @@ public class AjaxService {
             .build();
     }
     @GET
-    @Path("/convites/{id}")
+    @Path("/convites/{id}")// id do Cliente
     @Produces(MediaType.APPLICATION_JSON)
     public Response getConvites(@PathParam("id") String id) {
         
@@ -73,7 +73,7 @@ public class AjaxService {
             .build();
     }
     @GET
-    @Path("/eventoConvite/{id}")
+    @Path("/eventoConvite/{id}")// id do convite
     @Produces(MediaType.APPLICATION_JSON)
     public Response getEventoConvite(@PathParam("id") String id) {
         

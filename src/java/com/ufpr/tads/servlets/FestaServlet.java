@@ -21,6 +21,8 @@ import java.io.PrintWriter;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -111,7 +113,25 @@ public class FestaServlet extends HttpServlet {
                     rd = getServletContext().getRequestDispatcher("/festaListaConvidados.jsp");
                     break;
                 case "listaFesta":
-                    request.setAttribute("listaFesta", FestaFacade.getListaFesta());
+                    List<Festa> lista = FestaFacade.getListaFesta();
+                    request.setAttribute("listaFesta", lista);
+                    List<Integer> pendentes = new ArrayList<Integer>();
+                    List<Integer> aceitos = new ArrayList<Integer>();
+                    int pen, acei;
+                    for(Festa fes : lista){
+                        pen = 0;
+                        acei = 0;
+                        if(fes.getConvites() != null && fes.getConvites().isEmpty()){
+                            for(Convite co : fes.getConvites()){
+                                if(co.getStatus().equals("Aceito")) acei++;
+                                else if(co.getStatus().equals("Aguardando")) pen++;
+                            }
+                        }
+                        pendentes.add(pen);
+                        aceitos.add(acei);
+                    }
+                    request.setAttribute("pendentes", pendentes);
+                    request.setAttribute("aceitos", aceitos);
                     rd = getServletContext().getRequestDispatcher("/festaListar.jsp");
                     break;
                 default :

@@ -24,6 +24,7 @@
                         <th>Hora</th>
                         <th>Local</th>
                         <th>Status</th>
+                        <th>Acao</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -53,6 +54,12 @@
                                 <a href="EncontroServlet?action=cancelarEncontro&id=${encontro.idEncontro}">
                                     <i class="fa fa-times"></i>
                                 </a>
+                                <c:if test="${ encontro.status.nome.equals(\"Realizado\")}">
+                                    <a href="EncontroServlet?action=cancelarEncontro&id=${encontro.idEncontro}">
+                                    <i class="fa fa-times">Casamento</i>
+                                </a>
+                                </c:if>
+                                    
                             </td>
                         </tr>
                     </c:forEach>

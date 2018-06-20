@@ -54,11 +54,42 @@ public class EncontroServlet extends HttpServlet {
         }
         if(action != null){
             String[] parameterList;
+            int aux;
             switch (action){
                 case "listaEncontro":
                     request.setAttribute("listaEncontro",EncontroFacade.getListaEncontroCliente(usuarioLogado.getIdCliente()));
                     rd = getServletContext().getRequestDispatcher("/encontroListar.jsp");
                     break;
+                case "aceitarEncontro":
+                    aux = Integer.parseInt(request.getParameter("id"));
+                    if(EncontroFacade.aceitaEncontro(aux)){
+                        request.setAttribute("msg","Convite aceito com sucesso");
+                    }
+                    else{
+                        request.setAttribute("msg","Erro ao aceitar o convite");
+                    }
+                    rd = getServletContext().getRequestDispatcher("/encontroListar.jsp");
+                    break;
+                case "cancelarEncontro":
+                    aux = Integer.parseInt(request.getParameter("id"));
+                    if(EncontroFacade.cancelarEncontro(aux,usuarioLogado)){
+                        request.setAttribute("msg","Encontro cancelado com sucesso");
+                    }
+                    else{
+                        request.setAttribute("msg","Erro ao cancelar o encontro");
+                    }
+                    rd = getServletContext().getRequestDispatcher("/encontroListar.jsp");
+                    break;
+                case "remarcarEncontro":
+                    aux = Integer.parseInt(request.getParameter("id"));
+                    if(EncontroFacade.remarcarEncontro(aux,usuarioLogado)){
+                        request.setAttribute("msg","Encontro remarcado com sucesso");
+                    }
+                    else{
+                        request.setAttribute("msg","Erro ao remarcar o encontro");
+                    }
+                    rd = getServletContext().getRequestDispatcher("/encontroListar.jsp");
+                    break;    
                 case "convidarClientes":
                     parameterList = (String[]) request.getParameterValues("idCliente");
                     Pagamento pagamento = new Pagamento();

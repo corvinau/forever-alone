@@ -59,7 +59,7 @@
                         <a href="#">
                             <i class="fa fa-eye"></i>
                         </a>
-                        <a href="#">
+                        <a href="EncontroServlet?action=aceitarEncontro&id=">
                             <i class="fa fa-check"></i>
                         </a>
                         <a href="#">

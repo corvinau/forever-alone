@@ -245,4 +245,98 @@ public class EncontroDAO {
         }
         
     }
+
+    public boolean updateEncontro(int idConvite, String confirmado) {
+        PreparedStatement st;
+        Encontro encontro = null;
+        try {
+            st = con.prepareStatement(
+                    "UPDATE encontro SET Status_idStatus = ? "
+                    + "WHERE Convite_idConvite = ?"
+            );
+            st.setString(1, confirmado);
+            st.setInt(2, idConvite);
+            
+            int aux = st.executeUpdate();
+            if(aux > 0) return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }        
+        return false;
+    }
+
+    public Cliente getOutroEncontro(int idEncontro,int idCliente){
+        PreparedStatement st;
+        Encontro encontro = null;
+        try {
+            st = con.prepareStatement(
+                    "SELECT Cliente_idCliente, Convite_idConvite FROM encontro E "
+                    + "WHERE idEncontro = ?"
+            );
+            st.setInt(1, idEncontro);
+            
+            rs = st.executeQuery();
+            if(rs.next()){
+                int aux = rs.getInt("Cliente_idCliente");
+                if(aux == idCliente){
+                    ConviteDAO conviteDao = new ConviteDAO();
+                    return conviteDao.getConviteEncontro(rs.getInt("Convite_idConvite")).getConvidado();
+                }
+                else{
+                    ClienteDAO clienteDao = new ClienteDAO();
+                    clienteDao.getCliente(aux);
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }        
+        return null;
+    }
+    
+    public boolean remarcarEncontro(int idEncontro,Cliente usuarioLogado) {
+        PreparedStatement st;
+        Encontro encontro = null;
+        try {
+            st = con.prepareStatement(
+                    "UPDATE encontro SET Status_idStatus = 'Remarcado' "
+                    + " data = ? , hora = ?  WHERE idEncontro = ?"
+            );
+            Date data = new Date(System.currentTimeMillis());
+            Date hora = new Date(100000000);
+            geraDataHora(usuarioLogado.getPreferencia().getHorario(), getOutroEncontro(idEncontro,usuarioLogado.getIdCliente()),data,hora);
+            st.setDate(1, new java.sql.Date(data.getTime()));
+            st.setTimestamp(2, new java.sql.Timestamp(hora.getTime()));
+            st.setInt(3, idEncontro);
+            
+            int aux = st.executeUpdate();
+            
+            if(aux > 0) return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }        
+        return false;
+    }
+
+    public boolean cancelarEncontro(int idEncontro, Cliente usuarioLogado) {
+         PreparedStatement st;
+        try {
+            st = con.prepareStatement(
+                    "UPDATE encontro SET Status_idStatus = 'Cancelado' "
+                    + "WHERE idEncontro = ? "
+            );
+            st.setInt(1, idEncontro);
+            
+            Cliente c = getOutroEncontro(idEncontro,usuarioLogado.getIdCliente());
+            ClienteDAO clienteDao = new ClienteDAO(con);
+            c.setQtdTokens(c.getQtdTokens()+1);
+            clienteDao.updateCliente(c);
+            
+            int aux = st.executeUpdate();
+            
+            if(aux > 0) return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }        
+        return false;
+    }
 }

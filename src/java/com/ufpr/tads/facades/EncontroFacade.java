@@ -10,6 +10,7 @@ import com.ufpr.tads.beans.Encontro;
 import com.ufpr.tads.beans.Horario;
 import com.ufpr.tads.beans.Pagamento;
 import com.ufpr.tads.dao.ClienteDAO;
+import com.ufpr.tads.dao.ConviteDAO;
 import com.ufpr.tads.dao.EncontroDAO;
 import com.ufpr.tads.dao.PagamentoDAO;
 import java.util.Date;
@@ -67,6 +68,36 @@ public class EncontroFacade {
             encontroDao.insertEncontro(usuarioLogado,Integer.parseInt(idClientes[i]),pagamento);
         }
         return true;
+    }
+
+    public static boolean aceitaEncontro(int idConvite) {
+        ConviteDAO conviteDao = new ConviteDAO();
+        if(conviteDao.aceitarConvite(idConvite)){
+            EncontroDAO encontroDao = new EncontroDAO();
+            if(encontroDao.updateEncontro(idConvite,"Confirmado")){
+                return true;
+            }
+        }
+        return false;
+       
+    }
+
+    public static boolean remarcarEncontro(int idEncontro,Cliente usuarioLogado) {
+        EncontroDAO encontroDao = new EncontroDAO();
+        if(encontroDao.remarcarEncontro(idEncontro,usuarioLogado)){
+            return true;
+        }
+        
+        return false;
+    }
+
+    public static boolean cancelarEncontro(int idEncontro, Cliente usuarioLogado) {
+        EncontroDAO encontroDao = new EncontroDAO();
+        if(encontroDao.cancelarEncontro(idEncontro,usuarioLogado)){
+            return true;
+        }
+        
+        return false;
     }
     
 }
