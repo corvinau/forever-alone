@@ -30,6 +30,7 @@ import com.ufpr.tads.dao.FuncionarioDAO;
 import com.ufpr.tads.dao.PreferenciaDAO;
 import com.ufpr.tads.dao.UFDAO;
 import com.ufpr.tads.dao.UsuarioDAO;
+import com.ufpr.tads.interfaces.Convidavel;
 import java.util.List;
 import java.util.Properties;
 import java.util.Random;
@@ -229,7 +230,19 @@ public class UsuarioFacade {
     }
     public static boolean switchDisponibilidade(Cliente usuarioLogado) {
         ClienteDAO clienteDAO = new ClienteDAO();
-        return clienteDAO.updateDisponibilidade(!usuarioLogado.isDisp(),usuarioLogado.getIdCliente());
+        if(!usuarioLogado.isDisp()){
+            if(usuarioLogado.getDescricao() != null && usuarioLogado.getDescricao().getIdDescricao() > 0){
+                if(usuarioLogado.getPreferencia() != null && usuarioLogado.getPreferencia().getIdPreferencias() > 0){
+                    return clienteDAO.updateDisponibilidade(!usuarioLogado.isDisp(),usuarioLogado.getIdCliente());
+                }
+            }
+        }
+        return false;
+    }
+
+    public static Convite getEventoConvite(int idConvite) {
+        ConviteDAO conviteDAO = new ConviteDAO();
+        return conviteDAO.getConvite(idConvite);
     }
     
     public static boolean switchDisponibilidadeCliente(int idCliente) {

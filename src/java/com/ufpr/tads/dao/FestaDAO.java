@@ -71,6 +71,8 @@ public class FestaDAO {
                 status.setIdStatus(rs.getInt("S.idStatus"));
                 status.setNome(rs.getString("S.nome"));
                 f.setStatus(status);
+                //f.setConvites(getConvites(f.getId()));
+                
                 listaFesta.add(f);
             }
             

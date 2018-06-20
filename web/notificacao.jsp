@@ -59,7 +59,7 @@
                         <a href="#">
                             <i class="fa fa-eye"></i>
                         </a>
-                        <a href="#">
+                        <a href="EncontroServlet?action=aceitarEncontro&id=">
                             <i class="fa fa-check"></i>
                         </a>
                         <a href="#">
@@ -104,7 +104,7 @@
             function getCidades(preencherPrimeiroForm){
                 preencherPrimeiroForm = false;
                 var clienteId = $("#convites").val();
-                var url = "http://localhost:28313/ForeverAlone/webresources/Ajax/convite/"+clienteId;
+                var url = "http://localhost:28313/ForeverAlone/webresources/Ajax/convites/"+clienteId;
                 $.ajax({
                     type : "GET",
                     url : url, // URL da sua Servlet

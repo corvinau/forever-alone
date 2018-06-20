@@ -10,6 +10,7 @@ import com.ufpr.tads.beans.Cliente;
 import com.ufpr.tads.beans.Convite;
 import com.ufpr.tads.beans.Encontro;
 import com.ufpr.tads.beans.Festa;
+import com.ufpr.tads.interfaces.Convidavel;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -132,7 +133,7 @@ public class ConviteDAO {
         Convite convite = null;
         try {
             st = con.prepareStatement(
-                      "SELECT C.IDCONVITE, C.STATUS, C.TIPO, C.Cliente_idCliente"
+                      "SELECT C.IDCONVITE, C.STATUS, C.TIPO, C.Cliente_idCliente "
                     + "FROM convite C "
                     + "WHERE C.IDCONVITE = ?"
             );
@@ -159,5 +160,86 @@ public class ConviteDAO {
         
         
         return null;
+    }
+
+    public Convite getConvite(int idConvite) {
+        PreparedStatement st;
+        Convite convite = null;
+        try {
+            st = con.prepareStatement(
+                      "SELECT C.IDCONVITE, C.STATUS, C.TIPO "
+                    + "FROM convite C "
+                    + "WHERE C.idConvite = ?"
+            );
+            st.setInt(1,idConvite);
+         
+            rs = st.executeQuery();
+            
+            FestaDAO festaDao = new FestaDAO(con);
+            EncontroDAO encontroDao = new EncontroDAO(con);
+            CasamentoDAO casamentoDao = new CasamentoDAO(con);
+            
+            if(rs.next()){
+                convite = new Convite();
+                convite.setIdConvite(rs.getInt("C.IDCONVITE"));
+                convite.setStatus("Aguardando");
+                convite.setTipo(rs.getString("C.TIPO"));
+                switch (convite.getTipo().toLowerCase()){
+                    case "f":
+                        Festa f = festaDao.getFestaByConvite(convite.getIdConvite());
+                        if(f != null && f.getIdFesta() > 0){
+                            convite.setEvento(f);
+                        }
+                        break;
+                    case "e":
+                        Encontro e = encontroDao.getEncontroByConvite(convite.getIdConvite());
+                        if(e != null && e.getId() > 0){
+                            convite.setEvento(e);
+                        }
+                        break;
+                    case "c":
+                        Casamento c = casamentoDao.getCasamentoByConvite(convite.getIdConvite());
+                        if(c != null && c.getId() > 0){
+                            convite.setEvento(c);
+                        }
+                        break;
+                }
+            }
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+        
+        return convite;
+    
+    }
+
+    public boolean aceitarConvite(int idConvite) {
+        PreparedStatement st;
+        
+        try {
+            st = con.prepareStatement(
+                    "UPDATE convite SET status = 'Aceito' "
+                    + "WHERE idConvite = ?"
+            );
+            st.setInt(1,idConvite);
+         
+            int aux = st.executeUpdate();
+            
+            if(aux > 0)return true;
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+        
+        return false;
     }
 }

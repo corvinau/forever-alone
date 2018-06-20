@@ -7,8 +7,10 @@ package com.ufpr.tads.servlets;
 
 import com.ufpr.tads.beans.Cliente;
 import com.ufpr.tads.beans.Descricao;
+import com.ufpr.tads.beans.Pagamento;
 import com.ufpr.tads.beans.Preferencia;
 import com.ufpr.tads.facades.EncontroFacade;
+import com.ufpr.tads.facades.FestaFacade;
 import com.ufpr.tads.facades.UsuarioFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -46,19 +48,64 @@ public class EncontroServlet extends HttpServlet {
             session.invalidate();
             rd.forward(request, response);
         }
-        String action = (String) request.getParameter("action");
-        if(action == null){
-            action = (String) request.getAttribute("action");
+        String action = (String) request.getAttribute("action");
+        if(action == null || action.isEmpty()){
+            action = (String) request.getParameter("action");
         }
         if(action != null){
+            String[] parameterList;
+            int aux;
             switch (action){
                 case "listaEncontro":
                     request.setAttribute("listaEncontro",EncontroFacade.getListaEncontroCliente(usuarioLogado.getIdCliente()));
                     rd = getServletContext().getRequestDispatcher("/encontroListar.jsp");
                     break;
-                case "SolicitarEncontro":
-                    request.setAttribute("listaEncontro",EncontroFacade.getListaEncontroCliente(usuarioLogado.getIdCliente()));
+                case "aceitarEncontro":
+                    aux = Integer.parseInt(request.getParameter("id"));
+                    if(EncontroFacade.aceitaEncontro(aux)){
+                        request.setAttribute("msg","Convite aceito com sucesso");
+                    }
+                    else{
+                        request.setAttribute("msg","Erro ao aceitar o convite");
+                    }
                     rd = getServletContext().getRequestDispatcher("/encontroListar.jsp");
+                    break;
+                case "cancelarEncontro":
+                    aux = Integer.parseInt(request.getParameter("id"));
+                    if(EncontroFacade.cancelarEncontro(aux,usuarioLogado)){
+                        request.setAttribute("msg","Encontro cancelado com sucesso");
+                    }
+                    else{
+                        request.setAttribute("msg","Erro ao cancelar o encontro");
+                    }
+                    rd = getServletContext().getRequestDispatcher("/encontroListar.jsp");
+                    break;
+                case "remarcarEncontro":
+                    aux = Integer.parseInt(request.getParameter("id"));
+                    if(EncontroFacade.remarcarEncontro(aux,usuarioLogado)){
+                        request.setAttribute("msg","Encontro remarcado com sucesso");
+                    }
+                    else{
+                        request.setAttribute("msg","Erro ao remarcar o encontro");
+                    }
+                    rd = getServletContext().getRequestDispatcher("/encontroListar.jsp");
+                    break;    
+                case "convidarClientes":
+                    parameterList = (String[]) request.getParameterValues("idCliente");
+                    Pagamento pagamento = new Pagamento();
+                    pagamento.setTipo("Tradicional");
+                    pagamento.setValor((float) (2.5 * parameterList.length));
+                    if(parameterList != null && parameterList.length > 0){
+                        EncontroFacade.insertConvites(usuarioLogado,parameterList,pagamento);
+                    }
+                    request.setAttribute("action", "listaEncontros");
+                    rd = getServletContext().getRequestDispatcher("/EncontroServlet");
+                    break;
+                case "SolicitarEncontro":
+                    if(usuarioLogado.isDisp()){
+                        request.setAttribute("listaCliente",EncontroFacade.getClientesCompativeis(usuarioLogado));
+                        rd = getServletContext().getRequestDispatcher("/encontroSolicitar.jsp");
+                    }
                     break;
                 default :
                     rd = getServletContext().getRequestDispatcher("/portal.jsp");

@@ -5,9 +5,13 @@
  */
 package com.ufpr.tads.services;
 
+import com.ufpr.tads.beans.Casamento;
 import com.ufpr.tads.beans.Cidade;
 import com.ufpr.tads.beans.Convite;
+import com.ufpr.tads.beans.Encontro;
+import com.ufpr.tads.beans.Festa;
 import com.ufpr.tads.facades.UsuarioFacade;
+import com.ufpr.tads.interfaces.Convidavel;
 import java.util.List;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
@@ -56,7 +60,7 @@ public class AjaxService {
             .build();
     }
     @GET
-    @Path("/convites/{id}")
+    @Path("/convites/{id}")// id do Cliente
     @Produces(MediaType.APPLICATION_JSON)
     public Response getConvites(@PathParam("id") String id) {
         
@@ -67,6 +71,37 @@ public class AjaxService {
             .ok()
             .entity(lista)
             .build();
+    }
+    @GET
+    @Path("/eventoConvite/{id}")// id do convite
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getEventoConvite(@PathParam("id") String id) {
+        
+        Convite convite = UsuarioFacade.getEventoConvite(Integer.parseInt(id));
+        switch (convite.getTipo().toLowerCase()){
+            case "f" :
+                GenericEntity<Festa> evento =
+                new GenericEntity<Festa>((Festa) convite.getEvento()) {};
+                return Response
+                .ok()
+                .entity(evento)
+                .build();
+            case "e" :
+                GenericEntity<Encontro> evento2 =
+                new GenericEntity<Encontro>((Encontro) convite.getEvento()) {};
+                return Response
+                .ok()
+                .entity(evento2)
+                .build();
+            default :
+                GenericEntity<Casamento> evento3 =
+                new GenericEntity<Casamento>((Casamento) convite.getEvento()) {};
+                return Response
+                .ok()
+                .entity(evento3)
+                .build();
+                
+        }
     }
     
     @GET

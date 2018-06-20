@@ -56,8 +56,8 @@ public class HorarioDAO {
                 h = new Horario();
                 h.setIdHorario(idHorario);
                 h.setDiaSemana(rs.getString("diaSemana"));
-                h.setHoraInicial(rs.getDate("horaInicial"));
-                h.setHoraLimite(rs.getDate("horaLimite"));
+                h.setHoraInicial(rs.getTimestamp("horaInicial"));
+                h.setHoraLimite(rs.getTimestamp("horaLimite"));
             }
             
             
@@ -88,8 +88,8 @@ public class HorarioDAO {
                 h = new Horario();
                 h.setIdHorario(rs.getInt("idHorario"));
                 h.setDiaSemana(rs.getString("diaSemana"));
-                h.setHoraInicial(rs.getDate("horaInicial"));
-                h.setHoraLimite(rs.getDate("horaLimite"));
+                h.setHoraInicial(rs.getTimestamp("horaInicial"));
+                h.setHoraLimite(rs.getTimestamp("horaLimite"));
             }
             
             
@@ -123,8 +123,8 @@ public class HorarioDAO {
                 h = new Horario();
                 h.setIdHorario(rs.getInt("horario.idHorario"));
                 h.setDiaSemana(rs.getString("horario.diaSemana"));
-                h.setHoraInicial(rs.getDate("horario.horaInicial"));
-                h.setHoraLimite(rs.getDate("horario.horaLimite"));
+                h.setHoraInicial(rs.getTimestamp("horario.horaInicial"));
+                h.setHoraLimite(rs.getTimestamp("horario.horaLimite"));
                 lista.add(h);
             }
             

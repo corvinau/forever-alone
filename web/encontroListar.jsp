@@ -24,6 +24,7 @@
                         <th>Hora</th>
                         <th>Local</th>
                         <th>Status</th>
+                        <th>Acao</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,13 +36,14 @@
                                     <td>${encontro.convite.convidado.nome}</td>
                                 </c:when>
                                 <c:otherwise>
+                                    convidado
                                     <td>${encontro.cliente.nome}</td>
                                 </c:otherwise>
                             </c:choose>
                             <td>${encontro.data}</td>
                             <td>${encontro.hora}</td>
                             <td>${encontro.local.nomeEstabelecimento}</td>
-                            <td>${encontro.status}</td>
+                            <td>${encontro.status.nome}</td>
                             <td>
                                 <a href="EncontroServlet?action=showDetalhes&id=${encontro.idEncontro}">
                                     <i class="fa fa-eye"></i>
@@ -52,6 +54,12 @@
                                 <a href="EncontroServlet?action=cancelarEncontro&id=${encontro.idEncontro}">
                                     <i class="fa fa-times"></i>
                                 </a>
+                                <c:if test="${ encontro.status.nome.equals(\"Realizado\")}">
+                                    <a href="EncontroServlet?action=cancelarEncontro&id=${encontro.idEncontro}">
+                                    <i class="fa fa-times">Casamento</i>
+                                </a>
+                                </c:if>
+                                    
                             </td>
                         </tr>
                     </c:forEach>
