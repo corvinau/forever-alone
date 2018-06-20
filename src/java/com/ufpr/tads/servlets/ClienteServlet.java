@@ -151,7 +151,7 @@ public class ClienteServlet extends HttpServlet {
         String[] listaForm1 = (String[]) request.getParameterValues("minutoMin");
         Date dataAux;
         for(int i = 0; i < listaHorario.size(); i++){
-            dataAux = new Date();
+            dataAux = new Date(100000000);
             horario = listaHorario.get(i);
             if(!listaForm[i].isEmpty()){
                 dataAux.setHours(Integer.parseInt(listaForm[i]));
@@ -168,7 +168,7 @@ public class ClienteServlet extends HttpServlet {
         listaForm = (String[]) request.getParameterValues("horaMax");
         listaForm1 = (String[]) request.getParameterValues("minutoMax");
         for(int i = 0; i < listaHorario.size(); i++){
-            dataAux = new Date();
+            dataAux = new Date(100000000);
             horario = listaHorario.get(i);
             if(!listaForm[i].isEmpty()){
                 dataAux.setHours(Integer.parseInt(listaForm[i]));

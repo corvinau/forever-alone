@@ -7,8 +7,10 @@ package com.ufpr.tads.servlets;
 
 import com.ufpr.tads.beans.Cliente;
 import com.ufpr.tads.beans.Descricao;
+import com.ufpr.tads.beans.Pagamento;
 import com.ufpr.tads.beans.Preferencia;
 import com.ufpr.tads.facades.EncontroFacade;
+import com.ufpr.tads.facades.FestaFacade;
 import com.ufpr.tads.facades.UsuarioFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -46,19 +48,33 @@ public class EncontroServlet extends HttpServlet {
             session.invalidate();
             rd.forward(request, response);
         }
-        String action = (String) request.getParameter("action");
-        if(action == null){
-            action = (String) request.getAttribute("action");
+        String action = (String) request.getAttribute("action");
+        if(action == null || action.isEmpty()){
+            action = (String) request.getParameter("action");
         }
         if(action != null){
+            String[] parameterList;
             switch (action){
                 case "listaEncontro":
                     request.setAttribute("listaEncontro",EncontroFacade.getListaEncontroCliente(usuarioLogado.getIdCliente()));
                     rd = getServletContext().getRequestDispatcher("/encontroListar.jsp");
                     break;
+                case "convidarClientes":
+                    parameterList = (String[]) request.getParameterValues("idCliente");
+                    Pagamento pagamento = new Pagamento();
+                    pagamento.setTipo("Tradicional");
+                    pagamento.setValor((float) (2.5 * parameterList.length));
+                    if(parameterList != null && parameterList.length > 0){
+                        EncontroFacade.insertConvites(usuarioLogado,parameterList,pagamento);
+                    }
+                    request.setAttribute("action", "listaEncontros");
+                    rd = getServletContext().getRequestDispatcher("/EncontroServlet");
+                    break;
                 case "SolicitarEncontro":
-                    request.setAttribute("listaEncontro",EncontroFacade.getListaEncontroCliente(usuarioLogado.getIdCliente()));
-                    rd = getServletContext().getRequestDispatcher("/encontroListar.jsp");
+                    if(usuarioLogado.isDisp()){
+                        request.setAttribute("listaCliente",EncontroFacade.getClientesCompativeis(usuarioLogado));
+                        rd = getServletContext().getRequestDispatcher("/encontroSolicitar.jsp");
+                    }
                     break;
                 default :
                     rd = getServletContext().getRequestDispatcher("/portal.jsp");

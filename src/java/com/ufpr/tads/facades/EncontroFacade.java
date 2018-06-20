@@ -5,8 +5,14 @@
  */
 package com.ufpr.tads.facades;
 
+import com.ufpr.tads.beans.Cliente;
 import com.ufpr.tads.beans.Encontro;
+import com.ufpr.tads.beans.Horario;
+import com.ufpr.tads.beans.Pagamento;
+import com.ufpr.tads.dao.ClienteDAO;
 import com.ufpr.tads.dao.EncontroDAO;
+import com.ufpr.tads.dao.PagamentoDAO;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -18,6 +24,49 @@ public class EncontroFacade {
     public static List<Encontro> getListaEncontroCliente(int idCliente) {
         EncontroDAO encontroDao = new EncontroDAO();
         return encontroDao.getListaEncontroCliente(idCliente);
+    }
+
+    public static List<Cliente> getClientesCompativeis(Cliente usuarioLogado) {
+        ClienteDAO clienteDao = new ClienteDAO();
+        List<Cliente> lista = clienteDao.getClientesCompativeis(usuarioLogado);
+        List<Horario> horarios;
+        List<Horario> horariosCliente = usuarioLogado.getPreferencia().getHorario();
+        Date menor;
+        Date maior;
+        for(Cliente c :lista){
+            horarios = c.getPreferencia().getHorario();
+            for(Horario h :horarios){
+                for(Horario hCliente:horariosCliente){
+                    if(h.getDiaSemana().equals(hCliente.getDiaSemana())){
+                        if(h.getHoraInicial().getTime() < hCliente.getHoraInicial().getTime()){
+                            menor = hCliente.getHoraInicial();
+                        }
+                        else{
+                            menor = h.getHoraInicial();
+                        }
+                        
+                        if(h.getHoraLimite().getTime() < hCliente.getHoraLimite().getTime()){
+                            maior = h.getHoraLimite();
+                        }
+                        else{
+                            maior = hCliente.getHoraLimite();
+                        }
+                        if(menor.getTime() > maior.getTime()){
+                            lista.remove(c);
+                        }
+                    }
+                }
+            }
+        }
+        return lista;
+    }
+
+    public static boolean insertConvites(Cliente usuarioLogado, String[] idClientes, Pagamento pagamento) {
+        EncontroDAO encontroDao = new EncontroDAO();
+        for( int i = 0 ; i < idClientes.length; i++){
+            encontroDao.insertEncontro(usuarioLogado,Integer.parseInt(idClientes[i]),pagamento);
+        }
+        return true;
     }
     
 }

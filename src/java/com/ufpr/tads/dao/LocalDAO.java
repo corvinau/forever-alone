@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -127,5 +128,41 @@ public class LocalDAO {
         
         
         return 0;
+    }
+
+    public Local getRandomLocal(int idCidade) {
+        List<Local> listaLocal = new ArrayList<Local>();
+        Local l = null;
+        PreparedStatement st;
+        
+        try {
+            st = con.prepareStatement(
+                    "SELECT L.idLocal, L.nomeEstabelecimento, L.Endereco_idEndereco "
+                    + " FROM local L " 
+                    + "INNER JOIN Endereco E ON L.Endereco_idEndereco = E.idEndereco "
+                    + "Where E.Cidade_idCidade = ?"
+                    
+            );
+            st.setInt(1, idCidade);
+            
+            rs = st.executeQuery();
+            EnderecoDAO enderecoDAO = new EnderecoDAO(con);
+            while(rs.next()){
+                l = new Local();
+                l.setIdLocal(rs.getInt("L.idLocal"));
+                l.setNomeEstabelecimento(rs.getString("L.nomeEstabelecimento"));
+                l.setEndereco(enderecoDAO.getEndereco(rs.getInt("L.Endereco_idEndereco")));
+                listaLocal.add(l);
+            }
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        Random rand = new Random();
+        if(listaLocal.isEmpty()) return null;
+        return listaLocal.get(rand.nextInt(listaLocal.size()));
+        
     }
 }

@@ -229,7 +229,14 @@ public class UsuarioFacade {
     }
     public static boolean switchDisponibilidade(Cliente usuarioLogado) {
         ClienteDAO clienteDAO = new ClienteDAO();
-        return clienteDAO.updateDisponibilidade(!usuarioLogado.isDisp(),usuarioLogado.getIdCliente());
+        if(!usuarioLogado.isDisp()){
+            if(usuarioLogado.getDescricao() != null && usuarioLogado.getDescricao().getIdDescricao() > 0){
+                if(usuarioLogado.getPreferencia() != null && usuarioLogado.getPreferencia().getIdPreferencias() > 0){
+                    return clienteDAO.updateDisponibilidade(!usuarioLogado.isDisp(),usuarioLogado.getIdCliente());
+                }
+            }
+        }
+        return false;
     }
     
 }

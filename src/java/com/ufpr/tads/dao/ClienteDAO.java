@@ -402,7 +402,7 @@ public class ClienteDAO {
         return false;
     }
     
-        public String getEmailCliente(int idUsuario){
+    public String getEmailCliente(int idUsuario){
         PreparedStatement st;
         ResultSet res;
         String email = null;
@@ -418,5 +418,50 @@ public class ClienteDAO {
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         }   
         return email;
+    }
+        
+    public List<Cliente> getClientesCompativeis(Cliente usuarioLogado) {
+        List<Cliente> lista = new ArrayList<Cliente>();
+        Cliente c ;
+        PreparedStatement st;
+        
+        try {
+            st = con.prepareStatement(
+                    "SELECT C.idCliente "
+                    + "FROM Cliente C "
+                    + "INNER JOIN descricao D ON C.Descricao_idDescricao = D.idDescricao "
+                    + "INNER JOIN corCabelo CC ON D.CorCabelo_idCorCabelo = CC.idCorCabelo "
+                    + "INNER JOIN corPele CP ON D.CorPele_idCorPele = CP.idCorPele "
+                    + "INNER JOIN endereco E ON C.Endereco_idEndereco = E.idEndereco "
+                    + "WHERE C.idCliente != ? "
+                    + "AND E.Cidade_idCidade = ? "
+                    + "AND C.sexo = ? "
+                    + "AND ROUND(DATEDIFF(CURRENT_DATE, C.dataNascimento)/365,0) >= ? AND ROUND(DATEDIFF(CURRENT_DATE, C.dataNascimento)/365,0) <= ? "
+                    + "AND CC.idCorCabelo IN "
+                            + "(SELECT PHC.CorCabelo_idCorCabelo FROM preferencias_has_corcabelo PHC WHERE PHC.Preferencias_idPreferencias = ?) "
+                    + "AND CP.idCorPele IN "
+                            + "(SELECT PHP.CorPele_idCorPele FROM preferencias_has_corPele PHP WHERE PHP.Preferencias_idPreferencias = ?) "                  
+            );
+            st.setInt(1, usuarioLogado.getIdCliente());
+            st.setInt(2, usuarioLogado.getEndereco().getCidade().getIdCidade());
+            st.setString(3, usuarioLogado.getPreferencia().getSexos() + "");
+            st.setInt(4, usuarioLogado.getPreferencia().getIdadeMin());
+            st.setInt(5, usuarioLogado.getPreferencia().getIdadeMax());
+            st.setInt(6, usuarioLogado.getPreferencia().getIdPreferencias());
+            st.setInt(7, usuarioLogado.getPreferencia().getIdPreferencias());
+            rs = st.executeQuery();
+            while(rs.next()){
+                lista.add(getCliente(rs.getInt("C.idCliente")));
+            }
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+        
+        return lista;
     }
 }
