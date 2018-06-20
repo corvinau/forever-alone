@@ -113,6 +113,8 @@ public class UsuarioServlet extends HttpServlet {
         }
         c.setNome((String) request.getParameter("nome"));
         c.setCpf((String) request.getParameter("cpf"));
+        c.setCpf(c.getCpf().replace(".", ""));
+        c.setCpf(c.getCpf().replace("-", ""));
         aux = (String) request.getParameter("dataNascimento");
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
         try {
