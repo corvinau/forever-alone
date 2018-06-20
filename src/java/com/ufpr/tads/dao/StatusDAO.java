@@ -57,7 +57,6 @@ class StatusDAO {
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         }        
         
-        
         return status;
     }
 }

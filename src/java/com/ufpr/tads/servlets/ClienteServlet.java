@@ -74,6 +74,12 @@ public class ClienteServlet extends HttpServlet {
                     UsuarioFacade.updatePreferencia(usuarioLogado);
                     rd = getServletContext().getRequestDispatcher("/clienteOpcoes.jsp");
                     break;
+                case "switchDisp" :
+                    if(UsuarioFacade.switchDisponibilidade(usuarioLogado)){
+                        usuarioLogado.setDisp(!usuarioLogado.isDisp());
+                    }
+                    rd = getServletContext().getRequestDispatcher("/clienteOpcoes.jsp");
+                    break;
                 case "formDescricao":
                     request.setAttribute("listaCorCabelo",UsuarioFacade.getListaCorCabelo());
                     request.setAttribute("listaCorPele",UsuarioFacade.getListaCorPele());
@@ -113,7 +119,7 @@ public class ClienteServlet extends HttpServlet {
         preferencia.setIdadeMin(Integer.parseInt((String) request.getParameter("idadeMin")));
         preferencia.setIdadeMax(Integer.parseInt((String) request.getParameter("idadeMax")));
         
-        String[] listaForm = (String[]) request.getParameterValues("cabelo");
+        String[] listaForm = (String[]) request.getParameterValues("corCabelo");
         List<CorCabelo> listaCabelos = new ArrayList<CorCabelo>();
         CorCabelo cabelo;
         for( int i = 0 ; i < listaForm.length ; i++){
@@ -123,7 +129,7 @@ public class ClienteServlet extends HttpServlet {
         }
         preferencia.setCorCabelo(listaCabelos);
         
-        listaForm = (String[]) request.getParameterValues("pele");
+        listaForm = (String[]) request.getParameterValues("corPele");
         List<CorPele> listaPele = new ArrayList<CorPele>();
         CorPele pele;
         for( int i = 0; i < listaForm.length;i++){
@@ -144,20 +150,19 @@ public class ClienteServlet extends HttpServlet {
         listaForm = (String[]) request.getParameterValues("horaMin");
         String[] listaForm1 = (String[]) request.getParameterValues("minutoMin");
         Date dataAux;
-        int tamanhoLista = listaForm.length;
-        for(int i = 0; i < tamanhoLista; i++){
+        for(int i = 0; i < listaHorario.size(); i++){
             dataAux = new Date();
             horario = listaHorario.get(i);
             if(!listaForm[i].isEmpty()){
-                horario = listaHorario.get(i);
                 dataAux.setHours(Integer.parseInt(listaForm[i]));
                 dataAux.setMinutes(Integer.parseInt(listaForm1[i]));
                 horario.setHoraInicial(dataAux);
             }
-            else{
-                tamanhoLista--;
-                i--;
+            else {
+                dataAux.setHours(0);
+                dataAux.setMinutes(0);
             }
+            horario.setHoraInicial(dataAux);
             listaHorario.set(i,horario);
         }
         listaForm = (String[]) request.getParameterValues("horaMax");
@@ -168,12 +173,12 @@ public class ClienteServlet extends HttpServlet {
             if(!listaForm[i].isEmpty()){
                 dataAux.setHours(Integer.parseInt(listaForm[i]));
                 dataAux.setMinutes(Integer.parseInt(listaForm1[i]));
-                horario.setHoraInicial(dataAux);
             }
             else{
-                tamanhoLista--;
-                i--;
+                dataAux.setHours(23);
+                dataAux.setMinutes(59);
             }
+            horario.setHoraLimite(dataAux);
             listaHorario.set(i,horario);
         }
        

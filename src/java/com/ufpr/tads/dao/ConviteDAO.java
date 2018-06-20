@@ -6,6 +6,7 @@
 package com.ufpr.tads.dao;
 
 import com.ufpr.tads.beans.Casamento;
+import com.ufpr.tads.beans.Cliente;
 import com.ufpr.tads.beans.Convite;
 import com.ufpr.tads.beans.Encontro;
 import com.ufpr.tads.beans.Festa;
@@ -77,7 +78,7 @@ public class ConviteDAO {
             st = con.prepareStatement(
                       "SELECT C.IDCONVITE, C.STATUS, C.TIPO "
                     + "FROM convite C "
-                    + "WHERE C.CLIENTE_IDCLIENTE = ? AND STATUS = 'Aguardando'"
+                    + "WHERE C.CLIENTE_IDCLIENTE = ? AND C.STATUS = 'Aguardando'"
             );
             st.setInt(1,idCliente);
          
@@ -124,5 +125,39 @@ public class ConviteDAO {
         
         
         return lista;
+    }
+
+    public Convite getConviteEncontro(int idConvite) {
+        PreparedStatement st;
+        Convite convite = null;
+        try {
+            st = con.prepareStatement(
+                      "SELECT C.IDCONVITE, C.STATUS, C.TIPO, C.Cliente_idCliente"
+                    + "FROM convite C "
+                    + "WHERE C.IDCONVITE = ?"
+            );
+            st.setInt(1,idConvite);
+         
+            rs = st.executeQuery();
+            
+            ClienteDAO clienteDao = new ClienteDAO();
+            
+            if(rs.next()){
+                convite = new Convite();
+                convite.setIdConvite(rs.getInt("C.IDCONVITE"));
+                convite.setStatus(rs.getString("C.STATUS"));
+                convite.setTipo(rs.getString("C.TIPO"));
+                convite.setConvidado(clienteDao.getCliente(rs.getInt("C.Cliente_idCliente")));
+            }
+            return convite;
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+        
+        return null;
     }
 }

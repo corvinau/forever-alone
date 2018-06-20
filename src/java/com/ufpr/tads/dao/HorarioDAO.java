@@ -77,7 +77,7 @@ public class HorarioDAO {
         try {
             st = con.prepareStatement(
                     "SELECT idHorario, diaSemana, horaInicial, horaLimite "
-                    + "FROM Horario WHERE diaSemana = ? , horaInicial = ? , horaLimite = ? "
+                    + "FROM Horario WHERE diaSemana = ? AND horaInicial = ? AND horaLimite = ? "
             );
             st.setString(1, diaSemana);
             st.setDate(2,new java.sql.Date(horaInicial.getTime()));
@@ -141,12 +141,12 @@ public class HorarioDAO {
         
         try {
             st = con.prepareStatement(
-                    "SELECT INTO horario(diaSemana, horaInicial, horaLimite) "
+                    "INSERT INTO horario(diaSemana, horaInicial, horaLimite) "
                     + "VALUES(?,?,?) ",Statement.RETURN_GENERATED_KEYS
             );
             st.setString(1, h.getDiaSemana());
-            st.setDate(2,new java.sql.Date(h.getHoraInicial().getTime()));
-            st.setDate(3, new java.sql.Date(h.getHoraLimite().getTime()));
+            st.setTimestamp(2,new java.sql.Timestamp(h.getHoraInicial().getTime()));
+            st.setTimestamp(3,new java.sql.Timestamp(h.getHoraLimite().getTime()));
             
             st.executeUpdate();
             

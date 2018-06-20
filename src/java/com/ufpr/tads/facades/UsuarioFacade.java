@@ -227,4 +227,9 @@ public class UsuarioFacade {
         new UsuarioDAO().updateUsuario(c);
         new ClienteDAO().updateCliente(c);
     }
+    public static boolean switchDisponibilidade(Cliente usuarioLogado) {
+        ClienteDAO clienteDAO = new ClienteDAO();
+        return clienteDAO.updateDisponibilidade(!usuarioLogado.isDisp(),usuarioLogado.getIdCliente());
+    }
+    
 }
