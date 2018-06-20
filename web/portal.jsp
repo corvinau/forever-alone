@@ -21,7 +21,7 @@
         </c:if>
         
         <c:if test="${not empty msg}">
-            <div class="container alert alert-warning" role="alert">
+            <div class="container alert alert-info" role="alert">
                 <span>${msg}</span>
             </div>
         </c:if>
@@ -34,35 +34,26 @@
             </div>
         </section>
 
-        <div class="container">
+        <div class="container" style="margin-bottom: 8%">
             <div class="grid_3 grid_5 wow fadeInUp animated" data-wow-delay=".5s" style="width: 100%; display: inline-flex; margin-bottom: inherit;">
                 <div class="well">
                     <h4 id="h4.-bootstrap-heading">
-                        Encontros efetivados
+                        Encontros totais efetivados
                     </h4>
                     <p class="pWell">45</p>
                 </div>
                 <div class="well">
                     <h4 id="h4.-bootstrap-heading">
-                        Encontros pendentes
+                        Encontros totais pendentes
                     </h4>
                     <p class="pWell">23</p>
                 </div>
                 <div class="well">
                     <h4 id="h4.-bootstrap-heading">
-                        Encontros solicitados
+                        Encontros totais solicitados
                     </h4>
                     <p class="pWell">69</p>
                 </div>
-            </div>
-        </div>
-        
-        <div class="container" style="margin: 1% auto 3%;">
-            <div class="col-md-12">
-                Alguma coisa aqui<br>
-                Alguma coisa aqui<br>
-                Alguma coisa aqui<br>
-                Sara decide hehe<br>
             </div>
         </div>
                 

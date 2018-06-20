@@ -52,7 +52,7 @@
                             <td>${local.endereco.cidade.nome}</td>
                             <td>${local.endereco.bairro}</td>
                             <td>${local.endereco.rua}</td>
-                            <td>
+                            <td style="width: 125px;">
                                 <a href="ClientesServlet?action=show&id=${local.idLocal}">
                                     <i class="fa fa-eye"></i>
                                 </a>

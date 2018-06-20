@@ -52,7 +52,7 @@
                             <td>${funcionario.cpf}</td>
                             <td>${funcionario.cargo}</td>
                             <td>${funcionario.dataNasc}</td>
-                            <td>
+                            <td style="width: 125px;">
                                 <a href="FuncionarioServlet?action=show&id=${funcionario.idFuncionario}">
                                     <i class="fa fa-eye"></i>
                                 </a>

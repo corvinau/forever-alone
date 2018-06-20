@@ -23,13 +23,13 @@ window.onload = function getConvites(){
                                 $("#encontro").append('<td><i class="fa fa-glass"></i></td><td>ENCONTRO '+obj.idConvite+'</td><td style="width: 125px;"><a href="EncontroServlet?action=aceitarEncontro&id='+obj.idConvite+'"><i class="fa fa-check"></i></a><a href="EncontroServlet?action=cancelarEncontro&id='+obj.idConvite+'"><i class="fa fa-times"></i></a></td>');
                                 break;
                             case 'F':
-                                $("#festa").append('<td><i class="fa fa-music"></i></td><td>FESTA '+obj.idConvite+'</td><td style="width: 125px;"><a href="EncontroServlet?action=aceitarEncontro&id='+obj.idConvite+'"><i class="fa fa-check"></i></a><a href="EncontroServlet?action=cancelarEncontro&id='+obj.idConvite+'"><i class="fa fa-times"></i></a></td>');
+                                $("#festa").append('<td><i class="fa fa-music"></i></td><td>FESTA '+obj.idConvite+'</td><td style="width: 125px;"><a href="FestaServlet?action=aceitarFesta&id='+obj.idConvite+'"><i class="fa fa-check"></i></a><a href="FestaServlet?action=cancelarFesta&id='+obj.idConvite+'"><i class="fa fa-times"></i></a></td>');
                                 break;
                             case 'C':
-                                $("#casamento").append('<td><i class="fa fa-heart"></i></td><td>CASAMENTO '+obj.idConvite+'</td><td style="width: 125px;"><a href="EncontroServlet?action=aceitarEncontro&id='+obj.idConvite+'"><i class="fa fa-check"></i></a><a href="EncontroServlet?action=cancelarEncontro&id='+obj.idConvite+'"><i class="fa fa-times"></i></a></td>');
+                                $("#casamento").append('<td><i class="fa fa-heart"></i></td><td>CASAMENTO '+obj.idConvite+'</td><td style="width: 125px;"><a href="CasamentoServlet?action=aceitarCasamento&id='+obj.idConvite+'"><i class="fa fa-check"></i></a><a href="CasamentoServlet?action=cancelarCasamento&id='+obj.idConvite+'"><i class="fa fa-times"></i></a></td>');
                                 break;
                             case 'O':
-                                $("#orcamento").append('<td><i class="fa fa-dollar"></i></td><td>ORÇAMENTO '+obj.idConvite+'</td><td style="width: 125px;"><a href="EncontroServlet?action=aceitarEncontro&id='+obj.idConvite+'"><i class="fa fa-check"></i></a><a href="EncontroServlet?action=cancelarEncontro&id='+obj.idConvite+'"><i class="fa fa-times"></i></a></td>');
+                                $("#orcamento").append('<td><i class="fa fa-dollar"></i></td><td>ORÇAMENTO '+obj.idConvite+'</td><td style="width: 125px;"><a href="OrcamentoServlet?action=aceitarOrcamento&id='+obj.idConvite+'"><i class="fa fa-check"></i></a><a href="OrcamentoServlet?action=cancelarOrcamento&id='+obj.idConvite+'"><i class="fa fa-times"></i></a></td>');
                                 break;
                             default:
                                 break;

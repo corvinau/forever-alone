@@ -45,7 +45,7 @@
                             <div class="w3_agileits_services_grid_1">
                                 <i class="fa fa-search" aria-hidden="true" style="margin-left: auto;"></i>
                             </div>
-                            <h3>Search within reach</h3>
+                            <h3>Encontre pessoas com as caracteristicas desejadas</h3>
                         </div>
                     </div>
                     <div class="w3_agileits_services_grid">
@@ -53,7 +53,7 @@
                             <div class="w3_agileits_services_grid_1">
                                 <i class="fa fa-list-alt" aria-hidden="true" style="margin-left: auto;"></i>
                             </div>
-                            <h3>Shortlisted matches</h3>
+                            <h3>Visualize seus encontros</h3>
                         </div>
                     </div>
                     <div class="w3_agileits_services_grid">
@@ -61,7 +61,7 @@
                             <div class="w3_agileits_services_grid_1">
                                 <i class="fa fa-users" aria-hidden="true" style="margin-left: auto;"></i>
                             </div>
-                            <h3>Meet the prospects</h3>
+                            <h3>Participe de festas</h3>
                         </div>
                     </div>
                     <div class="clearfix"></div>
@@ -76,10 +76,10 @@
             </div>
             <div class="about-right">
                 <h3 class="subheading-agileits-w3layouts">
-                    VENHA ENCONTRAR A PESSOA IDEAL PARA SUA VIDA
+                    VENHA ENCONTRAR A PESSOA IDEAL PARA SUA VIDA 
                 </h3>
                 <p class="para-agileits-w3layouts">
-                    VENHA ACHAR SEU CRUSH, ELE ESTÁ AQUI
+                    VENHA ACHAR SEU CRUSH, ELE ESTÁ AQUI!!
                 </p>
                 <br><br>
                 <h3 class="subheading-agileits-w3layouts">
@@ -110,21 +110,21 @@
                     <div id="owl-demo2" class="owl-carousel">
                         <div class="test-grid1">
                             <img src="images/t1.jpg" alt="" class="img-r">
-                            <h4>Heloise</h4>
-                            <p>Lorem ipsum dolor sit amet, Ut enim ad minim veniam, quis.Lorem ipsum dolor .</p>
+                            <h4>Heloise Spew</h4>
+                            <p>Nos encontramos em uma festa, marcamos alguns encontros e logo nos casamos. Tudo através do Forever Alone.</p>
                         </div>	
                         <div class="agile">
                             <div class="test-grid1">
                                 <img src="images/t2.jpg" alt="" class="img-r">
-                                <h4>Bonnie</h4>
-                                <p>Lorem ipsum dolor sit amet, Ut enim ad minim veniam, quis.Lorem ipsum dolor .</p>
+                                <h4>David Antony</h4>
+                                <p>Nosso primeiro encontro foi marcado por aqui, fizemos nosso orçamento com ótimos valores e hoje tenho a melhor esposa do mundo.</p>
                             </div>	
                         </div>
                         <div class="agile">
                             <div class="test-grid1">
                                 <img src="images/t3.jpg" alt="" class="img-r">
-                                <h4>Jack</h4>
-                                <p>Lorem ipsum dolor sit amet, Ut enim ad minim veniam, quis.Lorem ipsum dolor .</p>
+                                <h4>Jack Braun</h4>
+                                <p>Encontrei a mulher da minha vida através de um encontro marcado por aqui. Hoje temos a melhor familia do mundo</p>
                             </div>	
                         </div>					
                     </div>
