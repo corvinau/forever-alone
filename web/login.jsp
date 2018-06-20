@@ -17,7 +17,7 @@
         <%@include file="header.jsp"%>
     
         <c:if test="${not empty msg}">
-            <div class="container alert alert-primary" role="alert">
+            <div class="container alert alert-info" role="alert">
                 <span><c:out value="${msg}" /></span>
             </div>
         </c:if>
