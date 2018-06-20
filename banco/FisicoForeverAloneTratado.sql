@@ -293,7 +293,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS Encontro (
   idEncontro INT NOT NULL AUTO_INCREMENT,
   data DATE NULL,
-  hora DATE NULL,
+  hora TIMESTAMP NULL,
   Local_idLocal INT NOT NULL,
   Status_idStatus INT NOT NULL,
   Cliente_idCliente INT NOT NULL,
