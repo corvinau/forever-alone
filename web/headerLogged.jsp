@@ -74,6 +74,7 @@
                             <div class="header-right-w3ls">
                                 <a href="ClienteServlet">Opções</a>
                                 <a href="EncontroServlet?action=listaEncontro">Encontros</a>
+                                <a href="#">Casamento</a>
                                 <a href="LogoutServlet">Sair</a>
                             </div>
                             <div class="clearfix"></div>

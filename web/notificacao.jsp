@@ -17,6 +17,9 @@ window.onload = function getConvites(){
                     success : function(data) {
                         // Se sucesso, limpa e preenche a combo de cidade
                         // alert(JSON.stringify(data));
+                        if(data.length == 0){
+                            $("#nada").append('<td>Não há convites no momento.</td>');
+                        }
                         $.each(data, function(i, obj) {
                             switch (obj.tipo) {
                             case 'E':
@@ -51,6 +54,7 @@ window.onload = function getConvites(){
                 <tr id="festa" style="border-bottom: 1px solid #ddd;"></tr>
                 <tr id="orcamento" style="border-bottom: 1px solid #ddd;"></tr>
                 <tr id="casamento" style="border-bottom: 1px solid #ddd;"></tr>
+                <tr id="nada" style="border-bottom: 1px solid #ddd;"></tr>
             </tbody>
         </table>
         <!--<button id="convites" name="convites" value="${loginBean.idCliente}">Atualizar</button>-->

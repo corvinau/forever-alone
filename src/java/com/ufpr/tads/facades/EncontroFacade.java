@@ -74,7 +74,7 @@ public class EncontroFacade {
         ConviteDAO conviteDao = new ConviteDAO();
         if(conviteDao.aceitarConvite(idConvite)){
             EncontroDAO encontroDao = new EncontroDAO();
-            if(encontroDao.updateEncontro(idConvite,"Confirmado")){
+            if(encontroDao.updateEncontro(idConvite,2)){
                 return true;
             }
         }

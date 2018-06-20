@@ -60,7 +60,7 @@ public class EncontroServlet extends HttpServlet {
                     request.setAttribute("listaEncontro",EncontroFacade.getListaEncontroCliente(usuarioLogado.getIdCliente()));
                     rd = getServletContext().getRequestDispatcher("/encontroListar.jsp");
                     break;
-                case "aceitarEncontro":
+                    case "aceitarEncontro":
                     aux = Integer.parseInt(request.getParameter("id"));
                     if(EncontroFacade.aceitaEncontro(aux)){
                         request.setAttribute("msg","Convite aceito com sucesso");

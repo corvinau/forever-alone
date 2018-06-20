@@ -246,7 +246,7 @@ public class EncontroDAO {
         
     }
 
-    public boolean updateEncontro(int idConvite, String confirmado) {
+    public boolean updateEncontro(int idConvite, int confirmado) {
         PreparedStatement st;
         Encontro encontro = null;
         try {
@@ -254,7 +254,7 @@ public class EncontroDAO {
                     "UPDATE encontro SET Status_idStatus = ? "
                     + "WHERE Convite_idConvite = ?"
             );
-            st.setString(1, confirmado);
+            st.setInt(1, confirmado);
             st.setInt(2, idConvite);
             
             int aux = st.executeUpdate();
@@ -321,7 +321,7 @@ public class EncontroDAO {
          PreparedStatement st;
         try {
             st = con.prepareStatement(
-                    "UPDATE encontro SET Status_idStatus = 'Cancelado' "
+                    "UPDATE encontro SET Status_idStatus = 5 "
                     + "WHERE idEncontro = ? "
             );
             st.setInt(1, idEncontro);
