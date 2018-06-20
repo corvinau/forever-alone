@@ -46,11 +46,9 @@ public class ClienteDAO {
         
         try {
             st = con.prepareStatement(
-                    "SELECT idCliente, nome, cpf, dataNascimento,"
-                    + " dataCadastro, sexo, disponibilidade, qtdTokens, "
-                    + "Endereco_idEndereco, Descricao_idDescricao, "
-                    + "Preferencias_idPreferencias "
-                    + "FROM Cliente WHERE idCliente = ?"
+                    "SELECT idCliente, nome, cpf, dataNascimento, dataCadastro, sexo, disponibilidade, qtdTokens, "
+                            + "Usuario_idUsuario, Endereco_idEndereco, Descricao_idDescricao, "
+                            + "Preferencias_idPreferencias FROM Cliente WHERE idCliente = ?"
             );
             st.setInt(1, idCliente);
             
@@ -60,6 +58,7 @@ public class ClienteDAO {
             PreferenciaDAO preferenciaDAO = new PreferenciaDAO(con);
             while(rs.next()){
                 c = new Cliente();
+                c.setEmail(getEmailCliente(rs.getInt("Usuario_idUsuario")));
                 c.setIdCliente(rs.getInt("idCliente"));
                 c.setNome(rs.getString("nome"));
                 c.setCpf(rs.getString("cpf"));
@@ -68,6 +67,7 @@ public class ClienteDAO {
                 c.setSexo(rs.getString("sexo").charAt(0));
                 c.setDisp(rs.getBoolean("disponibilidade"));
                 c.setQtdTokens(rs.getInt("qtdTokens"));
+                c.setIdUsuario(rs.getInt("Usuario_idUsuario"));
                 c.setEndereco(enderecoDAO.getEndereco(rs.getInt("Endereco_idEndereco")));
                 c.setDescricao(descricaoDAO.getDescricao(rs.getInt("Descricao_idDescricao")));
                 c.setPreferencia(preferenciaDAO.getPreferencia(rs.getInt("Preferencias_idPreferencias")));
@@ -77,10 +77,6 @@ public class ClienteDAO {
         } catch (SQLException ex) {
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-        
-        
         return c;
     }
     public Cliente getCliente(Usuario u){
@@ -406,4 +402,26 @@ public class ClienteDAO {
         return false;
     }
     
+        public String getEmailCliente(int idUsuario){
+        PreparedStatement st;
+        String email = null;
+        try {
+            st = con.prepareStatement("SELECT EMAIL FROM USUARIO WHERE IDUSUARIO = ?");
+                st.setInt(1, idUsuario);
+                rs = st.executeQuery();
+            while(rs.next()){
+                email = rs.getString(1);
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            try {
+                rs.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }   
+        return email;
+    }
 }
