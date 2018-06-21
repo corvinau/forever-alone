@@ -103,12 +103,19 @@ public class EncontroDAO {
         Encontro encontro = null;
         try {
             st = con.prepareStatement(
-                    "SELECT idEncontro, data, hora, Status_idStatus, Cliente_idCliente, "
+                    "SELECT idEncontro, data, hora, Status_idStatus, Cliente_idCliente AS CONVIDADO, "
                     + "Convite_idConvite, Local_idLocal "
                     + "FROM encontro  "
-                    + "WHERE Cliente_idCliente = ?"
+                    + "WHERE Cliente_idCliente = ? "
+                    + "UNION "
+                    + "SELECT E.idEncontro, E.data, E.hora, E.Status_idStatus, C.Cliente_idCliente AS CONVIDADO, "
+                    + "E.Convite_idConvite, E.Local_idLocal "
+                    + "FROM convite C "
+                    + "INNER JOIN encontro E ON E.Convite_idConvite = C.idConvite "
+                    + "WHERE C.Cliente_idCliente = ? "
             );
             st.setInt(1, idCliente);
+            st.setInt(2, idCliente);
             
             StatusDAO statusDAO = new StatusDAO(con);
             ClienteDAO clienteDAO = new ClienteDAO(con);
@@ -122,7 +129,7 @@ public class EncontroDAO {
                 encontro.setData(rs.getDate("data"));
                 encontro.setHora(rs.getDate("hora"));
                 encontro.setStatus(statusDAO.getStatus(rs.getInt("Status_idStatus")));
-                encontro.setCliente(clienteDAO.getCliente(rs.getInt("Cliente_idCliente")));
+                encontro.setCliente(clienteDAO.getCliente(rs.getInt("CONVIDADO")));
                 encontro.setLocal(localDAO.getLocal(rs.getInt("Local_idLocal")));
                 encontro.setConvite(conviteDAO.getConviteEncontro(rs.getInt("Convite_idConvite")));
                 lista.add(encontro);

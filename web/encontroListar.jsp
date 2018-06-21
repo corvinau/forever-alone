@@ -63,18 +63,21 @@
                                 <a href="EncontroServlet?action=showDetalhes&id=${encontro.idEncontro}">
                                     <i class="fa fa-eye"></i>
                                 </a>
-                                <a href="EncontroServlet?action=remarcarEncontro&id=${encontro.idEncontro}">
-                                    <i class="fa fa-pencil"></i>
-                                </a>
-                                <a href="EncontroServlet?action=cancelarEncontro&id=${encontro.idEncontro}">
-                                    <i class="fa fa-times"></i>
-                                </a>
-                                <c:if test="${ encontro.status.nome.equals(\"Realizado\")}">
-                                    <a href="EncontroServlet?action=cancelarEncontro&id=${encontro.idEncontro}">
-                                        <i class="fa fa-times">Casamento</i>
-                                    </a>
-                                </c:if>
-                                    
+                                <c:choose >
+                                    <c:when test="${ encontro.status.nome.equals(\"Realizado\")}">
+                                        <a href="EncontroServlet?action=cancelarEncontro&id=${encontro.idEncontro}">
+                                            <i class="fa fa-heart">Casamento</i>
+                                        </a>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <a href="EncontroServlet?action=remarcarEncontro&id=${encontro.idEncontro}">
+                                            <i class="fa fa-pencil"></i>
+                                        </a>
+                                        <a href="EncontroServlet?action=cancelarEncontro&id=${encontro.idEncontro}">
+                                            <i class="fa fa-times"></i>
+                                        </a>
+                                    </c:otherwise>
+                                </c:choose>
                             </td>
                         </tr>
                     </c:forEach>
