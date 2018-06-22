@@ -30,7 +30,7 @@
                             </c:when>
                             <c:otherwise>
                                 ${encontro.cliente.nome}
-                                <c:set var="convidando" value="${encontro.cliente.nome}" ></c:set>
+                                <c:set var="convidando" value="${encontro.cliente.idCliente}" ></c:set>
                             </c:otherwise>
                         </c:choose>
                     </h3>
