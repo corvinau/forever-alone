@@ -6,6 +6,7 @@
 package com.ufpr.tads.facades;
 
 import com.ufpr.tads.beans.Casamento;
+import com.ufpr.tads.beans.Convite;
 import com.ufpr.tads.dao.CasamentoDAO;
 
 /**
@@ -17,6 +18,7 @@ public class CasamentoFacade {
     
     public static boolean insertCasamento(Casamento casamento,int idConvidado){
         CasamentoDAO casamentoDao = new CasamentoDAO();
+        Convite convite = new Convite();
         return true;
     }
 }
