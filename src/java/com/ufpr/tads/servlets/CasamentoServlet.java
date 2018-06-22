@@ -57,10 +57,13 @@ public class CasamentoServlet extends HttpServlet {
         }
         if(action != null){
             int aux;
+            Casamento casamento;
             switch (action){
                 case  "solicitarCasamento" :
                     aux = Integer.parseInt(request.getParameter("idConvidando"));
-                    CasamentoFacade.insertCasamento(getPostCasamento(request),aux);
+                    casamento = getPostCasamento(request);
+                    casamento.setCliente(usuarioLogado);
+                    CasamentoFacade.insertCasamento(casamento,aux);
                     break;
                 default :
                     rd = getServletContext().getRequestDispatcher("/portal.jsp");

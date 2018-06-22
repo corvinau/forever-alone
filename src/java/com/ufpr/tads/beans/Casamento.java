@@ -25,6 +25,7 @@ public class Casamento implements Convidavel {
     private List<Padrinhos> padrinhos;
     private Orcamento orcamento;
     private Convite convite;
+    private Cliente cliente;
 
     public int getIdCasamento() {
         return idCasamento;
@@ -106,8 +107,14 @@ public class Casamento implements Convidavel {
         this.convite = convite;
     }
 
-    
+    public Cliente getCliente() {
+        return cliente;
+    }
 
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+    
     public Orcamento getOrcamento() {
         return orcamento;
     }
