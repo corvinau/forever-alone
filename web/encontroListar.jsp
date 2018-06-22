@@ -52,7 +52,6 @@
                                     <td>${encontro.convite.convidado.nome}</td>
                                 </c:when>
                                 <c:otherwise>
-                                    convidado
                                     <td>${encontro.cliente.nome}</td>
                                 </c:otherwise>
                             </c:choose>
