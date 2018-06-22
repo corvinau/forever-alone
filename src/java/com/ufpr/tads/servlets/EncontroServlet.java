@@ -83,7 +83,7 @@ public class EncontroServlet extends HttpServlet {
                     else{
                         request.setAttribute("msg","Erro ao cancelar o encontro");
                     }
-                    rd = getServletContext().getRequestDispatcher("/encontroListar.jsp");
+                    rd = getServletContext().getRequestDispatcher("/portal.jsp");
                     break;
                 case "remarcarEncontro":
                     aux = Integer.parseInt(request.getParameter("id"));

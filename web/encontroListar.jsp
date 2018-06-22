@@ -3,6 +3,7 @@
     Created on : 19/06/2018, 17:25:25
     Author     : ArtVin
 --%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -56,7 +57,7 @@
                                 </c:otherwise>
                             </c:choose>
                             <td>${encontro.data}</td>
-                            <td>${encontro.hora}</td>
+                            <td><fmt:formatDate value="${encontro.hora}" pattern="HH:mm"></fmt:formatDate></td>
                             <td>${encontro.local.nomeEstabelecimento}</td>
                             <td>${encontro.status.nome}</td>
                             <td>

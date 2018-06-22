@@ -120,7 +120,7 @@ public class EncontroDAO {
                 encontro.setStatus(statusDAO.getStatus(rs.getInt("Status_idStatus")));
                 encontro.setCliente(clienteDAO.getCliente(rs.getInt("Cliente_idCliente")));
                 encontro.setLocal(localDAO.getLocal(rs.getInt("Local_idLocal")));
-                encontro.setConvite(conviteDao.getConviteEncontro(rs.getInt("Convite_idConvite")));
+                encontro.setConvite(conviteDao.getConviteEvento(rs.getInt("Convite_idConvite")));
             }
             return encontro;
         } catch (SQLException ex) {
@@ -159,11 +159,11 @@ public class EncontroDAO {
                 encontro = new Encontro();
                 encontro.setIdEncontro(rs.getInt("idEncontro"));
                 encontro.setData(rs.getDate("data"));
-                encontro.setHora(rs.getDate("hora"));
+                encontro.setHora(rs.getTimestamp("hora"));
                 encontro.setStatus(statusDAO.getStatus(rs.getInt("Status_idStatus")));
                 encontro.setCliente(clienteDAO.getCliente(rs.getInt("CONVIDADO")));
                 encontro.setLocal(localDAO.getLocal(rs.getInt("Local_idLocal")));
-                encontro.setConvite(conviteDAO.getConviteEncontro(rs.getInt("Convite_idConvite")));
+                encontro.setConvite(conviteDAO.getConviteEvento(rs.getInt("Convite_idConvite")));
                 lista.add(encontro);
             }
             return lista;
@@ -306,11 +306,10 @@ public class EncontroDAO {
 
     public Cliente getOutroEncontro(int idEncontro,int idCliente){
         PreparedStatement st;
-        Encontro encontro = null;
         try {
             st = con.prepareStatement(
-                    "SELECT Cliente_idCliente, Convite_idConvite FROM encontro E "
-                    + "WHERE idEncontro = ?"
+                    "SELECT E.Cliente_idCliente, E.Convite_idConvite FROM encontro E "
+                    + "WHERE E.Convite_idConvite = ? "
             );
             st.setInt(1, idEncontro);
             
@@ -319,11 +318,11 @@ public class EncontroDAO {
                 int aux = rs.getInt("Cliente_idCliente");
                 if(aux == idCliente){
                     ConviteDAO conviteDao = new ConviteDAO();
-                    return conviteDao.getConviteEncontro(rs.getInt("Convite_idConvite")).getConvidado();
+                    return conviteDao.getConviteEvento(rs.getInt("Convite_idConvite")).getConvidado();
                 }
                 else{
                     ClienteDAO clienteDao = new ClienteDAO();
-                    clienteDao.getCliente(aux);
+                    return clienteDao.getCliente(aux);
                 }
             }
         } catch (SQLException ex) {
@@ -356,19 +355,22 @@ public class EncontroDAO {
         return false;
     }
 
-    public boolean cancelarEncontro(int idEncontro, Cliente usuarioLogado) {
+    public boolean cancelarEncontro(int idConvite, Cliente usuarioLogado) {
          PreparedStatement st;
         try {
             st = con.prepareStatement(
                     "UPDATE encontro SET Status_idStatus = 5 "
-                    + "WHERE idEncontro = ? "
+                    + "WHERE Convite_idConvite = ? "
             );
-            st.setInt(1, idEncontro);
-            
-            Cliente c = getOutroEncontro(idEncontro,usuarioLogado.getIdCliente());
+            st.setInt(1, idConvite);
+            EncontroDAO encontroDao = new EncontroDAO();
+            Cliente c = encontroDao.getOutroEncontro(idConvite,usuarioLogado.getIdCliente());
             ClienteDAO clienteDao = new ClienteDAO(con);
             c.setQtdTokens(c.getQtdTokens()+1);
             clienteDao.updateCliente(c);
+            ConviteDAO conviteDao = new ConviteDAO(con);
+            conviteDao.recusarConvite(idConvite);
+            
             
             int aux = st.executeUpdate();
             

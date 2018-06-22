@@ -37,7 +37,40 @@ public class CasamentoDAO {
     }
 
     public Casamento getCasamentoByConvite(int idConvite) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        PreparedStatement st;
+        Casamento casamento = null;
+        try {
+            st = con.prepareStatement(
+                    "SELECT idCasamento, status, data, hora, qtdConvidados, nomePadre, "
+                    + "igreja, localLuaMel, Cliente_idCliente, Convite_idConvite  "
+                    + "FROM casamento "
+                    + "WHERE Convite_idConvite = ? "
+            );
+            st.setInt(1, idConvite);
+            ClienteDAO clienteDao = new ClienteDAO();
+            ConviteDAO conviteDao = new ConviteDAO();
+            rs = st.executeQuery();
+            if(rs.next()) {
+                casamento = new Casamento();
+                casamento.setIdCasamento(rs.getInt("idCasamento"));
+                casamento.setStatus(rs.getString("status"));
+                casamento.setData(rs.getDate("data"));
+                casamento.setHora(rs.getTimestamp("hora"));
+                casamento.setQtdConvidados(rs.getInt("qtdConvidados"));
+                casamento.setNomePadre(rs.getString("nomePadre"));
+                casamento.setIgreja((rs.getString("igreja")));
+                casamento.setLocalLuaDeMel(rs.getString("localLuaMel"));
+                casamento.setCliente(clienteDao.getCliente(rs.getInt("Cliente_idCliente")));
+                casamento.setConvite(conviteDao.getConviteEvento(idConvite));
+                return casamento;
+            }
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return casamento;
     }
 
     public int insertCasamento(Casamento casamento) {

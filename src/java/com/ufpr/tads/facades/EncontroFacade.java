@@ -96,9 +96,9 @@ public class EncontroFacade {
         return false;
     }
 
-    public static boolean cancelarEncontro(int idEncontro, Cliente usuarioLogado) {
+    public static boolean cancelarEncontro(int idConvite, Cliente usuarioLogado) {
         EncontroDAO encontroDao = new EncontroDAO();
-        if(encontroDao.cancelarEncontro(idEncontro,usuarioLogado)){
+        if(encontroDao.cancelarEncontro(idConvite,usuarioLogado)){
             return true;
         }
         
