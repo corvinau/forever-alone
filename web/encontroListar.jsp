@@ -65,8 +65,8 @@
                                 </a>
                                 <c:choose >
                                     <c:when test="${ encontro.status.nome.equals(\"Realizado\")}">
-                                        <a href="EncontroServlet?action=cancelarEncontro&id=${encontro.idEncontro}">
-                                            <i class="fa fa-heart">Casamento</i>
+                                        <a href="EncontroServlet?action=solicitarCasamento&id=${encontro.idEncontro}">
+                                            <i class="fa fa-heart"></i>
                                         </a>
                                     </c:when>
                                     <c:otherwise>

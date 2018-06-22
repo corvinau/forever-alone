@@ -26,6 +26,11 @@ public class EncontroFacade {
         EncontroDAO encontroDao = new EncontroDAO();
         return encontroDao.getListaEncontroCliente(idCliente);
     }
+    
+    public static Encontro getEncontroConvite(int idEncontro){
+        EncontroDAO encontroDao = new EncontroDAO();
+        return encontroDao.getEncontroConvite(idEncontro);
+    }
 
     public static List<Cliente> getClientesCompativeis(Cliente usuarioLogado) {
         ClienteDAO clienteDao = new ClienteDAO();

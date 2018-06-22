@@ -56,6 +56,11 @@ public class EncontroServlet extends HttpServlet {
             String[] parameterList;
             int aux;
             switch (action){
+                case "solicitarCasamento":
+                    aux = Integer.parseInt(request.getParameter("id"));
+                    request.setAttribute("encontro", EncontroFacade.getEncontroConvite(aux));
+                    rd = getServletContext().getRequestDispatcher("/casamentoSolicitarForm.jsp");
+                    break;
                 case "listaEncontro":
                     request.setAttribute("listaEncontro",EncontroFacade.getListaEncontroCliente(usuarioLogado.getIdCliente()));
                     rd = getServletContext().getRequestDispatcher("/encontroListar.jsp");

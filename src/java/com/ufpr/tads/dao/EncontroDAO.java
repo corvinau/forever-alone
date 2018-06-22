@@ -96,6 +96,38 @@ public class EncontroDAO {
         }        
         return null;
     }
+    public Encontro getEncontroConvite(int idEncontro) {
+        PreparedStatement st;
+        Encontro encontro = null;
+        try {
+            st = con.prepareStatement(
+                    "SELECT idEncontro, data, hora, Status_idStatus, Cliente_idCliente, "
+                    + "Convite_idConvite, Local_idLocal "
+                    + "FROM encontro  "
+                    + "WHERE idEncontro = ?"
+            );
+            st.setInt(1, idEncontro);
+            StatusDAO statusDAO = new StatusDAO(con);
+            ClienteDAO clienteDAO = new ClienteDAO(con);
+            LocalDAO localDAO = new LocalDAO(con);
+            ConviteDAO conviteDao = new ConviteDAO(con);
+            rs = st.executeQuery();
+            if(rs.next()){
+                encontro = new Encontro();
+                encontro.setIdEncontro(rs.getInt("idEncontro"));
+                encontro.setData(rs.getDate("data"));
+                encontro.setHora(rs.getDate("hora"));
+                encontro.setStatus(statusDAO.getStatus(rs.getInt("Status_idStatus")));
+                encontro.setCliente(clienteDAO.getCliente(rs.getInt("Cliente_idCliente")));
+                encontro.setLocal(localDAO.getLocal(rs.getInt("Local_idLocal")));
+                encontro.setConvite(conviteDao.getConviteEncontro(rs.getInt("Convite_idConvite")));
+            }
+            return encontro;
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }        
+        return null;
+    }
 
     public List<Encontro> getListaEncontroCliente(int idCliente) {
         List<Encontro> lista = new ArrayList<Encontro>();
