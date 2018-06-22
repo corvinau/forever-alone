@@ -16,6 +16,8 @@
             addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
             function hideURLbar(){ window.scrollTo(0,1); }
         </script>
+        <!--favicon-->
+        <link rel="shortcut icon" href="images/favicon.ico">
         <!-- //for-mobile-apps -->
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" /><!-- Bootstrap -->
         <link href="css/font-awesome.css" rel="stylesheet"> <!-- Font awesome -->
