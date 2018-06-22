@@ -17,6 +17,6 @@ public class CasamentoFacade {
     public static boolean insertCasamento(Casamento casamento,int idConvidado){
         
         
-        
+        return true;
     }
 }
