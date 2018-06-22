@@ -57,6 +57,15 @@
 
             //Mascara CPF
             $( "#cpf" ).mask('000.000.000-00');
+            
+            <c:if test="${not empty cliente.cpf}" >
+                function existeCPF(campocpf){
+                    if(validaCPF)
+                        return true;
+                    else
+                        return false;
+                }
+            </c:if>
 
         </script>
     </head>

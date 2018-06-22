@@ -48,7 +48,8 @@ function existeCPF(campocpf){
             if (res){
             alert('CPF já existente');
             campocpf.value = "";
-                    return !res;
+            campocpf.focus();
+            return !res;
             }				
     }
 }
@@ -60,6 +61,8 @@ function validaCPF(campocpf) {
     if (cpf.length < 11){
         alert("CPF inválido.");
         campocpf.value = "";
+        campocpf.focus();
+        document.forms[0].onsubmit = false;
         return false;
     }
     for (i = 0; i < cpf.length - 1; i++)
@@ -79,6 +82,8 @@ function validaCPF(campocpf) {
           if (resultado != digitos.charAt(0)){
                 alert("CPF inválido.");
                 campocpf.value = "";
+                campocpf.focus();
+                document.forms[0].onsubmit = false;
                 return false;
           }
           numeros = cpf.substring(0,10);
@@ -89,6 +94,8 @@ function validaCPF(campocpf) {
           if (resultado != digitos.charAt(1)){
                 alert("CPF inválido.");
                 campocpf.value = "";
+                campocpf.focus();
+                document.forms[0].onsubmit = false;
                 return false;
           }
           return true;
@@ -97,6 +104,7 @@ function validaCPF(campocpf) {
         alert("CPF inválido.");
         campocpf.value = "";
         campocpf.focus();
+        document.forms[0].onsubmit = false;
         return false;
     }
   }
