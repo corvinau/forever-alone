@@ -17,7 +17,7 @@
         <section class="text-center">
             <div class="container">
                 <div class="tittle-agileinfo">
-                    <h3>Lista de Encontros</h3>
+                    <h3>Lista de encontros</h3>
                 </div>
             </div>
         </section>

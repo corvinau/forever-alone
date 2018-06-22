@@ -110,7 +110,7 @@
                                 <c:out value="${visualizar? 'disabled' : ''}"/> required>
                             </div>
 
-							<c:if test="${!visualizar}">
+				<c:if test="${!visualizar}">
 	                            <div class="w3_form_body_grid">
 	                                <span><c:out value="${alterar? 'Nova ' : ''}"/>Senha*</span>
 	                                <input type="password" name="senha" placeholder="<c:out value="${alterar? 'Nova ' : ''}"/>Senha" value="" required>
@@ -119,7 +119,7 @@
 	                                <span>Confirmar senha*</span>
 	                                <input type="password" name="senhaConfirm" placeholder="Confirmar senha" value="" required>
 	                            </div>
-							</c:if>
+				</c:if>
 
                             <div class="w3_form_body_grid">
                                 <span>Nome*</span>

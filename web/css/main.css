@@ -102,3 +102,7 @@ h4 {
 td a i.fa {
     color: rgb(65, 131, 154);
 }
+
+.tittle-agileinfo h3 {
+    text-transform:none;
+}

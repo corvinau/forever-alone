@@ -39,7 +39,7 @@
         <div class="login elite-app">
             <div class="container">
                 <div class="tittle-agileinfo">
-                    <h3>Cadastro festa</h3>
+                    <h3>Cadastrar festa</h3>
                 </div>
                 <div class="col-md-12 login-form-w3-agile">
                     <form action="FestaServlet?action=cadastroFesta" method="POST">

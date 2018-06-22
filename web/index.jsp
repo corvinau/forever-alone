@@ -72,7 +72,7 @@
         <!-- sobre -->
         <div class="about-w3layouts" id="about">
             <div class="tittle-agileinfo">
-                <h3>Sobre Nós</h3>
+                <h3>Sobre nós</h3>
             </div>
             <div class="about-right">
                 <h3 class="subheading-agileits-w3layouts">

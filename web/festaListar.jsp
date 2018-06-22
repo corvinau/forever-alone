@@ -18,7 +18,7 @@
         <section class="text-center">
             <div class="container">
                 <div class="tittle-agileinfo">
-                    <h3>Lista de Festas</h3>
+                    <h3>Lista de festas</h3>
                 </div>
             </div>
         </section>

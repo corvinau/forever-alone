@@ -70,7 +70,7 @@
         <div class="login elite-app">
             <div class="container">
                 <div class="tittle-agileinfo">
-                    <h3>Cadastrar Funcionário</h3>
+                    <h3>Cadastrar funcionário</h3>
                 </div>
                 <div class="col-md-12 login-form-w3-agile">
                     <form action="FuncionarioServlet?action=cadastroFuncionario" method="POST">
