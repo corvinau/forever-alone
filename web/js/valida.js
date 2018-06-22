@@ -59,9 +59,6 @@ function validaCPF(campocpf) {
     var numeros, digitos, soma, i, resultado, digitos_iguais;
     digitos_iguais = 1;
     if (cpf.length < 11){
-        alert("CPF inválido.");
-        campocpf.value = "";
-        campocpf.focus();
         document.forms[0].onsubmit = false;
         return false;
     }
@@ -81,7 +78,6 @@ function validaCPF(campocpf) {
           resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
           if (resultado != digitos.charAt(0)){
                 alert("CPF inválido.");
-                campocpf.value = "";
                 campocpf.focus();
                 document.forms[0].onsubmit = false;
                 return false;
@@ -93,7 +89,6 @@ function validaCPF(campocpf) {
           resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
           if (resultado != digitos.charAt(1)){
                 alert("CPF inválido.");
-                campocpf.value = "";
                 campocpf.focus();
                 document.forms[0].onsubmit = false;
                 return false;
