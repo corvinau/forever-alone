@@ -107,12 +107,12 @@
                                 <a href="portal.jsp">Forever Alone</a>
                             </h1>
                             <div class="header-right-w3ls">
-                                <a href="FuncionarioServlet?action=listaClientes">Clientes</a>
-                                <a href="FuncionarioServlet?action=listaLocal">Locais</a>
-                                <a href="FestaServlet?action=listaFesta">Festas</a>
                                 <c:if test="${loginBean.nome == \"admin\" }">
                                     <a href="FuncionarioServlet?action=listaFuncionarios">Funcionários</a>
                                 </c:if>
+                                <a href="FuncionarioServlet?action=listaClientes">Clientes</a>
+                                <a href="FuncionarioServlet?action=listaLocal">Locais</a>
+                                <a href="FestaServlet?action=listaFesta">Festas</a>
                                 <a href="LogoutServlet">Sair</a>
                             </div>
                             <div class="clearfix"></div>
